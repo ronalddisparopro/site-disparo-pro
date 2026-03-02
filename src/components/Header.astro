@@ -43,7 +43,7 @@ const navItems = [
     <div class="flex items-center justify-between">
       <div class="shrink-0">
         <a href={ROUTES.HOME}>
-          <img src="/public/images/logo-disparo-pro.svg" alt="isparo Pro" />
+          <img src="/images/logo-disparo-pro.svg" alt="Disparo Pro" />
         </a>
       </div>
 
@@ -86,8 +86,10 @@ const navItems = [
 
       <!-- Desktop Buttons -->
       <div class="hidden lg:flex items-center space-x-4">
-        <Button href={"/"} variant="secondary">Entrar</Button>
-        <Button href={"/"} variant="outline">Fale com a agente</Button>
+        <Button href={ROUTES.LOGIN} variant="secondary">Entrar</Button>
+        <Button href={ROUTES.CONTATO} variant="outline"
+          >Fale com a agente</Button
+        >
       </div>
 
       <!-- Mobile Toggle -->

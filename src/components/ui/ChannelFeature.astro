@@ -1,0 +1,79 @@
+---
+import { cx } from "../../lib/utils";
+import Button from "./Button.astro";
+import { ArrowRight } from "@lucide/astro";
+import Heading from "./Heading.astro";
+
+export interface Props {
+  badge: string;
+  title: string;
+  features: string[];
+  buttonText: string;
+  buttonHref?: string;
+  imageSrc: string;
+  imageAlt: string;
+  reverse?: boolean;
+  class?: string;
+}
+
+const {
+  badge,
+  title,
+  features,
+  buttonText,
+  buttonHref = "#",
+  imageSrc,
+  imageAlt,
+  reverse = false,
+  class: className,
+} = Astro.props;
+---
+
+<div
+  class={cx(
+    "flex flex-col lg:flex-row items-center lg:items-stretch justify-between gap-12 lg:gap-20 bg-surface-default pt-8 lg:pt-0 rounded-2xl overflow-hidden",
+    !reverse ? "lg:pl-16" : "lg:flex-row-reverse lg:pr-16",
+    className,
+  )}
+>
+  <div
+    class="flex flex-col justify-center items-start gap-6 w-full px-8 lg:px-0 lg:py-16 lg:w-1/2"
+  >
+    <div class="bg-brand-soft px-4 py-2 rounded-lg">
+      <span class="text-brand-primary font-semibold text-body-sm">
+        {badge}
+      </span>
+    </div>
+
+    <div class="flex flex-col gap-4">
+      <Heading as="h2" class="text-text-primary">
+        {title}
+      </Heading>
+
+      <ul class="flex flex-col gap-0">
+        {
+          features.map((feature) => (
+            <li class="gap-0 flex items-center text-text-secondary text-body-md lg:text-body-lg group/item">
+              <span>{feature}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <Button href={buttonHref} variant="primary" icon={ArrowRight}>
+      {buttonText}
+    </Button>
+  </div>
+
+  <div class="lg:w-1/2 w-full h-full relative group">
+    <div class="relative h-full overflow-hidden">
+      <img
+        src={imageSrc}
+        alt={imageAlt}
+        class="w-full h-full object-cover aspect-4/3 lg:aspect-auto"
+      />
+      <div class="absolute inset-0 bg-linear-to-tr pointer-events-none"></div>
+    </div>
+  </div>
+</div>

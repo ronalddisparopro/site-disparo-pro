@@ -3,6 +3,7 @@ export const ROUTES = {
   PLANOS: "/planos",
   CONTATO: "/contato",
   MATERIAIS: "/materiais",
+  LOGIN: "https://auth.disparopro.com.br/",
   BLOG: {
     HOME: "/blog",
     POST: (slug: string) => `/blog/${slug}`,
@@ -13,6 +14,7 @@ export const ROUTES = {
     RCS: "/canais/rcs",
     SMS: "/canais/disparo-sms",
     VOZ: "/canais/disparo-voz",
+    EMAIL: "/canais/disparo-email",
   },
   APIS: {
     WHATSAPP: "/apis/whatsapp",

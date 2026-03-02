@@ -22,10 +22,10 @@ const { seo, title, description } = Astro.props;
   </Section>
   <Section>
     <div class="flex flex-col lg:flex-row gap-12">
-      <div class="flex-grow">
+      <div class="grow">
         <slot />
       </div>
-      <aside class="w-full lg:w-80 flex-shrink-0">
+      <aside class="w-full lg:w-80 shrink-0">
         <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
           <Heading as="h3" class="mb-4">Categorias</Heading>
           <ul class="space-y-2">

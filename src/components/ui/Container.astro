@@ -3,11 +3,17 @@ import { cx } from "../../lib/utils";
 export interface Props {
   class?: string;
   as?: string;
+  fullWidth?: boolean;
 }
 
-const { class: className, as: Tag = "div", ...rest } = Astro.props;
+const {
+  class: className,
+  as: Tag = "div",
+  fullWidth = false,
+  ...rest
+} = Astro.props;
 ---
 
-<Tag class={cx("container", className)} {...rest}>
+<Tag class={cx(!fullWidth && "container", className)} {...rest}>
   <slot />
 </Tag>

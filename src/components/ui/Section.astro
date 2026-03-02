@@ -6,9 +6,16 @@ export interface Props {
   class?: string;
   id?: string;
   containerClass?: string;
+  fullWidth?: boolean;
 }
 
-const { class: className, id, containerClass, ...rest } = Astro.props;
+const {
+  class: className,
+  id,
+  containerClass,
+  fullWidth = false,
+  ...rest
+} = Astro.props;
 ---
 
 <section
@@ -16,7 +23,7 @@ const { class: className, id, containerClass, ...rest } = Astro.props;
   class={cx("py-10 md:py-16 xl:p-20 px-4 md:px-6 xl:px-0", className)}
   {...rest}
 >
-  <Container class={containerClass}>
+  <Container class={containerClass} fullWidth={fullWidth}>
     <slot />
   </Container>
 </section>

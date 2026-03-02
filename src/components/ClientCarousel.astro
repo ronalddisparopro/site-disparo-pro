@@ -1,0 +1,74 @@
+---
+const clients = [
+  { name: "Acordo Certo", src: "/images/clients/acordo-certo.svg" },
+  { name: "Agibank", src: "/images/clients/agibank.svg" },
+  { name: "Chapecoense", src: "/images/clients/chapecoense.svg" },
+  { name: "China in Box", src: "/images/clients/china-box.svg" },
+  { name: "Gendai", src: "/images/clients/gendai.svg" },
+  { name: "IXCSoft", src: "/images/clients/ixcsoft.svg" },
+  { name: "Modal", src: "/images/clients/modal.svg" },
+  { name: "Spoleto", src: "/images/clients/spoleto.svg" },
+];
+---
+
+<section class="mx-auto py-12 bg-surface-default overflow-hidden max-w-[985px]">
+  <div
+    class="relative w-full flex flex-nowrap overflow-hidden mask-[linear-gradient(to_right,transparent_0,black_128px,black_calc(100%-128px),transparent_100%)]"
+  >
+    <div
+      class="flex items-center justify-center md:justify-start [&_li]:mx-6 [&_img]:max-w-none animate-infinite-scroll py-2"
+    >
+      <ul
+        class="flex items-center justify-center md:justify-start [&_li]:mx-6 [&_img]:max-w-none"
+      >
+        {
+          clients.map((client) => (
+            <li>
+              <img
+                src={client.src}
+                alt={client.name}
+                class="h-5 md:h-7 w-auto transition-all duration-300 pointer-events-none select-none"
+              />
+            </li>
+          ))
+        }
+      </ul>
+      <ul
+        class="flex items-center justify-center md:justify-start [&_li]:mx-6 [&_img]:max-w-none"
+        aria-hidden="true"
+      >
+        {
+          clients.map((client) => (
+            <li>
+              <img
+                src={client.src}
+                alt={client.name}
+                class="h-5 md:h-7 w-auto transition-all duration-300 pointer-events-none select-none"
+              />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .animate-infinite-scroll {
+    animation: infinite-scroll 30s linear infinite;
+  }
+
+  @keyframes infinite-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Opção de pausar ao hover se desejar, mas para logos corporativos às vezes é melhor manter girando */
+  .animate-infinite-scroll:hover {
+    animation-play-state: paused;
+  }
+</style>

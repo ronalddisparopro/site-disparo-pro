@@ -2,7 +2,6 @@
 import type { BlogPost } from "../types/blog";
 import { ROUTES } from "../lib/routes";
 import { formatDate } from "../lib/utils";
-import Heading from "./ui/Heading.astro";
 
 export interface Props {
   post: BlogPost;
@@ -12,7 +11,7 @@ const { post } = Astro.props;
 ---
 
 <article class="flex flex-col overflow-hidden">
-  <a href={ROUTES.BLOG.POST(post.slug)} class="flex-shrink-0">
+  <a href={ROUTES.BLOG.POST(post.slug)} class="shrink-0">
     <img
       src={post.coverImage}
       alt={post.title}
@@ -20,25 +19,23 @@ const { post } = Astro.props;
     />
   </a>
   <div class="flex-1 p-4 flex flex-col gap-4">
-    <div class="flex-1">
-      <p class="text-sm font-medium text-primary mb-2">
-        <a href={ROUTES.BLOG.CATEGORY(post.category)} class="hover:underline">
-          {post.category}
-        </a>
-      </p>
-      <a href={ROUTES.BLOG.POST(post.slug)}>
-        <span class="text-body-md text-color-text-primary line-clamp-2">
-          {post.title}
-        </span>
+    <p class="text-sm text-text-secondary">
+      <a href={ROUTES.BLOG.CATEGORY(post.category)} class="hover:underline">
+        {post.category}
       </a>
-    </div>
-    <div>
-      <p class="text-sm text-gray-900">
-        <span class="font-bold">{post.author}</span>
-        <time datetime={post.publishedAt}>
-          {formatDate(post.publishedAt)}
-        </time>
-      </p>
-    </div>
+    </p>
+
+    <a href={ROUTES.BLOG.POST(post.slug)}>
+      <span class="leading-[1.1] text-body-md text-text-primary line-clamp-2">
+        {post.title}
+      </span>
+    </a>
+
+    <p class="text-sm text-text-secondary">
+      <span class="font-bold">{post.author}</span>
+      <time datetime={post.publishedAt}>
+        {formatDate(post.publishedAt)}
+      </time>
+    </p>
   </div>
 </article>

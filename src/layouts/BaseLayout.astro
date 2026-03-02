@@ -25,9 +25,9 @@ const { seo } = Astro.props;
       )
     }
   </head>
-  <body class="min-h-screen flex flex-col font-sans">
+  <body class="min-h-screen flex flex-col font-sans overflow-x-hidden">
     <Header />
-    <main class="grow max-w-[1200px] mx-auto">
+    <main class="grow w-full overflow-x-hidden">
       <slot />
     </main>
     <Footer />

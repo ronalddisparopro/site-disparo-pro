@@ -1,0 +1,137 @@
+---
+import Heading from "./ui/Heading.astro";
+
+const features = [
+  {
+    id: "jornadas",
+    title: "Jornadas integradas",
+    description: "Integração com Playtech, Smartico e Optimove.",
+    image: "/images/whatsapp_marketing.webp",
+  },
+  {
+    id: "suporte",
+    title: "Suporte Humano",
+    description: "Equipe qualificada e 100% humana à sua disposição.",
+    image: "/images/augusto_dalvit.webp",
+  },
+  {
+    id: "api",
+    title: "API Gratuita",
+    description: "Integre seu sistema à nossa API sem custos adicionais.",
+    image: "/images/rcs.webp",
+  },
+  {
+    id: "dados",
+    title: "Visualização de Dados",
+    description: "Confira seu desempenho em tempo real.",
+    image: "/images/disparo_de_email.webp",
+  },
+];
+---
+
+<div class="flex flex-col items-center gap-8 lg:gap-12 max-w-5xl mx-auto">
+  <div class="text-center flex flex-col gap-6">
+    <Heading as="h2">Assine, carregue e dispare!</Heading>
+    <p class="text-text-secondary text-body-md">
+      Com a Disparo Pro, criar e enviar jornadas de comunicação é fácil e
+      prático.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
+      {features.map((feature, index) => (
+        <button
+          data-feature-id={feature.id}
+          data-index={index}
+          class:list={[
+            "feature-card text-left p-4 rounded-xl border transition-all duration-300 cursor-pointer group flex flex-col gap-2",
+            index === 0 
+              ? "active bg-brand-soft border-brand-primary" 
+              : "bg-white border-dashed border-border-default hover:border-brand-primary/50"
+          ]}
+        >
+          <span class:list={[
+            "text-label font-bold transition-colors",
+            index === 0 ? "text-brand-primary" : "text-text-primary group-hover:text-brand-primary"
+          ]}>
+            {feature.title}
+          </span>
+          <p class="text-body-sm text-text-secondary">
+            {feature.description}
+          </p>
+        </button>
+      ))}
+    </div>
+  </div>
+
+  <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-surface-muted">
+    {features.map((feature, index) => (
+      <div 
+        id={`image-${feature.id}`}
+        class:list={[
+          "feature-image absolute inset-0 transition-opacity duration-500 ease-in-out",
+          index === 0 ? "opacity-100 z-10" : "opacity-0 z-0"
+        ]}
+      >
+        <img 
+          src={feature.image} 
+          alt={feature.title} 
+          class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-linear-to-t from-black/20 to-transparent pointer-events-none"></div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<script>
+  function initFeatureShowcase() {
+    const cards = document.querySelectorAll('.feature-card');
+    const images = document.querySelectorAll('.feature-image');
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const featureId = card.getAttribute('data-feature-id');
+
+        cards.forEach(c => {
+          c.classList.remove('active', 'bg-brand-soft', 'border-brand-primary');
+          c.classList.add('bg-white', 'border-dashed', 'border-border-default');
+          
+          const title = c.querySelector('span');
+          if (title) {
+            title.classList.remove('text-brand-primary');
+            title.classList.add('text-text-primary');
+          }
+        });
+
+        card.classList.add('active', 'bg-brand-soft', 'border-brand-primary');
+        card.classList.remove('bg-white', 'border-dashed', 'border-border-default');
+        
+        const activeTitle = card.querySelector('span');
+        if (activeTitle) {
+          activeTitle.classList.add('text-brand-primary');
+          activeTitle.classList.remove('text-text-primary');
+        }
+
+        images.forEach(img => {
+          if (img.id === `image-${featureId}`) {
+            img.classList.add('opacity-100', 'z-10');
+            img.classList.remove('opacity-0', 'z-0');
+          } else {
+            img.classList.remove('opacity-100', 'z-10');
+            img.classList.add('opacity-0', 'z-0');
+          }
+        });
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', initFeatureShowcase);
+  initFeatureShowcase();
+</script>
+
+<style>
+  .feature-image img {
+    filter: brightness(0.98);
+  }
+</style>
+```

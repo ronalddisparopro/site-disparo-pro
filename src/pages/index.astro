@@ -3,25 +3,117 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/ui/Section.astro";
 import Heading from "../components/ui/Heading.astro";
 import Hero from "../components/ui/Hero.astro";
-import Box from "../components/ui/Box.astro";
+import Button from "../components/ui/Button.astro";
+import { ArrowRight } from "@lucide/astro";
+import ClientCarousel from "../components/ClientCarousel.astro";
+import FeatureShowcase from "../components/FeatureShowcase.astro";
+import ChannelFeature from "../components/ui/ChannelFeature.astro";
+import { ROUTES } from "../lib/routes";
 ---
 
 <BaseLayout>
   <Hero>
-    <div>
-      <Heading as="h1">
-        Plataforma Completa de Disparo e Comunicação API
-      </Heading>
+    <div class="w-full lg:w-1/2 flex flex-col items-start gap-6 md:gap-8">
+      <div
+        class="flex items-center gap-2 py-2 px-4 rounded-full bg-surface-muted"
+      >
+        <img src="/images/label-hero-home.webp" alt="Cliente" width="40" />
+        <p class="text-label text-text-secondary">Junte-se a 20mil empresas</p>
+      </div>
+      <div class="flex flex-col gap-4 md:gap-6 items-start">
+        <Heading as="h1">
+          Impulsione suas vendas com jornadas completas e personalizadas.
+        </Heading>
+        <p class="text-body-md text-text-secondary">
+          Dispare WhatsApp, RCS, SMS, E-mail e Voz em um só lugar.
+        </p>
+      </div>
+      <Button variant="primary" icon={ArrowRight} href={ROUTES.CONTATO}
+        >Comece agora</Button
+      >
     </div>
-
-    <Section>
-      <Box
-        variant="primary"
-        icon="/icons/whatsapp.svg"
-        iconAlt="WhatsApp"
-        title="94%"
-        description="dos brasileiros usam WhatsApp para receber mensagens"
-      />
-    </Section>
   </Hero>
+  <ClientCarousel />
+  <Section>
+    <FeatureShowcase />
+  </Section>
+
+  <div class="bg-surface-muted w-full">
+    <Section>
+      <div class="flex flex-col gap-6 lg:gap-12">
+        <ChannelFeature
+          badge="O canal favorito do cliente"
+          title="WhatsApp Marketing"
+          features={[
+            "Parceira oficial do WhatsApp",
+            "Jornadas automatizadas",
+            "Zero taxa de setup",
+            "Usuários ilimitados",
+          ]}
+          buttonText="Saiba mais"
+          buttonHref={ROUTES.CANAIS.WHATSAPP}
+          imageSrc="/images/whatsapp_marketing.webp"
+          imageAlt="WhatsApp Marketing Dashboard"
+        />
+        <ChannelFeature
+          badge="Conversão garantida"
+          title="RCS"
+          features={[
+            "Mensagens multimídia",
+            "Botões interativos",
+            "Sua marca verificada pela Meta",
+            "Zero taxa de setup",
+          ]}
+          buttonText="Saiba mais"
+          buttonHref={ROUTES.CANAIS.RCS}
+          imageSrc="/images/rcs.webp"
+          imageAlt="RCS"
+          reverse
+        />
+        <ChannelFeature
+          badge="Melhor custo-benefício"
+          title="Disparo de SMS"
+          features={[
+            "Até 98% de alcance",
+            "Segmentação de contatos",
+            "Mensagens personalizadas",
+            "Dados em tempo real",
+          ]}
+          buttonText="Saiba mais"
+          buttonHref={ROUTES.CANAIS.SMS}
+          imageSrc="/images/disparo_de_sms.webp"
+          imageAlt="Disparo de SMS"
+        />
+        <ChannelFeature
+          badge="Comunicação humanizada "
+          title="Disparo de Voz"
+          features={[
+            "Pague apenas por chamadas atendidas",
+            "Integração direta com SMS",
+            "Gere áudios com IA",
+            "Dados em tempo real",
+          ]}
+          buttonText="Saiba mais"
+          buttonHref={ROUTES.CANAIS.VOZ}
+          imageSrc="/images/disparo_de_voz.webp"
+          imageAlt="Disparo de Voz"
+          reverse
+        />
+        <ChannelFeature
+          badge="Tradicional que funciona"
+          title="Disparo de E-mail"
+          features={[
+            "Programe jornadas completas",
+            "Mensagens personalizadas",
+            "Zero taxa de setup",
+            "Suporte em tempo real",
+          ]}
+          buttonText="Saiba mais"
+          buttonHref={ROUTES.CANAIS.EMAIL}
+          imageSrc="/images/disparo_de_email.webp"
+          imageAlt="Disparo de E-mail"
+        />
+      </div>
+    </Section>
+  </div>
 </BaseLayout>
