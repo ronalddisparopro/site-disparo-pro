@@ -1,0 +1,67 @@
+---
+import type { SeoProps } from "../types/seo";
+import { getCanonicalUrl, generateDefaultSeoData } from "../lib/seo";
+
+export interface Props extends SeoProps {}
+
+const {
+  title,
+  description,
+  canonical,
+  image,
+  type = "website",
+  publishedAt,
+  author,
+} = Astro.props;
+
+const currentPath = Astro.url.pathname;
+const canonicalUrl = canonical || getCanonicalUrl(currentPath);
+const defaultData = generateDefaultSeoData();
+const finalImage = image || defaultData.image;
+---
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<meta name="generator" content={Astro.generator} />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description || defaultData.description} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:title" content={title} />
+<meta
+  property="og:description"
+  content={description || defaultData.description}
+/>
+{finalImage && <meta property="og:image" content={finalImage} />}
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalUrl} />
+<meta property="twitter:title" content={title} />
+<meta
+  property="twitter:description"
+  content={description || defaultData.description}
+/>
+{finalImage && <meta property="twitter:image" content={finalImage} />}
+
+<!-- Relacionamento a Blog Articles (se aplicável) -->
+{
+  type === "article" && publishedAt && (
+    <meta property="article:published_time" content={publishedAt} />
+  )
+}
+{
+  type === "article" && author && (
+    <meta property="article:author" content={author} />
+  )
+}

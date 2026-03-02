@@ -1,0 +1,25 @@
+---
+import { cx } from "../../lib/utils";
+import Container from "./Container.astro";
+
+export interface Props {
+  class?: string;
+  id?: string;
+  containerClass?: string;
+}
+
+const { class: className, id, containerClass, ...rest } = Astro.props;
+---
+
+<section
+  id={id}
+  class={cx(
+    "pt-10 md:pt-12 lg:pt-32 xl:pt-36 flex flex-col lg:flex-row items-start lg:items-center justify-between px-4 md:px-6 xl:px-0",
+    className,
+  )}
+  {...rest}
+>
+  <Container class={containerClass}>
+    <slot />
+  </Container>
+</section>

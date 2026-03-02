@@ -1,0 +1,13 @@
+---
+import { cx } from "../../lib/utils";
+export interface Props {
+  class?: string;
+  as?: string;
+}
+
+const { class: className, as: Tag = "div", ...rest } = Astro.props;
+---
+
+<Tag class={cx("container", className)} {...rest}>
+  <slot />
+</Tag>

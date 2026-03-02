@@ -1,0 +1,60 @@
+---
+import Container from "./ui/Container.astro";
+---
+
+<footer class="bg-gray-50 py-12 border-t border-gray-200">
+  <Container>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div>
+        <h3
+          class="text-sm font-semibold text-gray-400 tracking-wider uppercase mb-4"
+        >
+          Plataforma
+        </h3>
+        <ul class="space-y-4">
+          <li>
+            <a href="#" class="text-base text-gray-500 hover:text-gray-900"
+              >APIs</a>
+          </li>
+          <li>
+            <a href="#" class="text-base text-gray-500 hover:text-gray-900"
+              >Canais</a>
+          </li>
+          <li>
+            <a href="#" class="text-base text-gray-500 hover:text-gray-900"
+              >Preços</a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h3
+          class="text-sm font-semibold text-gray-400 tracking-wider uppercase mb-4"
+        >
+          Empresa
+        </h3>
+        <ul class="space-y-4">
+          <li>
+            <a href="#" class="text-base text-gray-500 hover:text-gray-900"
+              >Sobre nós</a>
+          </li>
+          <li>
+            <a href="/blog" class="text-base text-gray-500 hover:text-gray-900"
+              >Blog</a>
+          </li>
+          <li>
+            <a
+              href="/contato"
+              class="text-base text-gray-500 hover:text-gray-900">Contato</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div
+      class="mt-8 border-t border-gray-200 pt-8 md:flex md:items-center md:justify-between"
+    >
+      <p class="text-base text-gray-400">
+        &copy; {new Date().getFullYear()} Disparo Pro. Todos os direitos reservados.
+      </p>
+    </div>
+  </Container>
+</footer>

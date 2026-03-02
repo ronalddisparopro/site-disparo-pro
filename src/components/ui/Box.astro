@@ -1,0 +1,73 @@
+---
+import { cx } from "../../lib/utils";
+import Heading from "./Heading.astro";
+import { Image } from "astro:assets";
+
+export interface Props {
+  variant?: "primary" | "secondary" | "tertiary";
+  class?: string;
+  icon?: string | any;
+  iconAlt?: string;
+  title?: string;
+  description?: string;
+}
+
+const {
+  variant = "primary",
+  class: className,
+  icon,
+  iconAlt = "",
+  title,
+  description,
+  ...rest
+} = Astro.props;
+
+const baseClass =
+  "flex flex-col items-start gap-6 rounded-lg py-8 px-6 text-left transition-all hover:opacity-90";
+
+const variants = {
+  primary: "bg-[var(--color-surface-muted)]",
+  secondary: "bg-transparent border border-border-default",
+  tertiary:
+    "bg-[linear-gradient(180deg,var(--color-brand-soft)_0%,rgba(255,255,255,0.19)_100%)]",
+};
+
+const titleStyles = {
+  primary: "text-hero",
+  secondary: "text-body-lg",
+  tertiary: "text-body-lg",
+};
+
+const classes = cx(baseClass, variants[variant], className);
+---
+
+<div class={classes} {...rest}>
+  {
+    icon &&
+      (typeof icon === "string" ? (
+        <img src={icon} alt={iconAlt} class="w-12 h-12 object-contain" />
+      ) : (
+        <Image src={icon} alt={iconAlt} class="w-12 h-12 object-contain" />
+      ))
+  }
+
+  <div class="flex flex-col gap-2">
+    {
+      title && (
+        <span class={cx("font-bold", titleStyles[variant])}>
+          {title}
+        </span>
+      )
+    }
+
+    {
+      description && (
+        <p class="text-body-md text-text-secondary leading-relaxed">
+          {description}
+        </p>
+      )
+    }
+
+    <slot />
+  </div>
+</div>

@@ -1,0 +1,46 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import type { SeoProps } from "../types/seo";
+import Section from "../components/ui/Section.astro";
+import Heading from "../components/ui/Heading.astro";
+
+export interface Props {
+  seo: SeoProps;
+  title: string;
+  description?: string;
+}
+
+const { seo, title, description } = Astro.props;
+---
+
+<BaseLayout seo={seo}>
+  <Section class="bg-gray-50 border-b border-gray-200">
+    <div class="max-w-3xl mx-auto text-center">
+      <Heading as="h1" class="mb-4">{title}</Heading>
+      {description && <p class="text-xl text-gray-600">{description}</p>}
+    </div>
+  </Section>
+  <Section>
+    <div class="flex flex-col lg:flex-row gap-12">
+      <div class="flex-grow">
+        <slot />
+      </div>
+      <aside class="w-full lg:w-80 flex-shrink-0">
+        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+          <Heading as="h3" class="mb-4">Categorias</Heading>
+          <ul class="space-y-2">
+            <li>
+              <a
+                href="/blog/categoria/whatsapp"
+                class="text-primary hover:underline">WhatsApp</a>
+            </li>
+            <li>
+              <a href="/blog/categoria/rcs" class="text-primary hover:underline"
+                >RCS</a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </Section>
+</BaseLayout>

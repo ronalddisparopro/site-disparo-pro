@@ -1,0 +1,23 @@
+---
+import { cx } from "../../lib/utils";
+
+export interface Props {
+  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+  class?: string;
+}
+
+const { as: Tag = "h2", class: className, ...rest } = Astro.props;
+
+const styles = {
+  h1: "text-hero font-bold leading-[1.1]",
+  h2: "text-title-section font-semibold",
+  h3: "text-title-card font-semibold",
+  h4: "text-body-lg font-medium",
+  h5: "text-body-md font-medium",
+  h6: "text-body-sm font-medium",
+};
+---
+
+<Tag class={cx(styles[Tag as keyof typeof styles], className)} {...rest}>
+  <slot />
+</Tag>

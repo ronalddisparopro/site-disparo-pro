@@ -1,0 +1,26 @@
+---
+import PostLayout from "../../layouts/PostLayout.astro";
+import { MOCK_POSTS } from "../../types/blog";
+
+export function getStaticPaths() {
+  return MOCK_POSTS.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+
+const seo = {
+  title: `${post.title} - Blog Disparo Pro`,
+  description: post.excerpt,
+  type: "article" as const,
+  image: post.coverImage,
+  author: post.author,
+  publishedAt: post.publishedAt,
+};
+---
+
+<PostLayout post={post} seo={seo}>
+  <div set:html={post.content} />
+</PostLayout>

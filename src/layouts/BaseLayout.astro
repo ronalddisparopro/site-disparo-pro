@@ -1,0 +1,35 @@
+---
+import "../styles/globals.css";
+import SEO from "../components/SEO.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import type { SeoProps } from "../types/seo";
+
+export interface Props {
+  seo?: SeoProps;
+}
+
+const { seo } = Astro.props;
+---
+
+<html lang="pt-BR" class="scroll-smooth">
+  <head>
+    {
+      seo ? (
+        <SEO {...seo} />
+      ) : (
+        <SEO
+          title="Dispare SMS e Torpedo de Voz em Massa | Disparo Pro"
+          description="Alcance até 98% do seu público-alvo! Tenha acesso a uma plataforma simples e intuitiva para disparar mensagens em massa."
+        />
+      )
+    }
+  </head>
+  <body class="min-h-screen flex flex-col font-sans">
+    <Header />
+    <main class="grow max-w-[1200px] mx-auto">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,192 @@
+---
+import Container from "./ui/Container.astro";
+import { ROUTES } from "../lib/routes";
+import Button from "./ui/Button.astro";
+import { Menu, X, ChevronDown } from "@lucide/astro";
+
+const navItems = [
+  { label: "Início", href: ROUTES.HOME },
+  {
+    label: "Canais",
+    children: [
+      { label: "WhatsApp Marketing", href: ROUTES.CANAIS.WHATSAPP },
+      { label: "RCS", href: ROUTES.CANAIS.RCS },
+      { label: "Disparo de SMS", href: ROUTES.CANAIS.SMS },
+      { label: "Disparo de Voz", href: ROUTES.CANAIS.VOZ },
+    ],
+  },
+  { label: "Planos", href: ROUTES.PLANOS },
+  {
+    label: "APIs",
+    children: [
+      { label: "API de SMS", href: ROUTES.APIS.SMS },
+      { label: "API de WhatsApp", href: ROUTES.APIS.WHATSAPP },
+      { label: "API de RCS", href: ROUTES.APIS.RCS },
+      { label: "API de Voz", href: ROUTES.APIS.VOZ },
+      { label: "Integrações", href: ROUTES.APIS.INTEGRATIONS },
+    ],
+  },
+  {
+    label: "Recursos",
+    children: [
+      { label: "Blog", href: ROUTES.BLOG.HOME },
+      { label: "Materiais", href: ROUTES.MATERIAIS },
+    ],
+  },
+];
+---
+
+<header
+  class="px-4 md:px-6 xl:px-0 py-4 sticky top-0 left-0 w-full z-50 bg-[rgba(255,255,255,0.84)] shadow-[0_1px_18.3px_0_rgba(0,0,0,0.04)] backdrop-blur-sm"
+>
+  <Container>
+    <div class="flex items-center justify-between">
+      <div class="shrink-0">
+        <a href={ROUTES.HOME}>
+          <img src="/public/images/logo-disparo-pro.svg" alt="isparo Pro" />
+        </a>
+      </div>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:block">
+        <ul class="flex space-x-8">
+          {
+            navItems.map((item) => (
+              <li class="relative group">
+                <a
+                  href={item.href || "#"}
+                  class="flex items-center gap-1 text-button-sm text-text-primary hover:text-brand-primary transition-colors font-medium py-2"
+                  onclick={!item.href ? "return false;" : ""}
+                >
+                  {item.label}
+                  {item.children && <ChevronDown class="w-4 h-4" />}
+                </a>
+
+                {item.children && (
+                  <ul class="absolute left-0 top-full pt-2 w-56 hidden group-hover:block animate-in fade-in slide-in-from-top-2 duration-200">
+                    <div class="bg-white border border-border-default rounded-lg shadow-xl p-2 overflow-hidden">
+                      {item.children.map((child) => (
+                        <li>
+                          <a
+                            href={child.href}
+                            class="block px-4 py-2 text-button-sm text-text-primary hover:bg-brand-soft hover:text-brand-primary rounded-md transition-colors"
+                          >
+                            {child.label}
+                          </a>
+                        </li>
+                      ))}
+                    </div>
+                  </ul>
+                )}
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <!-- Desktop Buttons -->
+      <div class="hidden lg:flex items-center space-x-4">
+        <Button href={"/"} variant="secondary">Entrar</Button>
+        <Button href={"/"} variant="outline">Fale com a agente</Button>
+      </div>
+
+      <!-- Mobile Toggle -->
+      <button
+        id="menu-toggle"
+        class="lg:hidden p-2 text-text-primary focus:outline-none"
+        aria-label="Toggle Menu"
+      >
+        <Menu id="menu-icon" class="w-6 h-6" />
+        <X id="close-icon" class="w-6 h-6 hidden" />
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div
+      id="mobile-menu"
+      class="hidden absolute top-full left-0 w-full bg-surface-default border-b border-border-default lg:hidden shadow-lg max-h-[calc(100vh-80px)] overflow-y-auto"
+    >
+      <nav class="p-6">
+        <ul class="flex flex-col space-y-4">
+          {
+            navItems.map((item) => (
+              <li class="flex flex-col">
+                <div class="flex items-center justify-between">
+                  {item.href ? (
+                    <a
+                      href={item.href}
+                      class="text-button-sm text-text-primary hover:text-brand-primary transition-colors font-regular"
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <span class="text-button-sm text-text-primary font-regular">
+                      {item.label}
+                    </span>
+                  )}
+                  {item.children && (
+                    <button class="mobile-submenu-toggle p-2">
+                      <ChevronDown class="w-4 h-4 transition-transform duration-200" />
+                    </button>
+                  )}
+                </div>
+
+                {item.children && (
+                  <ul class="mobile-submenu hidden flex-col pl-4 mt-2 space-y-2 border-l-2 border-brand-soft ml-2">
+                    {item.children.map((child) => (
+                      <li>
+                        <a
+                          href={child.href}
+                          class="block py-1 text-button-sm text-text-secondary hover:text-brand-primary transition-colors"
+                        >
+                          {child.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))
+          }
+          <li class="pt-4 flex flex-col space-y-3">
+            <Button href={"/"} variant="secondary" class="w-full">Entrar</Button
+            >
+            <Button href={"/"} variant="outline" class="w-full"
+              >Fale com a agente</Button
+            >
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </Container>
+</header>
+
+<script>
+  const menuToggle = document.getElementById("menu-toggle");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const menuIcon = document.getElementById("menu-icon");
+  const closeIcon = document.getElementById("close-icon");
+
+  if (menuToggle && mobileMenu && menuIcon && closeIcon) {
+    menuToggle.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+      menuIcon.classList.toggle("hidden");
+      closeIcon.classList.toggle("hidden");
+    });
+  }
+
+  // Mobile Submenu Logic
+  const submenuToggles = document.querySelectorAll(".mobile-submenu-toggle");
+  submenuToggles.forEach((toggle) => {
+    toggle.addEventListener("click", () => {
+      const parent = toggle.closest("li");
+      const submenu = parent?.querySelector(".mobile-submenu");
+      const icon = toggle.querySelector("svg");
+
+      if (submenu && icon) {
+        submenu.classList.toggle("hidden");
+        icon.classList.toggle("rotate-180");
+      }
+    });
+  });
+</script>

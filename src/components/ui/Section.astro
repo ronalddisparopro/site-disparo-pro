@@ -1,0 +1,22 @@
+---
+import { cx } from "../../lib/utils";
+import Container from "./Container.astro";
+
+export interface Props {
+  class?: string;
+  id?: string;
+  containerClass?: string;
+}
+
+const { class: className, id, containerClass, ...rest } = Astro.props;
+---
+
+<section
+  id={id}
+  class={cx("py-10 md:py-16 xl:p-20 px-4 md:px-6 xl:px-0", className)}
+  {...rest}
+>
+  <Container class={containerClass}>
+    <slot />
+  </Container>
+</section>

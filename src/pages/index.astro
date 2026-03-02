@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Section from "../components/ui/Section.astro";
+import Heading from "../components/ui/Heading.astro";
+import Hero from "../components/ui/Hero.astro";
+import Box from "../components/ui/Box.astro";
+---
+
+<BaseLayout>
+  <Hero>
+    <div>
+      <Heading as="h1">
+        Plataforma Completa de Disparo e Comunicação API
+      </Heading>
+    </div>
+
+    <Section>
+      <Box
+        variant="primary"
+        icon="/icons/whatsapp.svg"
+        iconAlt="WhatsApp"
+        title="94%"
+        description="dos brasileiros usam WhatsApp para receber mensagens"
+      />
+    </Section>
+  </Hero>
+</BaseLayout>

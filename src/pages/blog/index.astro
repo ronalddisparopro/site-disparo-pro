@@ -1,0 +1,18 @@
+---
+import BlogLayout from "../../layouts/BlogLayout.astro";
+import BlogGrid from "../../components/BlogGrid.astro";
+import { MOCK_POSTS } from "../../types/blog";
+
+const seo = {
+  title: "Blog - Disparo Pro",
+  description: "Artigos sobre comunicação, APIs, WhatsApp e muito mais.",
+};
+---
+
+<BlogLayout
+  seo={seo}
+  title="Blog Disparo Pro"
+  description="Dicas, tutoriais e novidades sobre as melhores ferramentas de comunicação."
+>
+  <BlogGrid posts={MOCK_POSTS} />
+</BlogLayout>

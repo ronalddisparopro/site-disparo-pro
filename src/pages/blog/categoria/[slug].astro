@@ -1,0 +1,29 @@
+---
+import BlogLayout from "../../../layouts/BlogLayout.astro";
+import BlogGrid from "../../../components/BlogGrid.astro";
+import { MOCK_POSTS } from "../../../types/blog";
+
+export function getStaticPaths() {
+  const categories = [...new Set(MOCK_POSTS.map((post) => post.category))];
+  return categories.map((category) => ({
+    params: { slug: category },
+    props: { category },
+  }));
+}
+
+const { category } = Astro.props;
+const posts = MOCK_POSTS.filter((post) => post.category === category);
+
+const seo = {
+  title: `Categoria: ${category} - Blog Disparo Pro`,
+  description: `Artigos da categoria ${category}.`,
+};
+---
+
+<BlogLayout
+  seo={seo}
+  title={`Categoria: ${category}`}
+  description={`Todos os artigos em ${category}`}
+>
+  <BlogGrid posts={posts} />
+</BlogLayout>
