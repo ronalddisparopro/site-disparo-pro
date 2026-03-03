@@ -9,22 +9,104 @@ import ClientCarousel from "../components/ClientCarousel.astro";
 import FeatureShowcase from "../components/FeatureShowcase.astro";
 import ChannelFeature from "../components/ui/ChannelFeature.astro";
 import { ROUTES } from "../lib/routes";
+import SlideBoxSteps from "../components/SlideBoxSteps.astro";
+import ApiSection from "../components/ApiSection.astro";
+import Testimonial from "../components/Testimonial.astro";
+const CHANNEL_FEATURES = [
+  {
+    badge: "O canal favorito do cliente",
+    title: "WhatsApp Marketing",
+    features: [
+      "Parceira oficial do WhatsApp",
+      "Jornadas automatizadas",
+      "Zero taxa de setup",
+      "Usuários ilimitados",
+    ],
+    buttonText: "Saiba mais",
+    buttonHref: ROUTES.CANAIS.WHATSAPP,
+    imageSrc: "/images/whatsapp_marketing.webp",
+    imageAlt: "WhatsApp Marketing Dashboard",
+  },
+  {
+    badge: "Conversão garantida",
+    title: "RCS",
+    features: [
+      "Mensagens multimídia",
+      "Botões interativos",
+      "Sua marca verificada pela Meta",
+      "Zero taxa de setup",
+    ],
+    buttonText: "Saiba mais",
+    buttonHref: ROUTES.CANAIS.RCS,
+    imageSrc: "/images/rcs.webp",
+    imageAlt: "RCS",
+    reverse: true,
+  },
+  {
+    badge: "Melhor custo-benefício",
+    title: "Disparo de SMS",
+    features: [
+      "Até 98% de alcance",
+      "Segmentação de contatos",
+      "Mensagens personalizadas",
+      "Dados em tempo real",
+    ],
+    buttonText: "Saiba mais",
+    buttonHref: ROUTES.CANAIS.SMS,
+    imageSrc: "/images/disparo_de_sms.webp",
+    imageAlt: "Disparo de SMS",
+  },
+  {
+    badge: "Comunicação humanizada ",
+    title: "Disparo de Voz",
+    features: [
+      "Pague apenas por chamadas atendidas",
+      "Integração direta com SMS",
+      "Gere áudios com IA",
+      "Dados em tempo real",
+    ],
+    buttonText: "Saiba mais",
+    buttonHref: ROUTES.CANAIS.VOZ,
+    imageSrc: "/images/disparo_de_voz.webp",
+    imageAlt: "Disparo de Voz",
+    reverse: true,
+  },
+  {
+    badge: "Tradicional que funciona",
+    title: "Disparo de E-mail",
+    features: [
+      "Programe jornadas completas",
+      "Mensagens personalizadas",
+      "Zero taxa de setup",
+      "Suporte em tempo real",
+    ],
+    buttonText: "Saiba mais",
+    buttonHref: ROUTES.CANAIS.EMAIL,
+    imageSrc: "/images/disparo_de_email.webp",
+    imageAlt: "Disparo de E-mail",
+  },
+];
 ---
 
 <BaseLayout>
-  <Hero>
-    <div class="w-full lg:w-1/2 flex flex-col items-start gap-6 md:gap-8">
+  <Hero
+    id="home"
+    class="bg-[url(/images/background-blur.webp)] bg-cover bg-center lg:bg-left bg-no-repeat overflow-hidden"
+  >
+    <div
+      class="w-full lg:w-[48%] flex flex-col items-start gap-6 md:gap-8 lg:gap-4 xl:gap-8"
+    >
       <div
-        class="flex items-center gap-2 py-2 px-4 rounded-full bg-surface-muted"
+        class="flex items-center gap-2 py-2 px-4 rounded-full bg-surface-muted border border-border-default/20"
       >
         <img src="/images/label-hero-home.webp" alt="Cliente" width="40" />
         <p class="text-label text-text-secondary">Junte-se a 20mil empresas</p>
       </div>
-      <div class="flex flex-col gap-4 md:gap-6 items-start">
+      <div class="flex flex-col gap-4 md:gap-6 lg:gap-4 xl:gap-6 items-start">
         <Heading as="h1">
           Impulsione suas vendas com jornadas completas e personalizadas.
         </Heading>
-        <p class="text-body-md text-text-secondary">
+        <p class="text-body-md text-text-secondary max-w-[500px]">
           Dispare WhatsApp, RCS, SMS, E-mail e Voz em um só lugar.
         </p>
       </div>
@@ -32,8 +114,17 @@ import { ROUTES } from "../lib/routes";
         >Comece agora</Button
       >
     </div>
+    <div class="w-full lg:w-1/2">
+      <img
+        src="/images/image-hero.webp"
+        alt="Plataforma Disparo Pro"
+        class="w-full h-auto"
+      />
+    </div>
   </Hero>
+
   <ClientCarousel />
+
   <Section>
     <FeatureShowcase />
   </Section>
@@ -41,79 +132,64 @@ import { ROUTES } from "../lib/routes";
   <div class="bg-surface-muted w-full">
     <Section>
       <div class="flex flex-col gap-6 lg:gap-12">
-        <ChannelFeature
-          badge="O canal favorito do cliente"
-          title="WhatsApp Marketing"
-          features={[
-            "Parceira oficial do WhatsApp",
-            "Jornadas automatizadas",
-            "Zero taxa de setup",
-            "Usuários ilimitados",
-          ]}
-          buttonText="Saiba mais"
-          buttonHref={ROUTES.CANAIS.WHATSAPP}
-          imageSrc="/images/whatsapp_marketing.webp"
-          imageAlt="WhatsApp Marketing Dashboard"
-        />
-        <ChannelFeature
-          badge="Conversão garantida"
-          title="RCS"
-          features={[
-            "Mensagens multimídia",
-            "Botões interativos",
-            "Sua marca verificada pela Meta",
-            "Zero taxa de setup",
-          ]}
-          buttonText="Saiba mais"
-          buttonHref={ROUTES.CANAIS.RCS}
-          imageSrc="/images/rcs.webp"
-          imageAlt="RCS"
-          reverse
-        />
-        <ChannelFeature
-          badge="Melhor custo-benefício"
-          title="Disparo de SMS"
-          features={[
-            "Até 98% de alcance",
-            "Segmentação de contatos",
-            "Mensagens personalizadas",
-            "Dados em tempo real",
-          ]}
-          buttonText="Saiba mais"
-          buttonHref={ROUTES.CANAIS.SMS}
-          imageSrc="/images/disparo_de_sms.webp"
-          imageAlt="Disparo de SMS"
-        />
-        <ChannelFeature
-          badge="Comunicação humanizada "
-          title="Disparo de Voz"
-          features={[
-            "Pague apenas por chamadas atendidas",
-            "Integração direta com SMS",
-            "Gere áudios com IA",
-            "Dados em tempo real",
-          ]}
-          buttonText="Saiba mais"
-          buttonHref={ROUTES.CANAIS.VOZ}
-          imageSrc="/images/disparo_de_voz.webp"
-          imageAlt="Disparo de Voz"
-          reverse
-        />
-        <ChannelFeature
-          badge="Tradicional que funciona"
-          title="Disparo de E-mail"
-          features={[
-            "Programe jornadas completas",
-            "Mensagens personalizadas",
-            "Zero taxa de setup",
-            "Suporte em tempo real",
-          ]}
-          buttonText="Saiba mais"
-          buttonHref={ROUTES.CANAIS.EMAIL}
-          imageSrc="/images/disparo_de_email.webp"
-          imageAlt="Disparo de E-mail"
-        />
+        {CHANNEL_FEATURES.map((feature) => <ChannelFeature {...feature} />)}
       </div>
     </Section>
   </div>
+
+  <Section
+    containerClass="flex flex-col items-center justify-center gap-8 lg:gap-12"
+  >
+    <div
+      class="mx-auto w-full xl:max-w-3/4 flex flex-col gap-4 lg:gap-6 items-center justify-center"
+    >
+      <Heading as="h2" class="text-center"
+        >Crie e dispare jorndas de comunicação com poucos cliques</Heading
+      >
+      <p class="text-body-md text-text-secondary text-center">
+        Na Disparo Pro, criar suas jornadas de comunicação é fácil e intuitivo.
+        Confira o passo a passo:
+      </p>
+      <Button variant="primary" icon={ArrowRight} href={ROUTES.LOGIN}
+        >Crie sua conta agora!</Button
+      >
+    </div>
+
+    <SlideBoxSteps />
+  </Section>
+
+  <Section>
+    <ApiSection
+      title="Integre nossa API ao seu sistema!"
+      description="Com a Disparo Pro, você tem acesso a APIs de WhatsApp, RCS, SMS, E-mail e Voz – tudo com suporte nacional e integração facilitada aos principais CRMs do mercado."
+      link={ROUTES.APIS.INTEGRATIONS}
+    />
+  </Section>
+
+  <Section
+    containerClass="flex flex-col items-center justify-center gap-8 lg:gap-12"
+  >
+    <div class="flex flex-col items-center justify-center gap-6">
+      <Heading as="h2">Quem conhece, confia!</Heading>
+      <p class="text-body-md text-text-secondary">
+        + de 5 mil clientes atendidos
+      </p>
+    </div>
+    <div
+      class="gap-8 lg:gap-12 flex flex-col lg:flex-row items-center justify-between"
+    >
+      <Testimonial
+        name="Deive Leonardo"
+        position="Evangelista e influenciador Digital"
+        text="“Quando fizemos o lançamento do filme A Resposta, a Disparo Pro nos ajudou a alcançar todos os nossos leads e pessoas que fizeram parte da nossa história. Foi o melhor lançamento que pudemos imaginar, e ficamos no Top 10 da Netflix!”"
+        image="/images/deive_leonardo.webp"
+      />
+      <Testimonial
+        name="Augusto Dalvit Tonelo"
+        position="Vice-Presidente de Marketing da Chapecoense"
+        text="“Nós percebemos que o SMS era um canal bastante eficiente para a nossa necessidade. Precisávamos alcançar o torcedor associado de forma rápida e eficaz para mantê-lo engajado com o Clube. Considerando o investimento, o retorno foi muito positivo!”"
+        image="/images/augusto_dalvit.webp"
+      />
+    </div>
+  </Section>
 </BaseLayout>

@@ -11,10 +11,9 @@
 
   --color-surface-default: #ffffff;
   --color-surface-muted: #f8f9fa;
+  --color-surface-dark: #0d0d0d;
 
   --color-border-default: #dadada;
-
-  --font-sans: "DM Sans", system-ui, -apple-system, sans-serif;
 
   --text-hero: clamp(2rem, 4vw, 3rem); /* 32 → 48 */
 
@@ -37,6 +36,7 @@
 
 body {
   background-color: var(--color-surface-default);
+  font-family: "DM Sans", system-ui, sans-serif;
 }
 
 @utility container {

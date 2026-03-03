@@ -1,0 +1,57 @@
+---
+import { cx } from "../../lib/utils";
+import { Image } from "astro:assets";
+
+export interface Props {
+  class?: string;
+  image?: string | any;
+  imageAlt?: string;
+  title?: string;
+  description?: string;
+}
+
+const {
+  class: className,
+  image,
+  imageAlt = "",
+  title,
+  description,
+  ...rest
+} = Astro.props;
+
+const baseClass =
+  "bg-surface-muted border border-border-default flex flex-col items-start rounded-lg py-8 px-4 text-left transition-all hover:opacity-90";
+
+const classes = cx(baseClass, className);
+---
+
+<div class={classes} {...rest}>
+  <div class="flex flex-col gap-8">
+    <div class="flex flex-col gap-3">
+      {
+        title && (
+          <span class={cx("font-bold text-title-card text-text-primary")}>
+            {title}
+          </span>
+        )
+      }
+
+      {
+        description && (
+          <p class="text-body-md text-text-secondary leading-relaxed">
+            {description}
+          </p>
+        )
+      }
+    </div>
+    {
+      image &&
+        (typeof image === "string" ? (
+          <img src={image} alt={imageAlt} class="w-full object-contain" />
+        ) : (
+          <Image src={image} alt={imageAlt} class="w-full object-contain" />
+        ))
+    }
+    <slot />
+  </div>
+</div>

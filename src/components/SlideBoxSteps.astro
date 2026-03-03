@@ -1,0 +1,29 @@
+---
+import BoxStep from "./ui/BoxStep.astro";
+---
+
+<div
+  class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 lg:grid lg:grid-cols-3 lg:gap-8 lg:pb-0 lg:overflow-visible w-full"
+>
+  <div class="min-w-[85%] md:min-w-[45%] lg:min-w-0 shrink-0 snap-center">
+    <BoxStep
+      title="Faça login"
+      description="Acesse a plataforma com e-mail e senha."
+      image="/images/criar-conta.svg"
+    />
+  </div>
+  <div class="min-w-[85%] md:min-w-[45%] lg:min-w-0 shrink-0 snap-center">
+    <BoxStep
+      title="Crie sua jornada"
+      description="Suba a lista de mensagens e crie suas mensagens."
+      image="/images/criar-jornada.svg"
+    />
+  </div>
+  <div class="min-w-[85%] md:min-w-[45%] lg:min-w-0 shrink-0 snap-center">
+    <BoxStep
+      title="Dispare"
+      description="Programe ou dispare sua jornada de comunicação."
+      image="/images/disparar.svg"
+    />
+  </div>
+</div>
