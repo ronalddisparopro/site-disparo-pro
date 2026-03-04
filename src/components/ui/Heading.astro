@@ -4,20 +4,38 @@ import { cx } from "../../lib/utils";
 export interface Props {
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   class?: string;
+  variant?: "primary" | "secondary";
 }
 
-const { as: Tag = "h2", class: className, ...rest } = Astro.props;
+const {
+  as: Tag = "h2",
+  class: className,
+  variant = "primary",
+  ...rest
+} = Astro.props;
 
 const styles = {
   h1: "text-hero font-bold leading-[1.1]",
   h2: "text-title-section font-bold",
-  h3: "text-title-card font-semibold",
-  h4: "text-body-lg font-medium",
-  h5: "text-body-md font-medium",
-  h6: "text-body-sm font-medium",
+  h3: "text-title-card font-bold",
+  h4: "text-body-lg font-bold",
+  h5: "text-body-md font-semibold",
+  h6: "text-body-sm font-semibold",
+};
+
+const variants = {
+  primary: "text-text-primary",
+  secondary: "text-surface-default",
 };
 ---
 
-<Tag class={cx(styles[Tag as keyof typeof styles], className)} {...rest}>
+<Tag
+  class={cx(
+    styles[Tag as keyof typeof styles],
+    variants[variant as keyof typeof variants],
+    className,
+  )}
+  {...rest}
+>
   <slot />
 </Tag>

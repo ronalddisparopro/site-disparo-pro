@@ -1,0 +1,23 @@
+---
+import { cx } from "../../lib/utils";
+
+export interface Props {
+  class?: string;
+  text?: string;
+  image?: string;
+}
+
+const { class: className, text, image, ...rest } = Astro.props;
+
+const classes = cx(className);
+---
+
+<div class={classes} {...rest}>
+  <div
+    class="flex items-center gap-2 py-2 px-4 rounded-full bg-surface-muted border border-border-default/20"
+  >
+    <img src={image} alt={text} width="40" />
+    {text && <span class={cx("text-label text-text-secondary")}>{text}</span>}
+  </div>
+  <slot />
+</div>

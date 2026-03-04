@@ -12,6 +12,8 @@ import { ROUTES } from "../lib/routes";
 import SlideBoxSteps from "../components/SlideBoxSteps.astro";
 import ApiSection from "../components/ApiSection.astro";
 import Testimonial from "../components/Testimonial.astro";
+import Badge from "../components/ui/Badge.astro";
+import TestimonialDiv from "../components/TestimonialDiv.astro";
 const CHANNEL_FEATURES = [
   {
     badge: "O canal favorito do cliente",
@@ -96,12 +98,11 @@ const CHANNEL_FEATURES = [
     <div
       class="w-full lg:w-[48%] flex flex-col items-start gap-6 md:gap-8 lg:gap-4 xl:gap-8"
     >
-      <div
-        class="flex items-center gap-2 py-2 px-4 rounded-full bg-surface-muted border border-border-default/20"
-      >
-        <img src="/images/label-hero-home.webp" alt="Cliente" width="40" />
-        <p class="text-label text-text-secondary">Junte-se a 20mil empresas</p>
-      </div>
+      <Badge
+        text="Junte-se a 20mil empresas"
+        image="/images/label-hero-home.webp"
+      />
+
       <div class="flex flex-col gap-4 md:gap-6 lg:gap-4 xl:gap-6 items-start">
         <Heading as="h1">
           Impulsione suas vendas com jornadas completas e personalizadas.
@@ -166,30 +167,7 @@ const CHANNEL_FEATURES = [
     />
   </Section>
 
-  <Section
-    containerClass="flex flex-col items-center justify-center gap-8 lg:gap-12"
-  >
-    <div class="flex flex-col items-center justify-center gap-6">
-      <Heading as="h2">Quem conhece, confia!</Heading>
-      <p class="text-body-md text-text-secondary">
-        + de 5 mil clientes atendidos
-      </p>
-    </div>
-    <div
-      class="gap-8 lg:gap-12 flex flex-col lg:flex-row items-center justify-between"
-    >
-      <Testimonial
-        name="Deive Leonardo"
-        position="Evangelista e influenciador Digital"
-        text="“Quando fizemos o lançamento do filme A Resposta, a Disparo Pro nos ajudou a alcançar todos os nossos leads e pessoas que fizeram parte da nossa história. Foi o melhor lançamento que pudemos imaginar, e ficamos no Top 10 da Netflix!”"
-        image="/images/deive_leonardo.webp"
-      />
-      <Testimonial
-        name="Augusto Dalvit Tonelo"
-        position="Vice-Presidente de Marketing da Chapecoense"
-        text="“Nós percebemos que o SMS era um canal bastante eficiente para a nossa necessidade. Precisávamos alcançar o torcedor associado de forma rápida e eficaz para mantê-lo engajado com o Clube. Considerando o investimento, o retorno foi muito positivo!”"
-        image="/images/augusto_dalvit.webp"
-      />
-    </div>
+  <Section>
+    <TestimonialDiv />
   </Section>
 </BaseLayout>

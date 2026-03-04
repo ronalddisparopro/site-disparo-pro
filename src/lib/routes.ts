@@ -4,14 +4,12 @@ export const ROUTES = {
   CONTATO: "/contato",
   MATERIAIS: "/materiais",
   LOGIN: "https://auth.disparopro.com.br/",
-  
-/*
+
   BLOG: {
     HOME: "/blog",
     POST: (slug: string) => `/blog/${slug}`,
     CATEGORY: (slug: string) => `/blog/categoria/${slug}`,
   },
-*/
 
   CANAIS: {
     WHATSAPP: "/canais/whatsapp-marketing",

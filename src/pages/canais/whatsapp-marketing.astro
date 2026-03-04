@@ -2,12 +2,284 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Section from "../../components/ui/Section.astro";
 import Heading from "../../components/ui/Heading.astro";
+import Hero from "../../components/ui/Hero.astro";
+import { ArrowRight } from "lucide-astro";
+import Button from "../../components/ui/Button.astro";
+import { ROUTES } from "../../lib/routes";
+import Badge from "../../components/ui/Badge.astro";
+import Box from "../../components/ui/Box.astro";
+import ChannelHighlight from "../../components/ui/ChannelHighlight.astro";
+import InteractiveFeature from "../../components/ui/InteractiveFeature.astro";
+import ApiSection from "../../components/ApiSection.astro";
+import Faq from "../../components/ui/Faq.astro";
 ---
 
 <BaseLayout
-  seo={{ title: "WhatsApp Marketing", description: "API Oficial de WhatsApp." }}
+  seo={{
+    title: "WhatsApp Marketing",
+    description: "Amplie a comunicação da sua empresa com WhatsApp.",
+  }}
 >
+  <Hero
+    id="home"
+    class="bg-[url(/images/background-blur.webp)] bg-cover bg-center lg:bg-left bg-no-repeat overflow-hidden"
+  >
+    <div
+      class="w-full lg:w-[48%] flex flex-col items-start gap-6 md:gap-8 lg:gap-4 xl:gap-8"
+    >
+      <Badge
+        text="Parceira Oficial do WhatsApp"
+        image="/icons/whatsapp-icon.svg"
+      />
+      <div class="flex flex-col gap-4 md:gap-6 lg:gap-4 xl:gap-6 items-start">
+        <Heading as="h1">
+          Conte com o canal mais usado do Brasil para vender!
+        </Heading>
+        <p class="text-body-md text-text-secondary max-w-[500px]">
+          Amplie a comunicação da sua empresa com WhatsApp.
+        </p>
+      </div>
+      <Button variant="primary" icon={ArrowRight} href={ROUTES.CONTATO}
+        >Comece agora</Button
+      >
+    </div>
+    <div class="w-full lg:w-1/2">
+      <img
+        src="/images/image-hero.webp"
+        alt="Plataforma Disparo Pro"
+        class="w-full h-auto"
+      />
+    </div>
+  </Hero>
+
+  <Section
+    class="flex flex-col items-center justify-center"
+    containerClass="flex flex-col gap-8 lg:gap-12"
+  >
+    <div
+      class="mx-auto w-full xl:max-w-3/4 flex flex-col items-center justify-center text-center gap-4"
+    >
+      <Heading as="h2">O WhatsApp impulsiona o seu negócio!</Heading>
+      <p class="text-body-md text-text-secondary max-w-[500px]">
+        Ideal para modernizar sua comunicação, o WhatsApp se tornou o canal
+        favorito das empresas brasileiras.
+      </p>
+    </div>
+
+    <div class="flex flex-col gap-4 lg:grid lg:grid-cols-3 lg:gap-5">
+      <Box
+        variant="primary"
+        icon={"/icons/users.svg"}
+        iconAlt="Users"
+        title="94%"
+        description="dos brasileiros usam WhatsApp para receber mensagens"
+      />
+      <Box
+        variant="primary"
+        icon={"/icons/dollar.svg"}
+        iconAlt="Dollar"
+        title="45%"
+        description="das empresas vendem mais com WhatsApp"
+      />
+      <Box
+        variant="primary"
+        icon={"/icons/verify.svg"}
+        iconAlt="Verify"
+        title="88%"
+        description="dos clientes preferem contato pelo WhatsApp"
+      />
+    </div>
+  </Section>
+
+  <div class="bg-surface-muted w-full">
+    <Section>
+      <div class="flex flex-col gap-6 lg:gap-12">
+        <Heading as="h2" class="text-text-primary"
+          >Mais que envio: com a Disparo Pro, você transforma disparos em
+          interações!</Heading
+        >
+        <ChannelHighlight
+          items={[
+            {
+              icon: "/icons/fast.svg",
+              title: "Completo",
+              description: "Visualize respostas enviadas pelos seus clientes",
+            },
+            {
+              icon: "/icons/check-chat.svg",
+              title: "Prático",
+              description: "Responda seus clientes sem sair da plataforma",
+            },
+            {
+              icon: "/icons/notify.svg",
+              title: "Ágil",
+              description: "Seja notificado em tempo real",
+            },
+          ]}
+          imageSrc="/images/whatsapp_marketing.webp"
+          imageAlt="WhatsApp Marketing"
+          buttonText="Conheça a plataforma!"
+          buttonHref={ROUTES.LOGIN}
+        />
+      </div>
+    </Section>
+  </div>
+
+  <Section containerClass="flex flex-col gap-6 lg:gap-12">
+    <div class="flex flex-col gap-4 lg:gap-6">
+      <Heading as="h2" class="text-text-primary"
+        >Com WhatsApp, o retorno é garantido!</Heading
+      >
+      <p class="text-body-md text-text-secondary max-w-[500px]">
+        Diversas possibilidades de uso para o seu negócio.
+      </p>
+    </div>
+    <InteractiveFeature
+      items={[
+        {
+          icon: "/icons/love-chat.svg",
+          title: "Mais retorno",
+          description: "Garanta até 47% de taxa de resposta.",
+          image: "/images/mockups/whatsapp-retorno.webp",
+        },
+        {
+          icon: "/icons/search.svg",
+          title: "Mais alcance",
+          description: "Atinja mais de 147 milhões de usuários.",
+          image: "/images/mockups/whatsapp-alcance.webp",
+        },
+        {
+          icon: "/icons/bag.svg",
+          title: "Mais conversão",
+          description: "Converta até 40% da sua audiência.",
+          image: "/images/mockups/whatsapp-conversao.webp",
+        },
+        {
+          icon: "/icons/interface.svg",
+          title: "Um canal, diversas possibilidades",
+          description: "WhatsApp, RCS, SMS, Voz e E-mail em um só lugar.",
+          image: "/images/mockups/whatsapp-possibilidades.webp",
+        },
+      ]}
+      buttonText="Conheça a plataforma!"
+      buttonHref={ROUTES.LOGIN}
+    />
+  </Section>
+
+  <div class="bg-brand-soft w-full">
+    <Section>
+      <div class="flex flex-col gap-6 lg:gap-12">
+        <div class="flex flex-col gap-4 lg:gap-6">
+          <Heading as="h2" class="text-text-primary"
+            >Crie e dispare campanhas de comunicação com poucos cliques</Heading
+          >
+          <p class="text-body-md text-text-secondary max-w-[500px]">
+            Conheça as funcionalidades que esperam por você.
+          </p>
+        </div>
+
+        <div
+          class="flex flex-col lg:flex-row gap-6 xl:gap-12 items-start justify-center"
+        >
+          <img
+            src="/images/boxes-whatsapp-image.webp"
+            alt="Pessoa feliz utilizando o telefone"
+            class="hidden lg:block w-full max-w-[440px] h-[810px] rounded-2xl"
+          />
+          <img
+            src="/images/boxes-whatsapp-image-mobile.webp"
+            alt="Pessoa feliz utilizando o telefone"
+            class="block lg:hidden w-full rounded-2xl"
+          />
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Box
+              variant="tertiary"
+              icon={"/icons/unify.svg"}
+              iconAlt="Gerenciamento"
+              title="Gerenciamento Completo"
+              description="Crie, agende e acompanhe status em tempo real"
+            />
+            <Box
+              variant="tertiary"
+              icon={"/icons/love-chat.svg"}
+              iconAlt="Mensagens"
+              title="Caixa de Mensagens"
+              description="Acompanhe seu histórico de mensagens"
+            />
+            <Box
+              variant="tertiary"
+              icon={"/icons/users.svg"}
+              iconAlt="Contatos"
+              title="Controle de Contatos"
+              description="Adicione manualmente ou importe listas em massa"
+            />
+            <Box
+              variant="tertiary"
+              icon={"/icons/interface.svg"}
+              iconAlt="Modelos"
+              title="Biblioteca de Modelos"
+              description="Desenvolva modelos de mensagens personalizados"
+            />
+            <Box
+              variant="tertiary"
+              icon={"/icons/fast.svg"}
+              iconAlt="Praticidade"
+              title="Praticidade Garantida"
+              description="Receba notificações de mensagens em tempo real"
+            />
+            <Box
+              variant="tertiary"
+              title="Comece já!"
+              description="Aproveite dezenas de benefícios agora."
+              buttonHref={ROUTES.CONTATO}
+              buttonText="Receba um contato"
+            />
+          </div>
+        </div>
+      </div>
+    </Section>
+  </div>
+
   <Section>
-    <Heading as="h1">WhatsApp Marketing</Heading>
+    <ApiSection
+      title="Integre nossa API de WhatsApp ao seu sistema!"
+      description="Com Disparo Pro, você tem acesso a uma API de WhatsApp Oficial com integração facilitada e zero mensalidade."
+      link={ROUTES.APIS.WHATSAPP}
+    />
+  </Section>
+
+  <Section class="bg-surface-default">
+    <Faq
+      title="Perguntas Frequentes"
+      description="Solucione suas principais dúvidas sobre vendas com WhatsApp."
+      items={[
+        {
+          question: "Como criar uma conta no WhatsApp Business?",
+          answer:
+            "Para criar uma conta, basta baixar o aplicativo WhatsApp Business na Google Play Store ou Apple App Store, inserir o número de telefone da sua empresa e seguir o processo de verificação por SMS ou ligação. Para utilizar a API Oficial com todos os recursos da Disparo Pro, nós guiamos você em todo o processo de aprovação junto ao Meta.",
+        },
+        {
+          question: "Para quem são indicadas as mensagens de WhatsApp?",
+          answer:
+            "O WhatsApp é indicado para empresas de todos os setores que desejam humanizar o atendimento, aumentar a conversão de vendas e manter uma comunicação direta e eficiente com seus clientes. Ideal para envio de promoções, alertas de segurança, confirmações de agendamento e suporte em tempo real.",
+        },
+        {
+          question:
+            "Mensagens enviadas para números errados e/ou desativados serão cobradas?",
+          answer:
+            "Na Disparo Pro, você possui total transparência. O sistema identifica números inválidos e evita o desperdício de créditos. Além disso, nossa plataforma oferece relatórios detalhados para que você possa limpar sua base de contatos constantemente.",
+        },
+        {
+          question: "O serviço possui mensalidade ou taxas adicionais?",
+          answer:
+            "Não cobramos mensalidade! Nosso modelo de negócio é baseado em créditos pré-pagos que não expiram. Você carrega o valor que desejar e utiliza conforme a sua necessidade, sem surpresas na fatura no final do mês.",
+        },
+        {
+          question: "Qual o valor para o envio de mensagens?",
+          answer:
+            "Os valores são altamente competitivos e variam conforme o volume contratado. Quanto maior o pacote de créditos, menor o custo por mensagem. Para saber o valor exato para sua demanda, confira nossa página de planos ou entre em contato com nosso time comercial.",
+        },
+      ]}
+    />
   </Section>
 </BaseLayout>

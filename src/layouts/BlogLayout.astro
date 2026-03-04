@@ -14,10 +14,10 @@ const { seo, title, description } = Astro.props;
 ---
 
 <BaseLayout seo={seo}>
-  <Section class="bg-gray-50 border-b border-gray-200">
+  <Section class="bg-surface-muted border-b border-border-default">
     <div class="max-w-3xl mx-auto text-center">
       <Heading as="h1" class="mb-4">{title}</Heading>
-      {description && <p class="text-xl text-gray-600">{description}</p>}
+      {description && <p class="text-xl text-text-secondary">{description}</p>}
     </div>
   </Section>
   <Section>
@@ -26,17 +26,21 @@ const { seo, title, description } = Astro.props;
         <slot />
       </div>
       <aside class="w-full lg:w-80 shrink-0">
-        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+        <div
+          class="bg-surface-default p-6 rounded-lg shadow-sm border border-border-default"
+        >
           <Heading as="h3" class="mb-4">Categorias</Heading>
           <ul class="space-y-2">
             <li>
               <a
                 href="/blog/categoria/whatsapp"
-                class="text-primary hover:underline">WhatsApp</a>
+                class="text-primary hover:underline">WhatsApp</a
+              >
             </li>
             <li>
               <a href="/blog/categoria/rcs" class="text-primary hover:underline"
-                >RCS</a>
+                >RCS</a
+              >
             </li>
           </ul>
         </div>

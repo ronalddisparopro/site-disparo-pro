@@ -1,7 +1,9 @@
 ---
 import { cx } from "../../lib/utils";
-import Heading from "./Heading.astro";
 import { Image } from "astro:assets";
+import Button from "./Button.astro";
+import { ArrowRight } from "@lucide/astro";
+import Heading from "./Heading.astro";
 
 export interface Props {
   variant?: "primary" | "secondary" | "tertiary";
@@ -10,6 +12,8 @@ export interface Props {
   iconAlt?: string;
   title?: string;
   description?: string;
+  buttonHref?: string;
+  buttonText?: string;
 }
 
 const {
@@ -19,14 +23,16 @@ const {
   iconAlt = "",
   title,
   description,
+  buttonHref,
+  buttonText,
   ...rest
 } = Astro.props;
 
 const baseClass =
-  "flex flex-col items-start gap-6 rounded-lg py-8 px-6 text-left transition-all hover:opacity-90";
+  "w-full flex flex-col items-start gap-6 rounded-lg py-8 px-6 text-left transition-all hover:opacity-90";
 
 const variants = {
-  primary: "bg-[var(--color-surface-muted)]",
+  primary: "bg-surface-muted text-hero",
   secondary: "bg-transparent border border-border-default",
   tertiary:
     "bg-[linear-gradient(180deg,var(--color-brand-soft)_0%,rgba(255,255,255,0.19)_100%)]",
@@ -45,18 +51,24 @@ const classes = cx(baseClass, variants[variant], className);
   {
     icon &&
       (typeof icon === "string" ? (
-        <img src={icon} alt={iconAlt} class="w-12 h-12 object-contain" />
+        <img
+          src={icon}
+          alt={iconAlt}
+          class="w-[52px] h-[52px] object-contain"
+        />
       ) : (
-        <Image src={icon} alt={iconAlt} class="w-12 h-12 object-contain" />
+        <Image
+          src={icon}
+          alt={iconAlt}
+          class="w-[52px] h-[52px] object-contain"
+        />
       ))
   }
 
-  <div class="flex flex-col gap-2">
+  <div class="flex flex-col gap-4">
     {
       title && (
-        <span class={cx("font-bold", titleStyles[variant])}>
-          {title}
-        </span>
+        <span class={cx("font-bold", titleStyles[variant])}>{title}</span>
       )
     }
 
@@ -67,7 +79,14 @@ const classes = cx(baseClass, variants[variant], className);
         </p>
       )
     }
-
     <slot />
   </div>
+
+  {
+    buttonHref && (
+      <Button variant="secondary" href={buttonHref} class="w-full">
+        {buttonText}
+      </Button>
+    )
+  }
 </div>
