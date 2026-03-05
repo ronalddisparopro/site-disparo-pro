@@ -2,8 +2,6 @@
 import { cx } from "../../lib/utils";
 import { Image } from "astro:assets";
 import Button from "./Button.astro";
-import { ArrowRight } from "@lucide/astro";
-import Heading from "./Heading.astro";
 
 export interface Props {
   variant?: "primary" | "secondary" | "tertiary";
@@ -32,8 +30,8 @@ const baseClass =
   "w-full flex flex-col items-start gap-6 rounded-lg py-8 px-6 text-left transition-all hover:opacity-90";
 
 const variants = {
-  primary: "bg-surface-muted text-hero",
-  secondary: "bg-transparent border border-border-default",
+  primary: "bg-surface-muted",
+  secondary: "bg-surface-muted",
   tertiary:
     "bg-[linear-gradient(180deg,var(--color-brand-soft)_0%,rgba(255,255,255,0.19)_100%)]",
 };
@@ -68,7 +66,9 @@ const classes = cx(baseClass, variants[variant], className);
   <div class="flex flex-col gap-4">
     {
       title && (
-        <span class={cx("font-bold", titleStyles[variant])}>{title}</span>
+        <span class={cx("font-bold text-text-primary", titleStyles[variant])}>
+          {title}
+        </span>
       )
     }
 

@@ -1,0 +1,166 @@
+---
+import { cx } from "../../lib/utils";
+import Button from "./Button.astro";
+import Heading from "./Heading.astro";
+import { ArrowRight } from "lucide-astro";
+
+export interface FeatureItem {
+  icon: string;
+  title: string;
+  description: string;
+  image: string;
+  audio: string;
+}
+
+export interface Props {
+  items: FeatureItem[];
+  buttonText?: string;
+  buttonHref?: string;
+  class?: string;
+}
+
+const {
+  items = [],
+  buttonText = "Crie sua conta agora!",
+  buttonHref = "#",
+  class: className,
+} = Astro.props;
+---
+
+<div
+  class={cx(
+    "flex flex-col lg:flex-row items-center gap-8 lg:gap-12 rounded-2xl bg-surface-muted",
+    className,
+  )}
+  data-interactive-voice-feature
+>
+  <!-- Image Column -->
+  <div
+    class="w-full lg:w-1/2
+         relative flex items-end justify-center
+         min-h-[400px] lg:min-h-[657px]
+         bg-[linear-gradient(220deg,var(--color-surface-default)_0%,var(--color-brand-primary)_100%)]
+         rounded-bl-2xl rounded-tl-2xl pt-6"
+  >
+    <div class="relative w-full max-w-[440px] flex flex-col items-center">
+      <img
+        data-active-image
+        src={items[0]?.image}
+        alt="Feature visualization"
+        class="w-full h-auto object-contain transition-all duration-500 ease-in-out"
+      />
+
+      <!-- Icon Overlay -->
+      <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 flex items-center justify-center"
+      >
+        <img src="/icons/more.svg" alt="More" class="w-16 h-16" />
+      </div>
+
+      <!-- Audio Player Overlay -->
+      <div
+        class="absolute bottom-40 left-1/2 -translate-x-1/2 w-4/5 bg-surface-default rounded-full p-2 md:p-3 flex items-center gap-3"
+      >
+        <audio
+          data-active-audio
+          src={items[0]?.audio}
+          class="w-full h-8 md:h-10"
+          controls></audio>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content Column -->
+  <div class="w-full lg:w-1/2 flex flex-col gap-6 px-4 lg:px-6 py-8 lg:py-0">
+    <div class="flex flex-col gap-6">
+      {
+        items.map((item, index) => (
+          <button
+            class={cx(
+              "flex flex-col items-start gap-3 pb-4 text-left border-b border-brand-soft transition-all duration-300 group feature-item-btn",
+              index === 0 ? "opacity-100" : "opacity-50 hover:opacity-80",
+            )}
+            data-image={item.image}
+            data-audio={item.audio}
+            data-index={index}
+          >
+            <div class="flex items-center justify-start gap-4">
+              <img
+                src={item.icon}
+                alt={item.title}
+                class="w-[52px] h-[52px] transition-transform group-active:scale-95"
+              />
+              <Heading as="h4" variant="primary">
+                {item.title}
+              </Heading>
+            </div>
+
+            <p class="text-body-sm text-text-secondary leading-relaxed">
+              {item.description}
+            </p>
+          </button>
+        ))
+      }
+    </div>
+
+    <div>
+      <Button variant="primary" icon={ArrowRight} href={buttonHref}>
+        {buttonText}
+      </Button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function setupInteractiveVoiceFeatures() {
+    const containers = document.querySelectorAll(
+      "[data-interactive-voice-feature]",
+    );
+
+    containers.forEach((container) => {
+      const buttons = container.querySelectorAll(".feature-item-btn");
+      const imageElement = container.querySelector(
+        "[data-active-image]",
+      ) as HTMLImageElement;
+      const audioElement = container.querySelector(
+        "[data-active-audio]",
+      ) as HTMLAudioElement;
+
+      if (!imageElement || !audioElement) return;
+
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const newImage = btn.getAttribute("data-image");
+          const newAudio = btn.getAttribute("data-audio");
+
+          // Update buttons state
+          buttons.forEach((b) => {
+            b.classList.remove("opacity-100");
+            b.classList.add("opacity-50");
+          });
+
+          btn.classList.add("opacity-100");
+          btn.classList.remove("opacity-50");
+
+          // Animation Image
+          if (newImage) {
+            imageElement.style.opacity = "0";
+            setTimeout(() => {
+              imageElement.src = newImage;
+              imageElement.style.opacity = "1";
+            }, 300);
+          }
+
+          // Update and Reload Audio
+          if (newAudio) {
+            audioElement.src = newAudio;
+            audioElement.load();
+          }
+        });
+      });
+    });
+  }
+
+  setupInteractiveVoiceFeatures();
+  document.addEventListener("astro:after-swap", setupInteractiveVoiceFeatures);
+</script>

@@ -16,13 +16,9 @@ export const ROUTES = {
     RCS: "/canais/rcs",
     SMS: "/canais/disparo-sms",
     VOZ: "/canais/disparo-voz",
-    EMAIL: "/canais/disparo-email",
   },
   APIS: {
-    WHATSAPP: "/apis/whatsapp",
-    RCS: "/apis/rcs",
-    SMS: "/apis/sms",
-    VOZ: "/apis/voz",
+    INDEX: "/apis",
     INTEGRATIONS: "/apis/integracoes",
   },
 } as const;

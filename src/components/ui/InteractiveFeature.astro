@@ -31,6 +31,7 @@ const {
     "flex flex-col lg:flex-row items-center gap-8 lg:gap-12 rounded-2xl bg-surface-muted",
     className,
   )}
+  data-interactive-feature
 >
   <!-- Image Column -->
   <div
@@ -38,13 +39,13 @@ const {
          relative flex items-end justify-center
          min-h-[400px] lg:min-h-[657px]
          bg-[linear-gradient(220deg,var(--color-surface-default)_0%,var(--color-brand-primary)_100%)]
-         rounded-bl-2xl rounded-tl-2xl pt-6 lg:pt-0"
+         rounded-bl-2xl rounded-tl-2xl pt-6"
   >
     <img
-      id="active-feature-image"
+      data-active-image
       src={items[0]?.image}
       alt="Feature visualization"
-      class="w-4/5 xl:w-full max-w-[440px] h-auto object-contain transition-all duration-500 ease-in-out"
+      class="w-4/5 max-w-[440px] h-auto object-contain transition-all duration-500 ease-in-out"
     />
   </div>
 
@@ -90,35 +91,39 @@ const {
 
 <script>
   function setupInteractiveFeatures() {
-    const buttons = document.querySelectorAll(".feature-item-btn");
-    const imageElement = document.getElementById(
-      "active-feature-image",
-    ) as HTMLImageElement;
+    const containers = document.querySelectorAll("[data-interactive-feature]");
 
-    if (!imageElement) return;
+    containers.forEach((container) => {
+      const buttons = container.querySelectorAll(".feature-item-btn");
+      const imageElement = container.querySelector(
+        "[data-active-image]",
+      ) as HTMLImageElement;
 
-    buttons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const newImage = btn.getAttribute("data-image");
+      if (!imageElement) return;
 
-        // Update buttons state
-        buttons.forEach((b) => {
-          b.classList.remove("opacity-100");
-          b.classList.add("opacity-50");
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const newImage = btn.getAttribute("data-image");
+
+          // Update buttons state within this container only
+          buttons.forEach((b) => {
+            b.classList.remove("opacity-100");
+            b.classList.add("opacity-50");
+          });
+
+          btn.classList.add("opacity-100");
+          btn.classList.remove("opacity-50");
+
+          // Animation
+          if (newImage) {
+            imageElement.style.opacity = "0";
+
+            setTimeout(() => {
+              imageElement.src = newImage;
+              imageElement.style.opacity = "1";
+            }, 300);
+          }
         });
-
-        btn.classList.add("opacity-100");
-        btn.classList.remove("opacity-50");
-
-        // Animation
-        if (newImage) {
-          imageElement.style.opacity = "0";
-
-          setTimeout(() => {
-            imageElement.src = newImage;
-            imageElement.style.opacity = "1";
-          }, 300);
-        }
       });
     });
   }

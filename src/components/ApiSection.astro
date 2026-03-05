@@ -3,15 +3,15 @@ import { ArrowRight } from "@lucide/astro";
 import { cx } from "../lib/utils";
 import Button from "./ui/Button.astro";
 import Heading from "./ui/Heading.astro";
+import { ROUTES } from "../lib/routes";
 
 export interface Props {
   class?: string;
   title?: string;
   description?: string;
-  link?: string;
 }
 
-const { class: className, title, description, link, ...rest } = Astro.props;
+const { class: className, title, description, ...rest } = Astro.props;
 
 const classes = cx(className);
 ---
@@ -37,7 +37,7 @@ const classes = cx(className);
           </p>
         )
       }
-      <Button href={link} variant="white" icon={ArrowRight}>Saiba Mais</Button>
+      <Button href={ROUTES.APIS.INDEX} variant="white" icon={ArrowRight}>Saiba Mais</Button>
     </div>
     <img
       src="/images/code-api.svg"

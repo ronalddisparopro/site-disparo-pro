@@ -1,0 +1,278 @@
+---
+import { cx } from "../../lib/utils";
+import Button from "./Button.astro";
+import { ArrowRight, Check } from "lucide-astro";
+import Heading from "./Heading.astro";
+import { ROUTES } from "../../lib/routes";
+import Badge from "./Badge.astro";
+
+export interface PricingPlan {
+  id: string;
+  name: string;
+  description: string;
+  monthlyPrice: string;
+  annualPrice: string;
+  features: string[];
+  previousPlanText?: string;
+  highlighted?: boolean;
+}
+
+export interface Props {
+  plans: PricingPlan[];
+  class?: string;
+}
+
+const { plans, class: className } = Astro.props;
+---
+
+<div class={cx("flex flex-col items-center gap-8 lg:gap-12 w-full", className)} data-pricing-section>
+  <!-- Toggle Switch -->
+  <div class="flex flex-col items-center gap-6">
+    <div class="bg-white/10 p-1 rounded-xl flex items-center gap-1 w-[220px] relative">
+      <div 
+        data-toggle-bg
+        class="absolute top-1 left-1 bottom-1 w-[calc(50%-4px)] bg-brand-primary rounded-lg shadow-lg transition-all duration-300 ease-in-out"
+      ></div>
+      <button 
+        data-pricing-toggle="monthly"
+        class="relative flex-1 py-2 text-label font-bold text-center transition-colors duration-300 z-10 text-surface-default"
+      >
+        Mensal
+      </button>
+      <button 
+        data-pricing-toggle="annual"
+        class="relative flex-1 py-2 text-label font-bold text-center transition-colors duration-300 z-10 text-text-primary"
+      >
+        Anual
+      </button>
+    </div>
+    
+    <Badge text="Economize até 39% escolhendo o plano anual" />
+  </div>
+
+  <!-- Plans Slider -->
+  <div class="flex flex-col items-center justify-center relative w-full max-w-7xl mx-auto px-4 lg:px-0 group" data-pricing-slider>
+
+    <div 
+      class="flex gap-4 md:gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar pb-8 items-stretch w-full"
+      data-slider-track
+    >
+      {
+        plans.map((plan) => (
+          <div 
+            class={cx(
+              "shrink-0 w-full md:w-[calc(50%-12px)] xl:w-[calc(33.333%-16px)] snap-start",
+              "bg-surface-default rounded-2xl flex flex-col items-stretch justify-between p-8 relative border-border-default/10",
+              plan.highlighted ? "border-2 border-brand-primary" : ""
+            )}
+          >
+            <div class="flex flex-col gap-8 text-left h-full">
+              <!-- Header -->
+              <div class="flex flex-col gap-4">
+                <Heading as="h3" class="text-heading-h4 font-bold text-text-primary leading-tight">
+                  {plan.name}
+                </Heading>
+                <p class="text-body-sm text-text-secondary min-h-[48px]">
+                  {plan.description}
+                </p>
+              </div>
+
+            <!-- Price -->
+            <div class="flex flex-col gap-2">
+              <div class="flex items-baseline gap-1" data-price-container>
+                <span 
+                  class="text-hero font-bold text-text-primary tracking-tight" 
+                  data-price-value 
+                  data-monthly={plan.monthlyPrice} 
+                  data-annual={plan.annualPrice}
+                >
+                  {plan.monthlyPrice === "Personalizado" ? plan.monthlyPrice : `R$${plan.monthlyPrice}`}
+                </span>
+                <span 
+                  class:list={["text-body-md font-bold text-text-primary", plan.monthlyPrice === "Personalizado" && "hidden"]} 
+                  data-price-suffix
+                >
+                  /mês
+                </span>
+              </div>
+              <p 
+                class:list={["text-tag font-bold text-text-secondary", plan.monthlyPrice === "Personalizado" && "hidden"]} 
+                data-payment-label
+              >
+                Pagamento mensal
+              </p>
+            </div>
+
+              <!-- Divider -->
+              <div class="h-px bg-border-default w-full"></div>
+
+              <!-- Features -->
+              <div class="flex flex-col gap-4 flex-1">
+                {plan.previousPlanText && (
+                  <p class="text-tag font-bold text-text-primary">
+                    {plan.previousPlanText}
+                  </p>
+                )}
+                <ul class="flex flex-col gap-4">
+                  {plan.features.map((feature) => (
+                    <li class="flex items-start gap-3">
+                      <div class="shrink-0 w-5 h-5 rounded-full bg-brand-soft flex items-center justify-center p-1">
+                        <Check class="w-full h-full text-brand-primary" stroke-width={4} />
+                      </div>
+                      <span class="text-tag font-bold text-text-primary leading-tight">
+                        {feature}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="mt-12">
+              <Button
+              href={ROUTES.CONTATO}
+                variant="primary" 
+                class="w-full flex justify-between px-6" 
+                icon={ArrowRight}
+              >
+                Comece agora
+              </Button>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+    <!-- Pagination indicators -->
+  <div class="flex gap-4" data-slider-dots>
+    {plans.map((_, i) => (
+      <button 
+        data-dot={i}
+        aria-label={`Go to slide ${i + 1}`}
+        class:list={[
+          "w-4 h-4 rounded-full transition-all duration-300 cursor-pointer border-none",
+          i === 0 ? "bg-brand-primary" : "bg-border-default/40"
+        ]}
+      ></button>
+    ))}
+  </div>
+</div>
+  </div>
+
+  
+
+<style>
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
+
+<script>
+  function setupPricing() {
+    const sections = document.querySelectorAll('[data-pricing-section]');
+    
+    sections.forEach(section => {
+      // Toggle logic
+      const toggleBg = section.querySelector('[data-toggle-bg]') as HTMLElement;
+      const monthlyBtn = section.querySelector('[data-pricing-toggle="monthly"]');
+      const annualBtn = section.querySelector('[data-pricing-toggle="annual"]');
+      const priceValues = section.querySelectorAll('[data-price-value]');
+      const paymentLabels = section.querySelectorAll('[data-payment-label]');
+
+      // Slider logic
+      const track = section.querySelector('[data-slider-track]') as HTMLElement;
+      const dots = section.querySelectorAll('[data-dot]');
+
+      if (toggleBg && monthlyBtn && annualBtn) {
+        const updatePricing = (type: 'monthly' | 'annual') => {
+          if (type === 'monthly') {
+            toggleBg.style.left = '4px';
+            monthlyBtn.classList.add('text-white');
+            monthlyBtn.classList.remove('text-text-primary');
+            annualBtn.classList.add('text-text-primary');
+            annualBtn.classList.remove('text-white');
+          } else {
+            toggleBg.style.left = 'calc(50% + 0px)';
+            annualBtn.classList.add('text-white');
+            annualBtn.classList.remove('text-text-primary');
+            monthlyBtn.classList.add('text-text-primary');
+            monthlyBtn.classList.remove('text-white');
+          }
+
+          priceValues.forEach(price => {
+            const val = type === 'monthly' ? price.getAttribute('data-monthly') : price.getAttribute('data-annual');
+            const container = price.closest('[data-pricing-slider] div'); // Card container
+            const suffix = container?.querySelector('[data-price-suffix]') as HTMLElement;
+            const label = container?.querySelector('[data-payment-label]') as HTMLElement;
+
+            if (val === 'Personalizado') {
+              price.textContent = val;
+              if (suffix) suffix.style.display = 'none';
+              if (label) label.style.display = 'none';
+            } else if (val) {
+              price.textContent = `R$${val}`;
+              if (suffix) suffix.style.display = 'block';
+              if (label) {
+                label.style.display = 'block';
+                label.textContent = type === 'monthly' ? 'Pagamento mensal' : 'Pagamento anual';
+              }
+            }
+          });
+        };
+
+        monthlyBtn.addEventListener('click', () => updatePricing('monthly'));
+        annualBtn.addEventListener('click', () => updatePricing('annual'));
+      }
+
+        if (track) {
+        const updateDots = () => {
+          const slideWidth = track.firstElementChild?.clientWidth || 0;
+          const gap = window.innerWidth >= 768 ? 24 : 16; // md:gap-6 (24px) or gap-4 (16px)
+          const visibleWidth = track.clientWidth;
+          
+          if (slideWidth > 0) {
+            const itemsVisible = Math.max(1, Math.round(visibleWidth / (slideWidth + gap)));
+            const totalItems = dots.length;
+            const maxScrollIndex = totalItems - itemsVisible;
+
+            const activeIndex = Math.round(track.scrollLeft / (slideWidth + gap));
+            
+            dots.forEach((dot, i) => {
+              if (i <= maxScrollIndex) {
+                (dot as HTMLElement).style.display = 'block';
+                if (i === activeIndex) {
+                  dot.classList.add('bg-brand-primary');
+                  dot.classList.remove('bg-border-default/40');
+                } else {
+                  dot.classList.remove('bg-brand-primary');
+                  dot.classList.add('bg-border-default/40');
+                }
+              } else {
+                (dot as HTMLElement).style.display = 'none';
+              }
+            });
+          }
+        };
+
+        dots.forEach((dot, i) => {
+          dot.addEventListener('click', () => {
+            const slideWidth = track.firstElementChild?.clientWidth || 0;
+            const gap = window.innerWidth >= 768 ? 24 : 16;
+            track.scrollTo({ left: i * (slideWidth + gap), behavior: 'smooth' });
+          });
+        });
+
+        track.addEventListener('scroll', updateDots);
+        window.addEventListener('resize', updateDots);
+        updateDots();
+      }
+    });
+  }
+
+  setupPricing();
+  document.addEventListener("astro:after-swap", setupPricing);
+</script>

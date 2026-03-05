@@ -2,12 +2,158 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Section from "../../components/ui/Section.astro";
 import Heading from "../../components/ui/Heading.astro";
+import Hero from "../../components/ui/Hero.astro";
+import { ArrowRight } from "lucide-astro";
+import Button from "../../components/ui/Button.astro";
+import { ROUTES } from "../../lib/routes";
+import Box from "../../components/ui/Box.astro";
+import InteractiveFeature from "../../components/ui/InteractiveFeature.astro";
+import ApiSection from "../../components/ApiSection.astro";
+import SlideBoxSteps from "../../components/SlideBoxSteps.astro";
+import TestimonialDiv from "../../components/TestimonialDiv.astro";
 ---
 
 <BaseLayout
-  seo={{ title: "Disparo de SMS", description: "Alta taxa de entrega." }}
+  seo={{
+    title: "Disparo de SMS",
+    description: "Alcance até 98% dos seus clientes com Disparo de SMS!",
+  }}
 >
+  <Hero
+    id="disparo-de-sms"
+    class="bg-[url(/images/background-blur.webp)] bg-cover bg-center lg:bg-left bg-no-repeat overflow-hidden"
+  >
+    <div
+      class="w-full lg:w-[48%] flex flex-col items-start gap-6 md:gap-8 lg:gap-4 xl:gap-8"
+    >
+      <div class="flex flex-col gap-4 md:gap-6 lg:gap-4 xl:gap-6 items-start">
+        <Heading as="h1">
+          Alcance até 98% dos seus clientes com Disparo de SMS!
+        </Heading>
+        <p class="text-body-md text-text-secondary max-w-[500px]">
+          Impulsione a comunicação do seu negócio com envio de SMS em massa.
+        </p>
+      </div>
+      <Button variant="primary" icon={ArrowRight} href={ROUTES.CONTATO}
+        >Experimente agora!</Button
+      >
+    </div>
+    <div class="w-full lg:w-1/2">
+      <img
+        src="/images/image-hero.webp"
+        alt="Plataforma Disparo Pro"
+        class="w-full h-auto"
+      />
+    </div>
+  </Hero>
+
+  <Section
+    class="flex flex-col items-center justify-center"
+    containerClass="flex flex-col gap-8 lg:gap-12"
+  >
+    <div
+      class="mx-auto w-full xl:max-w-3/4 flex flex-col items-center justify-center text-center gap-4"
+    >
+      <Heading as="h2"
+        >O SMS é o canal mais eficiente para comunicar o seu negócio</Heading
+      >
+      <p class="text-body-md text-text-secondary max-w-[500px]">
+        Simples, rápido e com altas taxas de alcance, o SMS oferece excelentes
+        resultados com um ótimo custo-benefício.
+      </p>
+    </div>
+
+    <div class="flex flex-col gap-4 lg:grid lg:grid-cols-3 lg:gap-5">
+      <Box
+        variant="primary"
+        icon={"/icons/users.svg"}
+        iconAlt="Users"
+        title="98%"
+        description="das pessoas lêem um SMS em até  3 minutos"
+      />
+      <Box
+        variant="primary"
+        icon={"/icons/dollar.svg"}
+        iconAlt="Dollar"
+        title="96%"
+        description="mais barato que os meios de comunicação tradicionais"
+      />
+      <Box
+        variant="primary"
+        icon={"/icons/verify.svg"}
+        iconAlt="Verify"
+        title="45%"
+        description="de conversão, com até 500% de retorno sobre o investimento"
+      />
+    </div>
+  </Section>
+
+  <Section
+    containerClass="flex flex-col items-center justify-center gap-8 lg:gap-12"
+  >
+    <div
+      class="mx-auto w-full xl:max-w-3/4 flex flex-col gap-4 lg:gap-6 items-center justify-center"
+    >
+      <Heading as="h2" class="text-center"
+        >Na Disparo Pro, você não precisa ser um especialista para disparar SMS
+        em massa!</Heading
+      >
+      <p class="text-body-md text-text-secondary text-center">
+        Na Disparo Pro, criar suas jornadas de comunicação é fácil e intuitivo.
+        Confira o passo a passo:
+      </p>
+      <Button variant="primary" icon={ArrowRight} href={ROUTES.LOGIN}
+        >Conheça a plataforma!</Button
+      >
+    </div>
+
+    <SlideBoxSteps />
+  </Section>
+
+  <Section containerClass="flex flex-col gap-6 lg:gap-12">
+    <Heading as="h2"
+      >Com SMS, você melhora sua comunicação em diferentes segmentos de mercado</Heading
+    >
+    <InteractiveFeature
+      items={[
+        {
+          icon: "/icons/dollar.svg",
+          title: "Betting",
+          description: "Alcance apostadores com áudios de influencers.",
+          image: "/images/mockups/sms-bet.webp",
+        },
+        {
+          icon: "/icons/promotion.svg",
+          title: "Crédito Consignado",
+          description: "Divulgue ofertas e diferenciais unindo Voz e SMS.",
+          image: "/images/mockups/sms-consignado.webp",
+        },
+        {
+          icon: "/icons/receipt.svg",
+          title: "Cobrança",
+          description: "Reduza a inadimplência com lembretes certeiros.",
+          image: "/images/mockups/sms-cobranca.webp",
+        },
+        {
+          icon: "/icons/hospital.svg",
+          title: "Clínicas",
+          description: "Garanta 100% de presença com lembretes de Voz.",
+          image: "/images/mockups/sms-clinicas.webp",
+        },
+      ]}
+      buttonText="Desbrave possibilidades!"
+      buttonHref={ROUTES.CONTATO}
+    />
+  </Section>
+
   <Section>
-    <Heading as="h1">Disparo de SMS</Heading>
+    <TestimonialDiv />
+  </Section>
+
+  <Section>
+    <ApiSection
+      title="Integre nossa API de SMS ao seu sistema!"
+      description="Com Disparo Pro, você tem acesso a uma API de SMS com integração facilitada e zero mensalidade."
+    />
   </Section>
 </BaseLayout>

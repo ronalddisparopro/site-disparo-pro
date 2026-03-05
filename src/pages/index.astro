@@ -11,7 +11,6 @@ import ChannelFeature from "../components/ui/ChannelFeature.astro";
 import { ROUTES } from "../lib/routes";
 import SlideBoxSteps from "../components/SlideBoxSteps.astro";
 import ApiSection from "../components/ApiSection.astro";
-import Testimonial from "../components/Testimonial.astro";
 import Badge from "../components/ui/Badge.astro";
 import TestimonialDiv from "../components/TestimonialDiv.astro";
 const CHANNEL_FEATURES = [
@@ -83,7 +82,7 @@ const CHANNEL_FEATURES = [
       "Suporte em tempo real",
     ],
     buttonText: "Saiba mais",
-    buttonHref: ROUTES.CANAIS.EMAIL,
+    buttonHref: ROUTES.CONTATO,
     imageSrc: "/images/disparo_de_email.webp",
     imageAlt: "Disparo de E-mail",
   },
@@ -163,7 +162,6 @@ const CHANNEL_FEATURES = [
     <ApiSection
       title="Integre nossa API ao seu sistema!"
       description="Com a Disparo Pro, você tem acesso a APIs de WhatsApp, RCS, SMS, E-mail e Voz – tudo com suporte nacional e integração facilitada aos principais CRMs do mercado."
-      link={ROUTES.APIS.INTEGRATIONS}
     />
   </Section>
 

@@ -2,12 +2,198 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Section from "../../components/ui/Section.astro";
 import Heading from "../../components/ui/Heading.astro";
+import Hero from "../../components/ui/Hero.astro";
+import { ArrowRight } from "lucide-astro";
+import Button from "../../components/ui/Button.astro";
+import { ROUTES } from "../../lib/routes";
+import Box from "../../components/ui/Box.astro";
+import InteractiveVoiceFeature from "../../components/ui/InteractiveVoiceFeature.astro";
+import ApiSection from "../../components/ApiSection.astro";
+import SlideBoxSteps from "../../components/SlideBoxSteps.astro";
+import Faq from "../../components/ui/Faq.astro";
 ---
 
 <BaseLayout
-  seo={{ title: "Disparo de Voz", description: "Agilidade e alcance." }}
+  seo={{
+    title: "Disparo de Voz",
+    description: "Amplie sua comunicação com áudios atraentes e humanizados.",
+  }}
 >
+  <Hero
+    id="disparo-de-voz"
+    class="bg-[url(/images/background-blur.webp)] bg-cover bg-center lg:bg-left bg-no-repeat overflow-hidden"
+  >
+    <div
+      class="w-full lg:w-[48%] flex flex-col items-start gap-6 md:gap-8 lg:gap-4 xl:gap-8"
+    >
+      <div class="flex flex-col gap-4 md:gap-6 lg:gap-4 xl:gap-6 items-start">
+        <Heading as="h1">
+          Alcance até 80% dos seus clientes com Disparo de Voz em massa!
+        </Heading>
+        <p class="text-body-md text-text-secondary max-w-[500px]">
+          Amplie sua comunicação com áudios atraentes e humanizados.
+        </p>
+      </div>
+      <Button variant="primary" icon={ArrowRight} href={ROUTES.CONTATO}
+        >Experimente agora!</Button
+      >
+    </div>
+    <div class="w-full lg:w-1/2">
+      <img
+        src="/images/image-hero.webp"
+        alt="Plataforma Disparo Pro"
+        class="w-full h-auto"
+      />
+    </div>
+  </Hero>
+
+  <Section
+    class="flex flex-col items-center justify-center"
+    containerClass="flex flex-col gap-8 lg:gap-12"
+  >
+    <div class="flex flex-col items-center justify-center text-center gap-4">
+      <Heading as="h2">Com Disparos de Voz, seu engajamento cresce!</Heading>
+      <p class="text-body-md text-text-secondary">
+        Humanize sua comunicação com jornadas integradas, personalizadas e ricas
+        em emoção.
+      </p>
+    </div>
+
+    <div class="flex flex-col gap-4 lg:grid lg:grid-cols-3 lg:gap-5">
+      <Box
+        variant="secondary"
+        icon={"/icons/unify.svg"}
+        iconAlt="Unify"
+        title="Integre"
+        description="Crie campanhas integradas usando Voz e SMS"
+      />
+      <Box
+        variant="secondary"
+        icon={"/icons/dollar.svg"}
+        iconAlt="Dollar"
+        title="Economize"
+        description="Pague apenas pelas chamadas atendidas"
+      />
+      <Box
+        variant="secondary"
+        icon={"/icons/users.svg"}
+        iconAlt="Users"
+        title="Conquiste"
+        description="Importe áudios com a voz de influenciadores"
+      />
+    </div>
+  </Section>
+
+  <Section
+    containerClass="flex flex-col items-center justify-center gap-8 lg:gap-12"
+  >
+    <div
+      class="mx-auto w-full xl:max-w-3/4 flex flex-col gap-4 lg:gap-6 items-center justify-center"
+    >
+      <Heading as="h2" class="text-center"
+        >Na Disparo Pro, enviar Disparos de Voz em massa é prático e rápido!</Heading
+      >
+      <p class="text-body-md text-text-secondary text-center">
+        Conosco, criar suas jornadas de comunicação é fácil e intuitivo. Confira
+        o passo a passo:
+      </p>
+      <Button variant="primary" icon={ArrowRight} href={ROUTES.LOGIN}
+        >Conheça a plataforma!</Button
+      >
+    </div>
+
+    <SlideBoxSteps />
+  </Section>
+
+  <Section containerClass="flex flex-col gap-6 lg:gap-12">
+    <Heading as="h2"
+      >Crie campanhas interativas unindo Disparos de Voz e SMS</Heading
+    >
+    <InteractiveVoiceFeature
+      items={[
+        {
+          icon: "/icons/dollar.svg",
+          title: "Betting",
+          description: "Alcance apostadores com áudios de influencers.",
+          image: "/images/mockups/sms-bet.webp",
+          audio: "/audios/bet.mp3",
+        },
+        {
+          icon: "/icons/promotion.svg",
+          title: "Crédito Consignado",
+          description: "Divulgue ofertas e diferenciais unindo Voz e SMS.",
+          image: "/images/mockups/sms-consignado.webp",
+          audio: "/audios/consignado.mp3",
+        },
+        {
+          icon: "/icons/receipt.svg",
+          title: "Cobrança",
+          description: "Reduza a inadimplência com lembretes certeiros.",
+          image: "/images/mockups/sms-cobranca.webp",
+          audio: "/audios/cobranca.mp3",
+        },
+        {
+          icon: "/icons/hospital.svg",
+          title: "Clínicas",
+          description: "Garanta 100% de presença com lembretes de Voz.",
+          image: "/images/mockups/sms-clinicas.webp",
+          audio: "/audios/clinicas.mp3",
+        },
+      ]}
+      buttonText="Desbrave possibilidades!"
+      buttonHref={ROUTES.CONTATO}
+    />
+  </Section>
+
   <Section>
-    <Heading as="h1">Disparo de Voz</Heading>
+    <ApiSection
+      title="Integre nossa API de Voz ao seu sistema!"
+      description="Com Disparo Pro, você tem acesso a uma API de Disparo de Voz com integração facilitada e zero mensalidade."
+    />
+  </Section>
+
+  <Section>
+    <Faq
+      title="Perguntas Frequentes"
+      description="Tudo o que você precisa saber sobre Disparo de Voz."
+      items={[
+        {
+          question: "O que é Disparo de Voz?",
+          answer:
+            "Disparo de Voz é um serviço que permite enviar mensagens de voz para seus clientes, facilitando a comunicação e aumentando o engajamento. Ele foi desenvolvido para atender à crescente demanda por uma comunicação mais personalizada",
+        },
+        {
+          question: "Posso personalizar meus Disparos de Voz?",
+          answer:
+            "Sim! Você pode personalizar suas mensagens utilizando tags, adaptando-as conforme suas necessidades.",
+        },
+        {
+          question:
+            "Qual a diferença em relação aos demais canais de comunicação?",
+          answer:
+            "O Torpedo ou Disparo de Voz adiciona um toque pessoal que se destaca em um mercado saturado de mensagens de texto. Além disso, você só paga por chamadas atendidas, ao contrário de outros canais, como e-mails, onde você paga independentemente da visualização.",
+        },
+        {
+          question: "Qual é a taxa de entregabilidade?",
+          answer:
+            "O Torpedo ou Disparo de Voz possui uma taxa de abertura de até 80%, dependendo da qualidade da sua lista de clientes.",
+        },
+        {
+          question: "É fácil disparar uma campanha?",
+          answer:
+            "Nossa plataforma é intuitiva, garantindo uma experiência simples e acessível, mesmo para quem nunca a utilizou.",
+        },
+        {
+          question: "Qual é o custo do serviço e como funciona a cobrança?",
+          answer:
+            "Nosso serviço começa a partir de R$ 0,20 por chamada de 60 segundos. Conforme o volume de disparos aumenta, o valor por chamada diminui. A plataforma é pré-paga, com um pacote mínimo de R$ 150. Para envios superiores a 5.000 chamadas, fale com a gente para obter um valor diferenciado.",
+        },
+        {
+          question: "Há suporte disponível caso eu tenha dúvidas?",
+          answer:
+            "Sim! Nossa equipe de suporte está pronta para ajudar a qualquer momento, sem robôs ou mensagens automáticas.",
+        },
+      ]}
+    />
   </Section>
 </BaseLayout>

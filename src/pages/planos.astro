@@ -1,11 +1,137 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Section from "../components/ui/Section.astro";
+import Badge from "../components/ui/Badge.astro";
 import Heading from "../components/ui/Heading.astro";
+import Hero from "../components/ui/Hero.astro";
+import PricingSection from "../components/ui/PricingSection.astro";
+import Section from "../components/ui/Section.astro";
+import ChannelHighlight from "../components/ui/ChannelHighlight.astro";
+import { ROUTES } from "../lib/routes";
+
+const PLANS = [
+  {
+    id: "basic",
+    name: "Disparo Pro Basic",
+    description:
+      "Para empresas que buscam novos canais para alcançar seus clientes.",
+    monthlyPrice: "77",
+    annualPrice: "47",
+    features: [
+      "Módulo de Disparos simples",
+      "WhatsApp, RCS, SMS e Voz",
+      "Upload de Arquivos",
+      "Histórico de Disparos",
+      "Etiquetas",
+      "Acesso Basic à API Disparo Pro",
+    ],
+  },
+  {
+    id: "advanced",
+    name: "Disparo Pro Advanced",
+    description:
+      "Para empresas que buscam dar o próximo passo em marketing e vendas.",
+    monthlyPrice: "577",
+    annualPrice: "447",
+    features: [
+      "Criação de Segmentos",
+      "Criação de Jornadas de Atendimento",
+      "Integração com E-Commerce",
+      "Módulo de Produtos",
+      "Gestão de Clientes",
+      "Acesso Advanced à API Disparo Pro",
+    ],
+    previousPlanText: "Tudo do plano anterior mais:",
+    highlighted: true,
+  },
+  {
+    id: "ultimate",
+    name: "Disparo Pro Ultimate",
+    description:
+      "Para empresas que buscam mais controle, volume e versatilidade.",
+    monthlyPrice: "1.987",
+    annualPrice: "1.347",
+    features: [
+      "Easy AI",
+      "API de integração",
+      "Gestão de Grupos",
+      "Acesso Ultimate à API Disparo Pro",
+    ],
+    previousPlanText: "Tudo do plano anterior mais:",
+  },
+  {
+    id: "api",
+    name: "Disparo Pro API",
+    description:
+      "Para empresas que exigem altos volumes de disparos e personalização.",
+    monthlyPrice: "Personalizado",
+    annualPrice: "Personalizado",
+    features: ["Dashboard de Gestão", "Acesso Full à API Disparo Pro"],
+  },
+];
 ---
 
 <BaseLayout seo={{ title: "Planos", description: "Nossos planos e preços." }}>
-  <Section>
-    <Heading as="h1">Planos</Heading>
-  </Section>
+  <Hero
+    id="planos"
+    class="pb-72 md:pb-96 bg-[url(/images/background-blur-planos.webp)] bg-cover bg-center lg:bg-left bg-no-repeat overflow-hidden"
+  >
+    <div
+      class="mx-auto w-full lg:max-w-4/5 flex flex-col items-center justify-center gap-6 md:gap-8 lg:gap-4 xl:gap-8"
+    >
+      <Badge text="Encontre o plano certo" />
+
+      <div
+        class="flex flex-col gap-4 md:gap-6 lg:gap-4 xl:gap-6 items-center text-center"
+      >
+        <Heading as="h1">
+          Garanta o melhor custo-benefício do mercado com vantagens exclusivas!
+        </Heading>
+        <p class="text-body-md text-text-secondary max-w-[500px]">
+          Dispare WhatsApp, RCS, SMS, E-mail e Voz com planos personalizados.
+        </p>
+      </div>
+    </div>
+  </Hero>
+
+  <div
+    class="mt-[-200px] md:mt-[-300px] px-4 md:px-6 xl:px-0 pb-10 md:pb-16 xl:pb-20 relative z-20"
+  >
+    <PricingSection plans={PLANS} />
+  </div>
+
+  <div class="bg-surface-muted w-full">
+    <Section>
+      <div class="flex flex-col gap-6 lg:gap-12">
+        <Heading as="h2"
+          >Conheça os benefícios que esperam por você na Disparo Pro!</Heading
+        >
+        <ChannelHighlight
+          items={[
+            {
+              icon: "/icons/verify.svg",
+              title: "Suporte Humano",
+              description:
+                "Atendimento 100% feito por pessoas reais, sem robôs ou mensagens automáticas.",
+            },
+            {
+              icon: "/icons/evolution.svg",
+              title: "Dados em Tempo Real",
+              description:
+                "Acompanhe métricas e resultados em tempo real para tomar decisões mais inteligentes.",
+            },
+            {
+              icon: "/icons/love-chat.svg",
+              title: "API Gratuita",
+              description:
+                "Integração simples, rápida e sem custo adicional para conectar seus sistemas.",
+            },
+          ]}
+          imageSrc="/images/plans-image.webp"
+          imageAlt="Plano Disparo Pro"
+          buttonText="Montar plano ideal"
+          buttonHref={ROUTES.CONTATO}
+        />
+      </div>
+    </Section>
+  </div>
 </BaseLayout>
