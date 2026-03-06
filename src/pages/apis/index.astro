@@ -2,10 +2,93 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Section from "../../components/ui/Section.astro";
 import Heading from "../../components/ui/Heading.astro";
+import Hero from "../../components/ui/Hero.astro";
+import { ArrowRight } from "lucide-astro";
+import Button from "../../components/ui/Button.astro";
+import { ROUTES } from "../../lib/routes";
+import Box from "../../components/ui/Box.astro";
 ---
 
-<BaseLayout seo={{ title: "APIs da Disparo Pro", description: "Integre nossa API ao seu sistema!" }}>
-  <Section>
-    <Heading as="h1">APIs da Disparo Pro</Heading>
+<BaseLayout
+  seo={{
+    title: "APIs da Disparo Pro",
+    description: "Integre nossa API ao seu sistema!",
+  }}
+>
+  <Hero
+    id="apis"
+    class="bg-[url(/images/gradients/gradient-one.webp)] bg-cover bg-center lg:bg-left bg-no-repeat overflow-hidden"
+  >
+    <div
+      class="w-full lg:w-[48%] flex flex-col items-start gap-6 md:gap-8 lg:gap-4 xl:gap-8"
+    >
+      <div class="flex flex-col gap-4 md:gap-6 lg:gap-4 xl:gap-6 items-start">
+        <Heading as="h1">
+          Integre SMS, WhatsApp, RCS e Voz ao seu sistema com uma única API
+        </Heading>
+        <p class="text-body-md text-text-secondary max-w-[500px]">
+          Automatize a comunicação da sua empresa e envie mensagens diretamente
+          do seu sistema, CRM ou plataforma.
+        </p>
+      </div>
+      <Button variant="primary" icon={ArrowRight} href={ROUTES.CONTATO}
+        >Integre agora</Button
+      >
+    </div>
+    <div class="w-full lg:w-1/2">
+      <img
+        src="/images/image-hero.webp"
+        alt="Plataforma Disparo Pro"
+        class="w-full h-auto"
+      />
+    </div>
+  </Hero>
+
+  <Section
+    class="flex flex-col items-center justify-center"
+    containerClass="flex flex-col gap-8 lg:gap-12"
+  >
+    <div
+      class="mx-auto w-full xl:max-w-3/4 flex flex-col items-center justify-center text-center gap-4"
+    >
+      <Heading as="h2"
+        >As melhores APIs do mercado para disparar mensagens em massa!</Heading
+      >
+      <p class="text-body-md text-text-secondary max-w-[500px]">
+        Com as integrações da Disparo Pro, você amplia suas operações sem
+        esforço:
+      </p>
+    </div>
+
+    <div class="flex flex-col gap-4 lg:grid lg:grid-cols-4 lg:gap-5">
+      <Box
+        variant="secondary"
+        icon={"/icons/fast.svg"}
+        iconAlt="Fast"
+        title="Integração simples"
+        description="Conecte seu sistema rapidamente com documentação completa."
+      />
+      <Box
+        variant="secondary"
+        icon={"/icons/dollar.svg"}
+        iconAlt="Dollar"
+        title="Zero mensalidade"
+        description="Integre gratuitamente e pague apenas pelos envios realizados."
+      />
+      <Box
+        variant="secondary"
+        icon={"/icons/interface.svg"}
+        iconAlt="Interface"
+        title="Multicanal"
+        description="Envie SMS, WhatsApp, RCS e Disparos de Voz com uma única API."
+      />
+      <Box
+        variant="secondary"
+        icon={"/icons/verify.svg"}
+        iconAlt="Verify"
+        title="Dados confiáveis"
+        description="Acompanhe status de envio e desempenho das mensagens em tempo real."
+      />
+    </div>
   </Section>
 </BaseLayout>

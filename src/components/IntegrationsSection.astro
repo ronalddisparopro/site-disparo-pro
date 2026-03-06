@@ -1,0 +1,35 @@
+---
+import Heading from "./ui/Heading.astro";
+import IntegrationBox from "./ui/IntegrationBox.astro";
+
+interface Integration {
+  title: string;
+  description: string;
+  buttonHref: string;
+}
+
+export interface Props {
+  title: string;
+  integrations: Integration[];
+}
+
+const { title, integrations } = Astro.props;
+---
+
+<div class="flex flex-col gap-8 lg:gap-12 items-center justify-center">
+  <div class="flex flex-col items-center justify-center text-center">
+    <Heading as="h2">{title}</Heading>
+  </div>
+
+  <div class="flex flex-col gap-4 lg:gap-6 w-full">
+    {
+      integrations.map((item) => (
+        <IntegrationBox
+          title={item.title}
+          description={item.description}
+          buttonHref={item.buttonHref}
+        />
+      ))
+    }
+  </div>
+</div>

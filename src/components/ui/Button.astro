@@ -6,15 +6,23 @@ export interface Props {
   variant?: "primary" | "secondary" | "outline" | "white";
   class?: string;
   icon?: any;
+  target?: string | boolean;
+  type?: "button" | "submit" | "reset";
+  id?: string;
 }
 
 const {
+  target,
   href,
   variant = "primary",
   class: className,
   icon: Icon,
   ...rest
 } = Astro.props;
+
+const targetValue =
+  typeof target === "string" ? target : target ? "_blank" : undefined;
+const rel = targetValue === "_blank" ? "noopener noreferrer" : undefined;
 
 const baseClass =
   "cursor-pointer inline-flex items-center justify-center font-regular transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2";
@@ -61,7 +69,7 @@ const classes = cx(baseClass, variants[variant], className);
 
 {
   href ? (
-    <a href={href} class={classes} {...rest}>
+    <a href={href} target={targetValue} rel={rel} class={classes} {...rest}>
       <slot />
       {(variant === "primary" || variant === "white") && Icon && (
         <Icon class="ml-2 w-5 h-5" />
