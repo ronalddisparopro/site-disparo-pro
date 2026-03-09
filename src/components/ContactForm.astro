@@ -5,37 +5,87 @@
   new RDStationForms(
     "dp-new-site-contact-b021f56c4ce666b3d362",
     "null",
-  ).createForm({
-    onFormReady: function ($form) {
-      const utms = [
-        "utm_source",
-        "utm_medium",
-        "utm_campaign",
-        "utm_term",
-        "utm_content",
-      ];
+  ).createForm();
 
-      utms.forEach((utm) => {
-        const value = localStorage.getItem(utm);
-        if (value) {
-          const fieldNames = [utm, `cf_${utm}`];
-          fieldNames.forEach((fieldName) => {
-            // Tenta encontrar campos no DOM principal
-            const fields = document.querySelectorAll(
-              `input[name="${fieldName}"]`,
-            );
-            fields.forEach((field) => (field.value = value));
+  (function () {
+    const STORAGE_KEY = "utmParameters";
 
-            // Se o RD Station injetar um objeto jQuery ($form), tenta encontrar nele
-            if ($form && typeof $form.find === "function") {
-              const $fields = $form.find(`input[name="${fieldName}"]`);
-              if ($fields.length > 0) {
-                $fields.val(value).change();
-              }
-            }
-          });
-        }
+    function injectUTM(container) {
+      if (!container || !container.querySelector) return;
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+
+      let parsed;
+      try {
+        parsed = JSON.parse(raw);
+      } catch (e) {
+        return;
+      }
+
+      const first = parsed.first_touch || {};
+      const last = parsed.last_touch || {};
+
+      const transfer = container.querySelector('[name="cf_utm_transfer"]');
+      if (transfer) {
+        transfer.value = btoa(raw);
+      }
+
+      const map = {
+        cf_utm_source: first.utm_source || last.utm_source,
+        cf_utm_medium: first.utm_medium || last.utm_medium,
+        cf_utm_campaign: first.utm_campaign || last.utm_campaign,
+        cf_utm_content: first.utm_content || last.utm_content,
+        cf_utm_term: first.utm_term || last.utm_term,
+      };
+
+      Object.entries(map).forEach(([name, value]) => {
+        if (!value) return;
+
+        const altName = name.replace("cf_", "");
+        const fields = container.querySelectorAll(
+          `[name="${name}"], [name="${altName}"]`,
+        );
+
+        fields.forEach((field) => {
+          field.value = value;
+          // Emite eventos para frameworks reativos
+          field.dispatchEvent(new Event("input", { bubbles: true }));
+          field.dispatchEvent(new Event("change", { bubbles: true }));
+        });
       });
-    },
-  });
+    }
+
+    // 🔥 CAPTURE MODE (antes do RD Station interceptar)
+    document.addEventListener(
+      "submit",
+      function (e) {
+        if (e.target && e.target.tagName === "FORM") {
+          injectUTM(e.target);
+        }
+      },
+      true,
+    );
+
+    // Tenta preencher visualmente também para o usuário (fallback)
+    const interval = setInterval(() => {
+      const formWrapper = document.getElementById(
+        "dp-new-site-contact-b021f56c4ce666b3d362",
+      );
+      if (formWrapper) {
+        const form = formWrapper.querySelector("form");
+        if (form) {
+          injectUTM(form);
+        }
+      }
+    }, 1000);
+
+    // Limpa o fallback após 10 segundos
+    setTimeout(() => clearInterval(interval), 10000);
+  })();
 </script>
+
+<style is:global>
+  .bricks-form__field:has([name^="cf_utm_"]) {
+    display: none !important;
+  }
+</style>

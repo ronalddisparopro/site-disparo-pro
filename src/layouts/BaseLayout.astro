@@ -32,7 +32,8 @@ const { seo } = Astro.props;
     }
 
     <script is:inline>
-      function captureUTMs() {
+      (function () {
+        const STORAGE_KEY = "utmParameters";
         const urlParams = new URLSearchParams(window.location.search);
         const utms = [
           "utm_source",
@@ -42,14 +43,37 @@ const { seo } = Astro.props;
           "utm_content",
         ];
 
+        let currentUtms = {};
+        let hasNewUtm = false;
+
         utms.forEach((utm) => {
-          const value = urlParams.get(utm);
-          if (value) {
-            localStorage.setItem(utm, value);
+          const val = urlParams.get(utm);
+          if (val) {
+            currentUtms[utm] = val;
+            hasNewUtm = true;
           }
         });
-      }
-      captureUTMs();
+
+        if (hasNewUtm) {
+          let stored = localStorage.getItem(STORAGE_KEY);
+          let data = {};
+          try {
+            data = stored ? JSON.parse(stored) : {};
+          } catch (e) {
+            data = {};
+          }
+
+          // Define as UTMs do primeiro toque se ainda não existirem
+          if (!data.first_touch) {
+            data.first_touch = { ...currentUtms };
+          }
+
+          // Atualiza as UTMs do último toque (opcional, mas útil)
+          data.last_touch = { ...currentUtms };
+
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        }
+      })();
     </script>
   </head>
   <body class="min-h-screen flex flex-col font-sans overflow-x-hidden">
