@@ -1,5 +1,8 @@
 ---
 import BoxStep from "./ui/BoxStep.astro";
+import criarContaImg from "../assets/images/criar-conta.svg";
+import criarJornadaImg from "../assets/images/criar-jornada.svg";
+import dispararImg from "../assets/images/disparar.svg";
 ---
 
 <div
@@ -9,21 +12,21 @@ import BoxStep from "./ui/BoxStep.astro";
     <BoxStep
       title="Faça login"
       description="Acesse a plataforma com e-mail e senha."
-      image="/images/criar-conta.svg"
+      image={criarContaImg}
     />
   </div>
   <div class="min-w-[85%] md:min-w-[45%] lg:min-w-0 shrink-0 snap-center">
     <BoxStep
       title="Crie sua jornada"
       description="Suba a lista de mensagens e crie suas mensagens."
-      image="/images/criar-jornada.svg"
+      image={criarJornadaImg}
     />
   </div>
   <div class="min-w-[85%] md:min-w-[45%] lg:min-w-0 shrink-0 snap-center">
     <BoxStep
       title="Dispare"
       description="Programe ou dispare sua jornada de comunicação."
-      image="/images/disparar.svg"
+      image={dispararImg}
     />
   </div>
 </div>

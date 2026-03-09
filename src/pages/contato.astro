@@ -8,10 +8,21 @@ import ContactForm from "../components/ContactForm.astro";
 <BaseLayout seo={{ title: "Contato", description: "Fale conosco." }}>
   <Hero
     id="contato"
-    class="pb-12 bg-[url(/images/gradients/gradient-general-hero.webp)] bg-cover bg-center lg:bg-left bg-no-repeat overflow-hidden"
+    class="pb-12 bg-surface-default relative overflow-hidden"
   >
+  <!-- Glow roxo -->
     <div
-      class="w-full lg:w-[48%] flex flex-col items-start gap-6 md:gap-8 lg:gap-4 xl:gap-8"
+      class="pointer-events-none absolute -bottom-[220px] left-2/6 w-[428px] h-[428px] rounded-full bg-brand-secondary blur-[100px]"
+    >
+    </div>
+
+    <!-- Glow rosa -->
+    <div
+      class="pointer-events-none absolute -bottom-[364px] right-0 w-[800px] h-[800px] rounded-full bg-brand-primary blur-[100px]"
+    >
+    </div>
+    <div
+      class="w-full lg:w-[48%] flex flex-col items-start gap-6 md:gap-8 lg:gap-4 xl:gap-8 relative z-10"
     >
       <div class="flex flex-col gap-4 md:gap-6 lg:gap-4 xl:gap-6 items-start">
         <Heading as="h1">Precisa falar com a Disparo Pro?</Heading>
@@ -21,7 +32,7 @@ import ContactForm from "../components/ContactForm.astro";
         </p>
       </div>
     </div>
-    <div class="w-full lg:w-1/2">
+    <div class="w-full lg:w-1/2 relative z-10">
       <ContactForm />
     </div>
   </Hero>

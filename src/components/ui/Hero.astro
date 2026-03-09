@@ -2,7 +2,7 @@
 import { cx } from "../../lib/utils";
 import Container from "./Container.astro";
 
-export interface Props {
+export interface Props extends astroHTML.JSX.HTMLAttributes {
   class?: string;
   id?: string;
   containerClass?: string;
@@ -14,6 +14,7 @@ const { class: className, id, containerClass, ...rest } = Astro.props;
 <section
   id={id}
   class={cx("overflow-hidden pt-12 lg:pt-24 xl:pt-32", className)}
+  {...rest}
 >
   <Container
     class={cx(

@@ -1,40 +1,51 @@
 ---
 import Container from "./ui/Container.astro";
 import { ROUTES } from "../lib/routes";
+import { Image } from "astro:assets";
+
+// Assets
+import logoFooterImg from "../assets/images/logo-disparo-pro-footer.svg";
+import facebookIcon from "../assets/icons/social/facebook.svg";
+import instagramIcon from "../assets/icons/social/instagram.svg";
+import linkedinIcon from "../assets/icons/social/linkedin.svg";
+import youtubeIcon from "../assets/icons/social/youtube.svg";
 ---
 
 <footer
-  class="bg-surface-dark text-surface-default bg-[url(/images/gradients/gradient-footer.webp)] bg-cover bg-center lg:bg-left bg-no-repeat overflow-hidden"
+  class="overflow-hidden"
+  style="background: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 100%), #0d0d0d;"
 >
   <Container
     class="flex flex-col lg:flex-row justify-between gap-8 lg:gap-0 py-10 lg:py-16 px-4 md:px-6 xl:px-0"
   >
     <a href={ROUTES.HOME} class="inline-block max-w-60">
-      <img
-        src="/images/logo-disparo-pro-footer.svg"
+      <Image
+        src={logoFooterImg}
         alt="Disparo Pro"
-        class="100%"
+        class="w-full h-auto"
+        width={240}
+        height={60}
       />
     </a>
 
     <div class="flex items-center justify-start lg:justify-center gap-4">
       <a href="https://www.facebook.com/disparopro" target="_blank">
-        <img src="/icons/social/facebook.svg" alt="Facebook" />
+        <Image src={facebookIcon} alt="Facebook" width={12} height={24} />
       </a>
       <a href="https://www.instagram.com/disparopro/" target="_blank">
-        <img src="/icons/social/instagram.svg" alt="Instagram" />
+        <Image src={instagramIcon} alt="Instagram" width={24} height={24} />
       </a>
       <a href="https://www.linkedin.com/company/disparo-pro" target="_blank">
-        <img src="/icons/social/linkedin.svg" alt="Linkedin" />
+        <Image src={linkedinIcon} alt="Linkedin" width={24} height={24} />
       </a>
       <a href="https://www.youtube.com/@disparopro" target="_blank">
-        <img src="/icons/social/youtube.svg" alt="Youtube" />
+        <Image src={youtubeIcon} alt="Youtube" width={24} height={24} />
       </a>
     </div>
   </Container>
   <div class="bg-brand-primary py-2 px-4 md:px-6 xl:px-0">
     <Container class="text-xs md:text-sm">
-      <p>
+      <p class="text-surface-default">
         Copyright © {new Date().getFullYear()} Disparo Pro Todos os direitos reservados.
       </p>
     </Container>

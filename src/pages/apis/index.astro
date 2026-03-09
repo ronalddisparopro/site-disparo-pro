@@ -7,6 +7,14 @@ import { ArrowRight } from "lucide-astro";
 import Button from "../../components/ui/Button.astro";
 import { ROUTES } from "../../lib/routes";
 import Box from "../../components/ui/Box.astro";
+import { Image } from "astro:assets";
+
+// Assets
+import heroImg from "../../assets/images/api-hero-image.webp";
+import fastIcon from "../../assets/icons/fast.svg";
+import dollarIcon from "../../assets/icons/dollar.svg";
+import interfaceIcon from "../../assets/icons/interface.svg";
+import verifyIcon from "../../assets/icons/verify.svg";
 ---
 
 <BaseLayout
@@ -17,10 +25,21 @@ import Box from "../../components/ui/Box.astro";
 >
   <Hero
     id="apis"
-    class="bg-[url(/images/gradients/gradient-general-hero.webp)] bg-cover bg-center lg:bg-left bg-no-repeat overflow-hidden"
+    class="bg-surface-default relative overflow-hidden"
   >
+  <!-- Glow roxo -->
     <div
-      class="w-full lg:w-1/2 flex flex-col items-start gap-6 md:gap-8 lg:gap-4 xl:gap-8"
+      class="pointer-events-none absolute -bottom-[220px] left-2/6 w-[428px] h-[428px] rounded-full bg-brand-secondary blur-[100px]"
+    >
+    </div>
+
+    <!-- Glow rosa -->
+    <div
+      class="pointer-events-none absolute -bottom-[364px] right-0 w-[800px] h-[800px] rounded-full bg-brand-primary blur-[100px]"
+    >
+    </div>
+    <div
+      class="w-full lg:w-1/2 flex flex-col items-start gap-6 md:gap-8 lg:gap-4 xl:gap-8 relative z-10"
     >
       <div class="flex flex-col gap-4 md:gap-6 lg:gap-4 xl:gap-6 items-start">
         <Heading as="h1">
@@ -35,11 +54,16 @@ import Box from "../../components/ui/Box.astro";
         >Integre agora</Button
       >
     </div>
-    <div class="w-[90%] lg:w-[420px]">
-      <img
-        src="/images/api-hero-image.webp"
+    <div class="w-[90%] lg:w-[420px] relative z-10">
+      <Image
+        src={heroImg}
         alt="Plataforma Disparo Pro"
         class="w-auto h-auto"
+        loading="eager"
+        fetchpriority="high"
+        width={420}
+        format="webp"
+        quality="mid"
       />
     </div>
   </Hero>
@@ -63,29 +87,25 @@ import Box from "../../components/ui/Box.astro";
     <div class="flex flex-col gap-4 lg:grid lg:grid-cols-4 lg:gap-5">
       <Box
         variant="secondary"
-        icon={"/icons/fast.svg"}
-        iconAlt="Fast"
+        icon={fastIcon}
         title="Integração simples"
         description="Conecte seu sistema rapidamente com documentação completa."
       />
       <Box
         variant="secondary"
-        icon={"/icons/dollar.svg"}
-        iconAlt="Dollar"
+        icon={dollarIcon}
         title="Zero mensalidade"
         description="Integre gratuitamente e pague apenas pelos envios realizados."
       />
       <Box
         variant="secondary"
-        icon={"/icons/interface.svg"}
-        iconAlt="Interface"
+        icon={interfaceIcon}
         title="Multicanal"
         description="Envie SMS, WhatsApp, RCS e Disparos de Voz com uma única API."
       />
       <Box
         variant="secondary"
-        icon={"/icons/verify.svg"}
-        iconAlt="Verify"
+        icon={verifyIcon}
         title="Dados confiáveis"
         description="Acompanhe status de envio e desempenho das mensagens em tempo real."
       />

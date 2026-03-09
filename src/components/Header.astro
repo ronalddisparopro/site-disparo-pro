@@ -3,6 +3,10 @@ import Container from "./ui/Container.astro";
 import { ROUTES } from "../lib/routes";
 import Button from "./ui/Button.astro";
 import { Menu, X, ChevronDown } from "@lucide/astro";
+import { Image } from "astro:assets";
+
+// Assets
+import logoImg from "../assets/images/logo-disparo-pro.svg";
 
 const navItems = [
   { label: "Início", href: ROUTES.HOME },
@@ -42,7 +46,7 @@ const navItems = [
     <div class="flex items-center justify-between">
       <div class="shrink-0">
         <a href={ROUTES.HOME}>
-          <img src="/images/logo-disparo-pro.svg" alt="Disparo Pro" />
+          <Image src={logoImg} alt="Disparo Pro" width={160} height={40} />
         </a>
       </div>
 

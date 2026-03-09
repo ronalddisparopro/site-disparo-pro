@@ -11,6 +11,30 @@ import InteractiveFeature from "../../components/ui/InteractiveFeature.astro";
 import ChannelHighlight from "../../components/ui/ChannelHighlight.astro";
 import ApiSection from "../../components/ApiSection.astro";
 import Faq from "../../components/ui/Faq.astro";
+import { Image } from "astro:assets";
+
+// Assets
+import heroImg from "../../assets/images/rcs-hero-image.webp";
+import verifyIcon from "../../assets/icons/verify.svg";
+import interfaceIcon from "../../assets/icons/interface.svg";
+import fastIcon from "../../assets/icons/fast.svg";
+import imageIcon from "../../assets/icons/image.svg";
+import consoleIcon from "../../assets/icons/console.svg";
+import chatIcon from "../../assets/icons/check-chat.svg";
+import evolutionIcon from "../../assets/icons/evolution.svg";
+import loveIcon from "../../assets/icons/love-chat.svg";
+import rcsInvertImg from "../../assets/images/rcs-invert.webp";
+import promotionIcon from "../../assets/icons/promotion.svg";
+import hospitalIcon from "../../assets/icons/hospital.svg";
+import learnIcon from "../../assets/icons/learn.svg";
+
+// Mockups
+import rcsBasicImg from "../../assets/images/mockups/rcs-basic.webp";
+import rcsSingleImg from "../../assets/images/mockups/rcs-single.webp";
+import rcsEcommerceImg from "../../assets/images/mockups/rcs-e-commerce.webp";
+import rcsSaudeImg from "../../assets/images/mockups/rcs-saude.webp";
+import rcsEducacaoImg from "../../assets/images/mockups/rcs-educacao.webp";
+import rcsInfoprodutorImg from "../../assets/images/mockups/rcs-infoprodutor.webp";
 ---
 
 <BaseLayout
@@ -21,26 +45,42 @@ import Faq from "../../components/ui/Faq.astro";
 >
   <Hero
     id="rcs"
-    class="bg-[url(/images/gradients/gradient-general-hero.webp)] bg-cover bg-center lg:bg-left bg-no-repeat overflow-hidden"
+    class="bg-surface-default relative overflow-hidden"
   >
+  <!-- Glow roxo -->
     <div
-      class="w-full lg:w-1/2 flex flex-col items-start gap-6 md:gap-8 lg:gap-4 xl:gap-8"
+      class="pointer-events-none absolute -bottom-[220px] left-2/6 w-[428px] h-[428px] rounded-full bg-brand-secondary blur-[100px]"
+    >
+    </div>
+
+    <!-- Glow rosa -->
+    <div
+      class="pointer-events-none absolute -bottom-[364px] right-0 w-[800px] h-[800px] rounded-full bg-brand-primary blur-[100px]"
+    >
+    </div>
+    <div
+      class="w-full lg:w-1/2 flex flex-col items-start gap-6 md:gap-8 lg:gap-4 xl:gap-8 relative z-10"
     >
       <div class="flex flex-col gap-4 md:gap-6 lg:gap-4 xl:gap-6 items-start">
         <Heading as="h1"> Transforme leads em clientes com RCS! </Heading>
         <p class="text-body-md text-text-secondary max-w-[500px]">
-          Acelere conversões com mensagens interativas<br> e multimídia.
+          Acelere conversões com mensagens interativas<br /> e multimídia.
         </p>
       </div>
       <Button variant="primary" icon={ArrowRight} href={ROUTES.CONTATO}
         >Experimente agora!</Button
       >
     </div>
-    <div class="w-[90%] lg:w-[420px]">
-      <img
-        src="/images/rcs-hero-image.webp"
+    <div class="w-[90%] lg:w-[420px] relative z-10">
+      <Image
+        src={heroImg}
         alt="Plataforma Disparo Pro"
         class="w-auto h-auto"
+        loading="eager"
+        fetchpriority="high"
+        width={420}
+        format="webp"
+        quality="mid"
       />
     </div>
   </Hero>
@@ -60,43 +100,37 @@ import Faq from "../../components/ui/Faq.astro";
     <div class="flex flex-col gap-4 lg:grid lg:grid-cols-3 lg:gap-5">
       <Box
         variant="secondary"
-        icon={"/icons/verify.svg"}
-        iconAlt="Verify"
+        icon={verifyIcon}
         title="Validação de Marca"
         description="Sua marca verificada garante segurança e credibilidade desde o primeiro contato"
       />
       <Box
         variant="secondary"
-        icon={"/icons/interface.svg"}
-        iconAlt="Interface"
+        icon={interfaceIcon}
         title="Branding Personalizado"
         description="Adicione logotipo, nome e cores para reforçar a identidade visual da sua marca"
       />
       <Box
         variant="secondary"
-        icon={"/icons/fast.svg"}
-        iconAlt="Fast"
+        icon={fastIcon}
         title="Botões Interativos"
         description="Facilite cliques, compras e respostas rápidas com botões projetados para engajamento"
       />
       <Box
         variant="secondary"
-        icon={"/icons/image.svg"}
-        iconAlt="Image"
+        icon={imageIcon}
         title="Imagens e Vídeos"
         description="Torne suas mensagens mais atraentes com imagens e vídeos envolventes"
       />
       <Box
         variant="secondary"
-        icon={"/icons/console.svg"}
-        iconAlt="Console"
+        icon={consoleIcon}
         title="API Integrada"
         description="Conecte facilmente seus sistemas à nossa plataforma com uma API robusta"
       />
       <Box
         variant="secondary"
-        icon={"/icons/check-chat.svg"}
-        iconAlt="Check Chat"
+        icon={chatIcon}
         title="Respostas Diretas"
         description="Estabeleça diálogos diretos com o cliente com respostas fáceis de receber e visualizar"
       />
@@ -104,22 +138,24 @@ import Faq from "../../components/ui/Faq.astro";
   </Section>
 
   <Section containerClass="flex flex-col gap-6 lg:gap-12">
-    <Heading as="h2">Escolha o formato ideal para seu RCS!</Heading>
+    <div class="flex flex-col gap-4 lg:gap-6">
+      <Heading as="h2">Escolha o formato ideal para seu RCS!</Heading>
+    </div>
     <InteractiveFeature
       items={[
         {
-          icon: "/icons/love-chat.svg",
+          icon: loveIcon,
           title: "RCS Basic",
           description:
             "Mensagens rápidas e diretas, ideais para confirmações, lembretes e notificações. Limite de 160 caracteres.",
-          image: "/images/mockups/rcs-basic.webp",
+          image: rcsBasicImg,
         },
         {
-          icon: "/icons/image.svg",
+          icon: imageIcon,
           title: "RCS Single",
           description:
             "Mensagens completas para campanhas de marketing, com até 3072 caracteres, imagens, botões e links interativos.",
-          image: "/images/mockups/rcs-single.webp",
+          image: rcsSingleImg,
         },
       ]}
       buttonText="Crie sua conta agora!"
@@ -137,25 +173,25 @@ import Faq from "../../components/ui/Faq.astro";
         <ChannelHighlight
           items={[
             {
-              icon: "/icons/verify.svg",
+              icon: verifyIcon,
               title: "Confiabilidade",
               description:
                 "Sua marca já chega com a validação do Google, transmitindo confiança desde o primeiro contato",
             },
             {
-              icon: "/icons/evolution.svg",
+              icon: evolutionIcon,
               title: "Resultados mensuráveis",
               description:
                 "Métricas detalhadas de entrega, abertura e interação para otimizar suas campanhas",
             },
             {
-              icon: "/icons/love-chat.svg",
+              icon: loveIcon,
               title: "Simplicidade",
               description:
                 "Ative e envie mensagens em poucos passos, sem precisar de suporte técnico especializado",
             },
           ]}
-          imageSrc="/images/rcs-invert.webp"
+          imageSrc={rcsInvertImg}
           imageAlt="RCS"
           buttonText=" Receba um contato"
           buttonHref={ROUTES.CONTATO}
@@ -165,36 +201,38 @@ import Faq from "../../components/ui/Faq.astro";
   </div>
 
   <Section containerClass="flex flex-col gap-6 lg:gap-12">
-    <Heading as="h2"
-      >O RCS impulsiona sua comunicação em diferentes negócios!</Heading
-    >
+    <div class="flex flex-col gap-4 lg:gap-6">
+      <Heading as="h2"
+        >O RCS impulsiona sua comunicação em diferentes negócios!</Heading
+      >
+    </div>
     <InteractiveFeature
       items={[
         {
-          icon: "/icons/promotion.svg",
+          icon: promotionIcon,
           title: "E-Commerce",
           description:
             "Ofertas, anúncios e recuperação de carrinhos abandonados.",
-          image: "/images/mockups/rcs-e-commerce.webp",
+          image: rcsEcommerceImg,
         },
         {
-          icon: "/icons/hospital.svg",
+          icon: hospitalIcon,
           title: "Saúde",
           description: "Confirmações, cobranças, lembretes e mais.",
-          image: "/images/mockups/rcs-saude.webp",
+          image: rcsSaudeImg,
         },
         {
-          icon: "/icons/learn.svg",
+          icon: learnIcon,
           title: "Educação",
           description: "Lembretes, comunicados, cobranças e mais.",
-          image: "/images/mockups/rcs-educacao.webp",
+          image: rcsEducacaoImg,
         },
         {
-          icon: "/icons/interface.svg",
+          icon: interfaceIcon,
           title: "Infoprodutores",
           description:
             "Ofertas exclusivas, convites para lives, lançamentos e mais.",
-          image: "/images/mockups/rcs-infoprodutor.webp",
+          image: rcsInfoprodutorImg,
         },
       ]}
       buttonText="Crie sua conta agora!"

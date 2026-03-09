@@ -11,6 +11,22 @@ import InteractiveFeature from "../../components/ui/InteractiveFeature.astro";
 import ApiSection from "../../components/ApiSection.astro";
 import SlideBoxSteps from "../../components/SlideBoxSteps.astro";
 import TestimonialDiv from "../../components/TestimonialDiv.astro";
+import { Image } from "astro:assets";
+
+// Assets
+import heroImg from "../../assets/images/sms-hero-image.webp";
+import usersIcon from "../../assets/icons/users.svg";
+import dollarIcon from "../../assets/icons/dollar.svg";
+import verifyIcon from "../../assets/icons/verify.svg";
+import promotionIcon from "../../assets/icons/promotion.svg";
+import receiptIcon from "../../assets/icons/receipt.svg";
+import hospitalIcon from "../../assets/icons/hospital.svg";
+
+// Mockups
+import smsBetImg from "../../assets/images/mockups/sms-bet.webp";
+import smsConsignadoImg from "../../assets/images/mockups/sms-consignado.webp";
+import smsCobrancaImg from "../../assets/images/mockups/sms-cobranca.webp";
+import smsClinicasImg from "../../assets/images/mockups/sms-clinicas.webp";
 ---
 
 <BaseLayout
@@ -21,28 +37,44 @@ import TestimonialDiv from "../../components/TestimonialDiv.astro";
 >
   <Hero
     id="disparo-de-sms"
-    class="bg-[url(/images/gradients/gradient-general-hero.webp)] bg-cover bg-center lg:bg-left bg-no-repeat overflow-hidden"
+    class="bg-surface-default relative overflow-hidden"
   >
+  <!-- Glow roxo -->
     <div
-      class="w-full lg:w-1/2 flex flex-col items-start gap-6 md:gap-8 lg:gap-4 xl:gap-8"
+      class="pointer-events-none absolute -bottom-[220px] left-2/6 w-[428px] h-[428px] rounded-full bg-brand-secondary blur-[100px]"
+    >
+    </div>
+
+    <!-- Glow rosa -->
+    <div
+      class="pointer-events-none absolute -bottom-[364px] right-0 w-[800px] h-[800px] rounded-full bg-brand-primary blur-[100px]"
+    >
+    </div>
+    <div
+      class="w-full lg:w-1/2 flex flex-col items-start gap-6 md:gap-8 lg:gap-4 xl:gap-8 relative z-10"
     >
       <div class="flex flex-col gap-4 md:gap-6 lg:gap-4 xl:gap-6 items-start">
         <Heading as="h1">
           Alcance até 98% dos seus clientes com Disparo de SMS!
         </Heading>
         <p class="text-body-md text-text-secondary max-w-[500px]">
-          Impulsione a comunicação do seu negócio<br> com envio de SMS em massa.
+          Impulsione a comunicação do seu negócio<br /> com envio de SMS em massa.
         </p>
       </div>
       <Button variant="primary" icon={ArrowRight} href={ROUTES.CONTATO}
         >Experimente agora!</Button
       >
     </div>
-    <div class="w-[90%] lg:w-[420px]">
-      <img
-        src="/images/sms-hero-image.webp"
+    <div class="w-[90%] lg:w-[420px] relative z-10">
+      <Image
+        src={heroImg}
         alt="Plataforma Disparo Pro"
         class="w-auto h-auto"
+        loading="eager"
+        fetchpriority="high"
+        width={420}
+        format="webp"
+        quality="mid"
       />
     </div>
   </Hero>
@@ -66,22 +98,19 @@ import TestimonialDiv from "../../components/TestimonialDiv.astro";
     <div class="flex flex-col gap-4 lg:grid lg:grid-cols-3 lg:gap-5">
       <Box
         variant="primary"
-        icon={"/icons/users.svg"}
-        iconAlt="Users"
+        icon={usersIcon}
         title="98%"
         description="das pessoas lêem um SMS em até  3 minutos"
       />
       <Box
         variant="primary"
-        icon={"/icons/dollar.svg"}
-        iconAlt="Dollar"
+        icon={dollarIcon}
         title="96%"
         description="mais barato que os meios de comunicação tradicionais"
       />
       <Box
         variant="primary"
-        icon={"/icons/verify.svg"}
-        iconAlt="Verify"
+        icon={verifyIcon}
         title="45%"
         description="de conversão, com até 500% de retorno sobre o investimento"
       />
@@ -111,34 +140,37 @@ import TestimonialDiv from "../../components/TestimonialDiv.astro";
   </Section>
 
   <Section containerClass="flex flex-col gap-6 lg:gap-12">
-    <Heading as="h2"
-      >Com SMS, você melhora sua comunicação em diferentes segmentos de mercado</Heading
-    >
+    <div class="flex flex-col gap-4 lg:gap-6">
+      <Heading as="h2"
+        >Com SMS, você melhora sua comunicação em diferentes segmentos de
+        mercado</Heading
+      >
+    </div>
     <InteractiveFeature
       items={[
         {
-          icon: "/icons/dollar.svg",
+          icon: dollarIcon,
           title: "Betting",
           description: "Alcance apostadores com áudios de influencers.",
-          image: "/images/mockups/sms-bet.webp",
+          image: smsBetImg,
         },
         {
-          icon: "/icons/promotion.svg",
+          icon: promotionIcon,
           title: "Crédito Consignado",
           description: "Divulgue ofertas e diferenciais unindo Voz e SMS.",
-          image: "/images/mockups/sms-consignado.webp",
+          image: smsConsignadoImg,
         },
         {
-          icon: "/icons/receipt.svg",
+          icon: receiptIcon,
           title: "Cobrança",
           description: "Reduza a inadimplência com lembretes certeiros.",
-          image: "/images/mockups/sms-cobranca.webp",
+          image: smsCobrancaImg,
         },
         {
-          icon: "/icons/hospital.svg",
+          icon: hospitalIcon,
           title: "Clínicas",
           description: "Garanta 100% de presença com lembretes de Voz.",
-          image: "/images/mockups/sms-clinicas.webp",
+          image: smsClinicasImg,
         },
       ]}
       buttonText="Desbrave possibilidades!"

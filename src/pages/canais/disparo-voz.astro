@@ -11,6 +11,22 @@ import InteractiveVoiceFeature from "../../components/ui/InteractiveVoiceFeature
 import ApiSection from "../../components/ApiSection.astro";
 import SlideBoxSteps from "../../components/SlideBoxSteps.astro";
 import Faq from "../../components/ui/Faq.astro";
+import { Image } from "astro:assets";
+
+// Assets
+import heroImg from "../../assets/images/voz-hero-image.webp";
+import unifyIcon from "../../assets/icons/unify.svg";
+import dollarIcon from "../../assets/icons/dollar.svg";
+import usersIcon from "../../assets/icons/users.svg";
+import promotionIcon from "../../assets/icons/promotion.svg";
+import receiptIcon from "../../assets/icons/receipt.svg";
+import hospitalIcon from "../../assets/icons/hospital.svg";
+
+// Mockups
+import smsBetImg from "../../assets/images/mockups/sms-bet.webp";
+import smsConsignadoImg from "../../assets/images/mockups/sms-consignado.webp";
+import smsCobrancaImg from "../../assets/images/mockups/sms-cobranca.webp";
+import smsClinicasImg from "../../assets/images/mockups/sms-clinicas.webp";
 ---
 
 <BaseLayout
@@ -21,10 +37,21 @@ import Faq from "../../components/ui/Faq.astro";
 >
   <Hero
     id="disparo-de-voz"
-    class="bg-[url(/images/gradients/gradient-general-hero.webp)] bg-cover bg-center lg:bg-left bg-no-repeat overflow-hidden"
+    class="bg-surface-default relative overflow-hidden"
   >
+  <!-- Glow roxo -->
     <div
-      class="w-full lg:w-1/2 flex flex-col items-start gap-6 md:gap-8 lg:gap-4 xl:gap-8"
+      class="pointer-events-none absolute -bottom-[220px] left-2/6 w-[428px] h-[428px] rounded-full bg-brand-secondary blur-[100px]"
+    >
+    </div>
+
+    <!-- Glow rosa -->
+    <div
+      class="pointer-events-none absolute -bottom-[364px] right-0 w-[800px] h-[800px] rounded-full bg-brand-primary blur-[100px]"
+    >
+    </div>
+    <div
+      class="w-full lg:w-1/2 flex flex-col items-start gap-6 md:gap-8 lg:gap-4 xl:gap-8 relative z-10"
     >
       <div class="flex flex-col gap-4 md:gap-6 lg:gap-4 xl:gap-6 items-start">
         <Heading as="h1">
@@ -38,11 +65,16 @@ import Faq from "../../components/ui/Faq.astro";
         >Experimente agora!</Button
       >
     </div>
-    <div class="w-[90%] lg:w-[420px]">
-      <img
-        src="/images/voz-hero-image.webp"
+    <div class="w-[90%] lg:w-[420px] relative z-10">
+      <Image
+        src={heroImg}
         alt="Plataforma Disparo Pro"
         class="w-auto h-auto"
+        loading="eager"
+        fetchpriority="high"
+        width={420}
+        format="webp"
+        quality="mid"
       />
     </div>
   </Hero>
@@ -62,22 +94,19 @@ import Faq from "../../components/ui/Faq.astro";
     <div class="flex flex-col gap-4 lg:grid lg:grid-cols-3 lg:gap-5">
       <Box
         variant="secondary"
-        icon={"/icons/unify.svg"}
-        iconAlt="Unify"
+        icon={unifyIcon}
         title="Integre"
         description="Crie campanhas integradas usando Voz e SMS"
       />
       <Box
         variant="secondary"
-        icon={"/icons/dollar.svg"}
-        iconAlt="Dollar"
+        icon={dollarIcon}
         title="Economize"
         description="Pague apenas pelas chamadas atendidas"
       />
       <Box
         variant="secondary"
-        icon={"/icons/users.svg"}
-        iconAlt="Users"
+        icon={usersIcon}
         title="Conquiste"
         description="Importe áudios com a voz de influenciadores"
       />
@@ -106,37 +135,39 @@ import Faq from "../../components/ui/Faq.astro";
   </Section>
 
   <Section containerClass="flex flex-col gap-6 lg:gap-12">
-    <Heading as="h2"
-      >Crie campanhas interativas unindo Disparos de Voz e SMS</Heading
-    >
+    <div class="flex flex-col gap-4 lg:gap-6">
+      <Heading as="h2"
+        >Crie campanhas interativas unindo Disparos de Voz e SMS</Heading
+      >
+    </div>
     <InteractiveVoiceFeature
       items={[
         {
-          icon: "/icons/dollar.svg",
+          icon: dollarIcon,
           title: "Betting",
           description: "Alcance apostadores com áudios de influencers.",
-          image: "/images/mockups/sms-bet.webp",
+          image: smsBetImg,
           audio: "/audios/bet.mp3",
         },
         {
-          icon: "/icons/promotion.svg",
+          icon: promotionIcon,
           title: "Crédito Consignado",
           description: "Divulgue ofertas e diferenciais unindo Voz e SMS.",
-          image: "/images/mockups/sms-consignado.webp",
+          image: smsConsignadoImg,
           audio: "/audios/consignado.mp3",
         },
         {
-          icon: "/icons/receipt.svg",
+          icon: receiptIcon,
           title: "Cobrança",
           description: "Reduza a inadimplência com lembretes certeiros.",
-          image: "/images/mockups/sms-cobranca.webp",
+          image: smsCobrancaImg,
           audio: "/audios/cobranca.mp3",
         },
         {
-          icon: "/icons/hospital.svg",
+          icon: hospitalIcon,
           title: "Clínicas",
           description: "Garanta 100% de presença com lembretes de Voz.",
-          image: "/images/mockups/sms-clinicas.webp",
+          image: smsClinicasImg,
           audio: "/audios/clinicas.mp3",
         },
       ]}
@@ -148,7 +179,7 @@ import Faq from "../../components/ui/Faq.astro";
   <Section>
     <ApiSection
       title="Integre nossa API de Voz ao seu sistema!"
-      description="Com Disparo Pro, você tem acesso a uma API de Disparo de Voz com integração facilitada e zero mensalidade."
+      description="Com Disparo Pro, você have acesso a uma API de Disparo de Voz com integração facilitada e zero mensalidade."
     />
   </Section>
 

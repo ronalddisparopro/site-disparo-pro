@@ -4,6 +4,11 @@ import { cx } from "../lib/utils";
 import Button from "./ui/Button.astro";
 import Heading from "./ui/Heading.astro";
 import { ROUTES } from "../lib/routes";
+import { Image } from "astro:assets";
+
+// Assets
+import apiIcon from "../assets/icons/api.svg";
+import codeApiImg from "../assets/images/code-api.svg";
 
 export interface Props {
   class?: string;
@@ -18,10 +23,11 @@ const classes = cx(className);
 
 <div class={classes} {...rest}>
   <div
-    class="flex flex-col lg:flex-row justify-between items-center py-8 px-4 lg:py-24 lg:px-12 rounded-2xl gap-6 bg-surface-dark bg-[url(/images/gradients/gradient-api-section.webp)] bg-cover bg-center lg:bg-left bg-no-repeat overflow-hidden"
+    class="flex flex-col lg:flex-row justify-between items-center py-8 px-4 lg:py-24 lg:px-12 rounded-2xl gap-6 bg-surface-dark overflow-hidden relative"
+    style="background: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 100%), #0d0d0d;"
   >
     <div class="w-full lg:w-1/2 flex flex-col items-start gap-6">
-      <img src="/icons/api.svg" alt="API da Disparo Pro" width="64" />
+      <Image src={apiIcon} alt="API da Disparo Pro" width={64} height={64} />
       {
         title && (
           <Heading as="h2" variant="secondary">
@@ -41,10 +47,11 @@ const classes = cx(className);
         >Saiba Mais</Button
       >
     </div>
-    <img
-      src="/images/code-api.svg"
+    <Image
+      src={codeApiImg}
       alt="Código da API da Disparo Pro"
       class="w-full lg:w-1/2"
+      width={600}
     />
     <slot />
   </div>

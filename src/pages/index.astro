@@ -13,6 +13,17 @@ import SlideBoxSteps from "../components/SlideBoxSteps.astro";
 import ApiSection from "../components/ApiSection.astro";
 import Badge from "../components/ui/Badge.astro";
 import TestimonialDiv from "../components/TestimonialDiv.astro";
+import { Image } from "astro:assets";
+
+// Importações de imagens para otimização do Astro
+import heroImage from "../assets/images/home-hero-image.webp";
+import labelHero from "../assets/images/label-hero-home.webp";
+import whatsappImg from "../assets/images/whatsapp_marketing.webp";
+import rcsImg from "../assets/images/rcs.webp";
+import smsImg from "../assets/images/disparo_de_sms.webp";
+import vozImg from "../assets/images/disparo_de_voz.webp";
+import emailImg from "../assets/images/disparo_de_email.webp";
+
 const CHANNEL_FEATURES = [
   {
     badge: "O canal favorito do cliente",
@@ -25,7 +36,7 @@ const CHANNEL_FEATURES = [
     ],
     buttonText: "Saiba mais",
     buttonHref: ROUTES.CANAIS.WHATSAPP,
-    imageSrc: "/images/whatsapp_marketing.webp",
+    imageSrc: whatsappImg,
     imageAlt: "WhatsApp Marketing Dashboard",
   },
   {
@@ -39,7 +50,7 @@ const CHANNEL_FEATURES = [
     ],
     buttonText: "Saiba mais",
     buttonHref: ROUTES.CANAIS.RCS,
-    imageSrc: "/images/rcs.webp",
+    imageSrc: rcsImg,
     imageAlt: "RCS",
     reverse: true,
   },
@@ -54,7 +65,7 @@ const CHANNEL_FEATURES = [
     ],
     buttonText: "Saiba mais",
     buttonHref: ROUTES.CANAIS.SMS,
-    imageSrc: "/images/disparo_de_sms.webp",
+    imageSrc: smsImg,
     imageAlt: "Disparo de SMS",
   },
   {
@@ -68,7 +79,7 @@ const CHANNEL_FEATURES = [
     ],
     buttonText: "Saiba mais",
     buttonHref: ROUTES.CANAIS.VOZ,
-    imageSrc: "/images/disparo_de_voz.webp",
+    imageSrc: vozImg,
     imageAlt: "Disparo de Voz",
     reverse: true,
   },
@@ -83,42 +94,53 @@ const CHANNEL_FEATURES = [
     ],
     buttonText: "Saiba mais",
     buttonHref: ROUTES.CONTATO,
-    imageSrc: "/images/disparo_de_email.webp",
+    imageSrc: emailImg,
     imageAlt: "Disparo de E-mail",
   },
 ];
 ---
 
 <BaseLayout>
-  <Hero
-    id="home"
-    class="bg-[url(/images/gradients/gradient-general-hero.webp)] bg-cover bg-center lg:bg-left bg-no-repeat overflow-hidden"
-  >
+  <Hero id="home" class="bg-surface-default relative overflow-hidden">
+    <!-- Glow roxo -->
     <div
-      class="w-full lg:w-[48%] flex flex-col items-start gap-6 md:gap-8 lg:gap-4 xl:gap-8"
+      class="pointer-events-none absolute -bottom-[220px] left-2/6 w-[428px] h-[428px] rounded-full bg-brand-secondary blur-[100px]"
     >
-      <Badge
-        text="Junte-se a 20mil empresas"
-        image="/images/label-hero-home.webp"
-      />
+    </div>
+
+    <!-- Glow rosa -->
+    <div
+      class="pointer-events-none absolute -bottom-[364px] right-0 w-[800px] h-[800px] rounded-full bg-brand-primary blur-[100px]"
+    >
+    </div>
+
+    <div
+      class="w-full lg:w-[48%] flex flex-col items-start gap-6 md:gap-8 lg:gap-4 xl:gap-8 relative z-10"
+    >
+      <Badge text="Junte-se a 20mil empresas" image={labelHero} />
 
       <div class="flex flex-col gap-4 md:gap-6 lg:gap-4 xl:gap-6 items-start">
         <Heading as="h1">
-          Impulsione suas vendas com jornadas completas<br> e personalizadas.
+          Impulsione suas vendas com jornadas completas<br /> e personalizadas.
         </Heading>
         <p class="text-body-md text-text-secondary max-w-[500px]">
-          Dispare WhatsApp, RCS, SMS, E-mail e Voz<br> em um só lugar.
+          Dispare WhatsApp, RCS, SMS, E-mail e Voz<br /> em um só lugar.
         </p>
       </div>
       <Button variant="primary" icon={ArrowRight} href={ROUTES.CONTATO}
         >Comece agora</Button
       >
     </div>
-    <div class="w-full lg:w-1/2">
-      <img
-        src="/images/home-hero-image.webp"
+    <div class="w-full lg:w-1/2 relative z-10">
+      <Image
+        src={heroImage}
         alt="Plataforma Disparo Pro"
         class="w-full h-auto"
+        loading="eager"
+        fetchpriority="high"
+        width={800}
+        quality="mid"
+        format="webp"
       />
     </div>
   </Hero>

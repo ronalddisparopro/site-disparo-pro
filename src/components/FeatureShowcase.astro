@@ -1,30 +1,36 @@
 ---
 import Heading from "./ui/Heading.astro";
+import { Image } from "astro:assets";
+
+import jornadasImg from "../assets/images/jornadas-integradas.svg";
+import suporteImg from "../assets/images/augusto_dalvit.webp";
+import apiImg from "../assets/images/rcs.webp";
+import dadosImg from "../assets/images/visualizacao-de-dados.svg";
 
 const features = [
   {
     id: "jornadas",
     title: "Jornadas integradas",
     description: "Integração com Playtech, Smartico e Optimove.",
-    image: "/images/jornadas-integradas.svg",
+    image: jornadasImg,
   },
   {
     id: "suporte",
     title: "Suporte Humano",
     description: "Equipe qualificada e 100% humana à sua disposição.",
-    image: "/images/augusto_dalvit.webp",
+    image: suporteImg,
   },
   {
     id: "api",
     title: "API Gratuita",
     description: "Integre seu sistema à nossa API sem custos adicionais.",
-    image: "/images/rcs.webp",
+    image: apiImg,
   },
   {
     id: "dados",
     title: "Visualização de Dados",
     description: "Confira seu desempenho em tempo real.",
-    image: "/images/visualizacao-de-dados.svg",
+    image: dadosImg,
   },
 ];
 ---
@@ -81,10 +87,14 @@ const features = [
             index === 0 ? "opacity-100 z-10" : "opacity-0 z-0",
           ]}
         >
-          <img
-            src={feature.image}
+          <Image
+            src={feature.image as any}
             alt={feature.title}
             class="w-full h-full object-contain"
+            width={1014}
+            height={634}
+            format="webp"
+            quality="mid"
           />
         </div>
       ))
