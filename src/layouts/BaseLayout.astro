@@ -30,6 +30,27 @@ const { seo } = Astro.props;
         />
       )
     }
+
+    <script is:inline>
+      function captureUTMs() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const utms = [
+          "utm_source",
+          "utm_medium",
+          "utm_campaign",
+          "utm_term",
+          "utm_content",
+        ];
+
+        utms.forEach((utm) => {
+          const value = urlParams.get(utm);
+          if (value) {
+            localStorage.setItem(utm, value);
+          }
+        });
+      }
+      captureUTMs();
+    </script>
   </head>
   <body class="min-h-screen flex flex-col font-sans overflow-x-hidden">
     <Header />

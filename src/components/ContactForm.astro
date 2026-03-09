@@ -5,5 +5,37 @@
   new RDStationForms(
     "dp-new-site-contact-b021f56c4ce666b3d362",
     "null",
-  ).createForm();
+  ).createForm({
+    onFormReady: function ($form) {
+      const utms = [
+        "utm_source",
+        "utm_medium",
+        "utm_campaign",
+        "utm_term",
+        "utm_content",
+      ];
+
+      utms.forEach((utm) => {
+        const value = localStorage.getItem(utm);
+        if (value) {
+          const fieldNames = [utm, `cf_${utm}`];
+          fieldNames.forEach((fieldName) => {
+            // Tenta encontrar campos no DOM principal
+            const fields = document.querySelectorAll(
+              `input[name="${fieldName}"]`,
+            );
+            fields.forEach((field) => (field.value = value));
+
+            // Se o RD Station injetar um objeto jQuery ($form), tenta encontrar nele
+            if ($form && typeof $form.find === "function") {
+              const $fields = $form.find(`input[name="${fieldName}"]`);
+              if ($fields.length > 0) {
+                $fields.val(value).change();
+              }
+            }
+          });
+        }
+      });
+    },
+  });
 </script>
