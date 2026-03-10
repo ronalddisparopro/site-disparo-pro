@@ -25,7 +25,7 @@ export interface Props {
 const { plans, class: className } = Astro.props;
 ---
 
-<div class={cx("flex flex-col items-center gap-8 lg:gap-12 w-full", className)} data-pricing-section>
+<div class={cx("flex flex-col items-center gap-6 lg:gap-8 w-full", className)} data-pricing-section>
   <!-- Toggle Switch -->
   <div class="flex flex-col items-center gap-6">
     <div class="bg-white/10 p-1 rounded-xl flex items-center gap-1 w-[220px] relative">
@@ -50,23 +50,18 @@ const { plans, class: className } = Astro.props;
     <Badge text="Economize até 39% escolhendo o plano anual" />
   </div>
 
-  <!-- Plans Slider -->
-  <div class="flex flex-col items-center justify-center relative w-full max-w-7xl mx-auto px-4 lg:px-0 group" data-pricing-slider>
-
-    <div 
-      class="flex gap-4 md:gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar pb-8 items-stretch w-full"
-      data-slider-track
-    >
+  <!-- Plans Grid -->
+  <div class="w-full max-w-7xl mx-auto px-4 lg:px-0">
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3 items-stretch w-full">
       {
         plans.map((plan) => (
           <div 
             class={cx(
-              "shrink-0 w-full md:w-[calc(50%-12px)] xl:w-[calc(33.333%-16px)] snap-start",
-              "bg-surface-default rounded-2xl flex flex-col items-stretch justify-between p-8 relative border-border-default/10",
+              "w-full bg-surface-default rounded-2xl flex flex-col items-stretch justify-between p-6 md:p-7 relative border border-border-default/32",
               plan.highlighted ? "border-2 border-brand-primary" : ""
             )}
           >
-            <div class="flex flex-col gap-8 text-left h-full">
+            <div class="flex flex-col gap-6 text-left h-full">
               <!-- Header -->
               <div class="flex flex-col gap-4">
                 <Heading as="h3" class="text-heading-h4 font-bold text-text-primary leading-tight">
@@ -81,7 +76,7 @@ const { plans, class: className } = Astro.props;
             <div class="flex flex-col gap-2">
               <div class="flex items-baseline gap-1" data-price-container>
                 <span 
-                  class="text-hero font-bold text-text-primary tracking-tight" 
+                  class="text-title-section font-bold text-text-primary tracking-tight" 
                   data-price-value 
                   data-monthly={plan.monthlyPrice} 
                   data-annual={plan.annualPrice}
@@ -128,8 +123,7 @@ const { plans, class: className } = Astro.props;
               </div>
             </div>
 
-            <!-- CTA -->
-            <div class="mt-12">
+            <div class="mt-8">
               <Button
               href={ROUTES.CONTATO}
                 variant="primary" 
@@ -143,33 +137,8 @@ const { plans, class: className } = Astro.props;
         ))
       }
     </div>
-    <!-- Pagination indicators -->
-  <div class="flex gap-4" data-slider-dots>
-    {plans.map((_, i) => (
-      <button 
-        data-dot={i}
-        aria-label={`Go to slide ${i + 1}`}
-        class:list={[
-          "w-4 h-4 rounded-full transition-all duration-300 cursor-pointer border-none",
-          i === 0 ? "bg-brand-primary" : "bg-border-default/40"
-        ]}
-      ></button>
-    ))}
   </div>
 </div>
-  </div>
-
-  
-
-<style>
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-</style>
 
 <script>
   function setupPricing() {
@@ -181,43 +150,30 @@ const { plans, class: className } = Astro.props;
       const monthlyBtn = section.querySelector('[data-pricing-toggle="monthly"]');
       const annualBtn = section.querySelector('[data-pricing-toggle="annual"]');
       const priceValues = section.querySelectorAll('[data-price-value]');
-      const paymentLabels = section.querySelectorAll('[data-payment-label]');
-
-      // Slider logic
-      const track = section.querySelector('[data-slider-track]') as HTMLElement;
-      const dots = section.querySelectorAll('[data-dot]');
 
       if (toggleBg && monthlyBtn && annualBtn) {
         const updatePricing = (type: 'monthly' | 'annual') => {
           if (type === 'monthly') {
             toggleBg.style.left = '4px';
-            monthlyBtn.classList.add('text-white');
-            monthlyBtn.classList.remove('text-text-primary');
-            annualBtn.classList.add('text-text-primary');
-            annualBtn.classList.remove('text-white');
           } else {
             toggleBg.style.left = 'calc(50% + 0px)';
-            annualBtn.classList.add('text-white');
-            annualBtn.classList.remove('text-text-primary');
-            monthlyBtn.classList.add('text-text-primary');
-            monthlyBtn.classList.remove('text-white');
           }
 
           priceValues.forEach(price => {
             const val = type === 'monthly' ? price.getAttribute('data-monthly') : price.getAttribute('data-annual');
-            const container = price.closest('[data-pricing-slider] div'); // Card container
-            const suffix = container?.querySelector('[data-price-suffix]') as HTMLElement;
-            const label = container?.querySelector('[data-payment-label]') as HTMLElement;
+            const card = price.closest('.bg-surface-default');
+            const suffix = card?.querySelector('[data-price-suffix]') as HTMLElement;
+            const label = card?.querySelector('[data-payment-label]') as HTMLElement;
 
             if (val === 'Personalizado') {
               price.textContent = val;
-              if (suffix) suffix.style.display = 'none';
-              if (label) label.style.display = 'none';
+              if (suffix) suffix.classList.add('hidden');
+              if (label) label.classList.add('hidden');
             } else if (val) {
               price.textContent = `R$${val}`;
-              if (suffix) suffix.style.display = 'block';
+              if (suffix) suffix.classList.remove('hidden');
               if (label) {
-                label.style.display = 'block';
+                label.classList.remove('hidden');
                 label.textContent = type === 'monthly' ? 'Pagamento mensal' : 'Pagamento anual';
               }
             }
@@ -226,49 +182,6 @@ const { plans, class: className } = Astro.props;
 
         monthlyBtn.addEventListener('click', () => updatePricing('monthly'));
         annualBtn.addEventListener('click', () => updatePricing('annual'));
-      }
-
-        if (track) {
-        const updateDots = () => {
-          const slideWidth = track.firstElementChild?.clientWidth || 0;
-          const gap = window.innerWidth >= 768 ? 24 : 16; // md:gap-6 (24px) or gap-4 (16px)
-          const visibleWidth = track.clientWidth;
-          
-          if (slideWidth > 0) {
-            const itemsVisible = Math.max(1, Math.round(visibleWidth / (slideWidth + gap)));
-            const totalItems = dots.length;
-            const maxScrollIndex = totalItems - itemsVisible;
-
-            const activeIndex = Math.round(track.scrollLeft / (slideWidth + gap));
-            
-            dots.forEach((dot, i) => {
-              if (i <= maxScrollIndex) {
-                (dot as HTMLElement).style.display = 'block';
-                if (i === activeIndex) {
-                  dot.classList.add('bg-brand-primary');
-                  dot.classList.remove('bg-border-default/40');
-                } else {
-                  dot.classList.remove('bg-brand-primary');
-                  dot.classList.add('bg-border-default/40');
-                }
-              } else {
-                (dot as HTMLElement).style.display = 'none';
-              }
-            });
-          }
-        };
-
-        dots.forEach((dot, i) => {
-          dot.addEventListener('click', () => {
-            const slideWidth = track.firstElementChild?.clientWidth || 0;
-            const gap = window.innerWidth >= 768 ? 24 : 16;
-            track.scrollTo({ left: i * (slideWidth + gap), behavior: 'smooth' });
-          });
-        });
-
-        track.addEventListener('scroll', updateDots);
-        window.addEventListener('resize', updateDots);
-        updateDots();
       }
     });
   }

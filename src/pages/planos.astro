@@ -11,14 +11,14 @@ import { Image } from "astro:assets";
 
 // Assets
 import plansImage from "../assets/images/plans-image.webp";
-import verifyIcon from "../assets/icons/verify.svg";
+import usersIcon from "../assets/icons/users.svg";
 import evolutionIcon from "../assets/icons/evolution.svg";
-import loveIcon from "../assets/icons/love-chat.svg";
+import apiIcon from "../assets/icons/console.svg";
 
 const PLANS = [
   {
     id: "basic",
-    name: "Disparo Pro Basic",
+    name: "Basic",
     description:
       "Para empresas que buscam novos canais para alcançar seus clientes.",
     monthlyPrice: "77",
@@ -34,7 +34,7 @@ const PLANS = [
   },
   {
     id: "advanced",
-    name: "Disparo Pro Advanced",
+    name: "Advanced",
     description:
       "Para empresas que buscam dar o próximo passo em marketing e vendas.",
     monthlyPrice: "577",
@@ -52,7 +52,7 @@ const PLANS = [
   },
   {
     id: "ultimate",
-    name: "Disparo Pro Ultimate",
+    name: "Ultimate",
     description:
       "Para empresas que buscam mais controle, volume e versatilidade.",
     monthlyPrice: "1.987",
@@ -67,7 +67,7 @@ const PLANS = [
   },
   {
     id: "api",
-    name: "Disparo Pro API",
+    name: "API",
     description:
       "Para empresas que exigem altos volumes de disparos e personalização.",
     monthlyPrice: "Personalizado",
@@ -126,7 +126,7 @@ const PLANS = [
         <ChannelHighlight
           items={[
             {
-              icon: verifyIcon,
+              icon: usersIcon,
               title: "Suporte Humano",
               description:
                 "Atendimento 100% feito por pessoas reais, sem robôs ou mensagens automáticas.",
@@ -138,7 +138,7 @@ const PLANS = [
                 "Acompanhe métricas e resultados em tempo real para tomar decisões mais inteligentes.",
             },
             {
-              icon: loveIcon,
+              icon: apiIcon,
               title: "API Gratuita",
               description:
                 "Integração simples, rápida e sem custo adicional para conectar seus sistemas.",
