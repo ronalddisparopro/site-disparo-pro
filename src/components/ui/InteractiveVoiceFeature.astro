@@ -43,7 +43,7 @@ import moreIcon from "../../assets/icons/more.svg";
   <div
     class="w-full lg:w-1/2
          relative flex items-end justify-center
-         min-h-[400px] lg:min-h-[657px]
+         h-[480px] md:h-[550px] lg:h-[657px]
          bg-[linear-gradient(220deg,var(--color-surface-default)_0%,var(--color-brand-primary)_100%)]
          rounded-bl-2xl rounded-tl-2xl pt-6 overflow-hidden"
   >
@@ -55,37 +55,24 @@ import moreIcon from "../../assets/icons/more.svg";
           <Image
             src={item.image as any}
             alt={item.title}
-            width={440}
-            height={800}
+            width={500}
+            height={900}
             class={cx(
-              "absolute bottom-0 w-full h-auto object-contain transition-all duration-500 ease-in-out voice-main-img",
+              "absolute bottom-0 left-1/2 -translate-x-1/2 w-auto h-[92%] max-w-[95%] object-contain transition-all duration-500 ease-in-out voice-main-img",
               index === 0
                 ? "opacity-100 z-10 translate-y-0"
                 : "opacity-0 z-0 translate-y-8",
             )}
             data-image-index={index}
             format="webp"
-            quality="mid"
+            quality="high"
           />
         ))
       }
 
-      <!-- Icon Overlay -->
-      <div
-        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 flex items-center justify-center z-20"
-      >
-        <Image
-          src={moreIcon}
-          alt="More"
-          class="w-16 h-16"
-          width={64}
-          height={64}
-        />
-      </div>
-
       <!-- Audio Player Overlay -->
       <div
-        class="absolute bottom-40 left-1/2 -translate-x-1/2 w-4/5 bg-surface-default rounded-full p-2 md:p-3 flex items-center gap-3 z-30"
+        class="absolute bottom-28 md:bottom-36 lg:bottom-44 left-1/2 -translate-x-1/2 w-4/6 md:w-3/5 lg:w-4/6 bg-surface-default rounded-full p-2 md:p-3 flex items-center gap-3 z-30"
       >
         <audio
           data-active-audio

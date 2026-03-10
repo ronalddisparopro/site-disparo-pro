@@ -39,7 +39,7 @@ const {
   <div
     class="w-full lg:w-1/2
          relative flex items-end justify-center
-         min-h-[400px] lg:min-h-[657px]
+         h-[480px] md:h-[550px] lg:h-[657px]
          bg-[linear-gradient(220deg,var(--color-surface-default)_0%,var(--color-brand-primary)_100%)]
          rounded-bl-2xl rounded-tl-2xl pt-6 overflow-hidden"
   >
@@ -48,17 +48,17 @@ const {
         <Image
           src={item.image as any}
           alt={item.title}
-          width={440}
-          height={800}
+          width={500}
+          height={900}
           class={cx(
-            "absolute bottom-0 w-4/5 max-w-[440px] h-auto object-contain transition-all duration-500 ease-in-out feature-main-img",
+            "absolute bottom-0 left-1/2 -translate-x-1/2 w-auto h-[92%] max-w-[95%] object-contain transition-all duration-500 ease-in-out feature-main-img",
             index === 0
               ? "opacity-100 z-10 translate-y-0"
               : "opacity-0 z-0 translate-y-8",
           )}
           data-image-index={index}
           format="webp"
-          quality="mid"
+          quality="high"
         />
       ))
     }
