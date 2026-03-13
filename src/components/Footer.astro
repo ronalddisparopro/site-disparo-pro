@@ -8,7 +8,6 @@ import Icon from "./Icon.astro";
 import logoFooterImg from "../assets/images/logo-disparo-pro-footer.svg";
 ---
 
-
 <footer
   class="overflow-hidden"
   style="background: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 100%), #0d0d0d;"
@@ -26,22 +25,42 @@ import logoFooterImg from "../assets/images/logo-disparo-pro-footer.svg";
       />
     </a>
 
-    <div class="flex items-center justify-start lg:justify-center gap-4 text-white">
-      <a href="https://www.facebook.com/disparopro" target="_blank">
-        <Icon name="facebook-logo" size={24} variant="secondary" type="fill"/>
+    <div
+      class="flex items-center justify-start lg:justify-center gap-4 text-white"
+    >
+      <a
+        href="https://www.facebook.com/disparopro"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Visitar o Facebook da Disparo Pro"
+      >
+        <Icon name="facebook-logo" size={24} variant="secondary" type="fill" />
       </a>
-      <a href="https://www.instagram.com/disparopro/" target="_blank">
-        <Icon name="instagram-logo" size={24} variant="secondary" type="fill"/>
+      <a
+        href="https://www.instagram.com/disparopro/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Visitar o Instagram da Disparo Pro"
+      >
+        <Icon name="instagram-logo" size={24} variant="secondary" type="fill" />
       </a>
-      <a href="https://www.linkedin.com/company/disparo-pro" target="_blank">
-        <Icon name="linkedin-logo" size={24} variant="secondary" type="fill"/>
+      <a
+        href="https://www.linkedin.com/company/disparo-pro"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Visitar o LinkedIn da Disparo Pro"
+      >
+        <Icon name="linkedin-logo" size={24} variant="secondary" type="fill" />
       </a>
-      <a href="https://www.youtube.com/@disparopro" target="_blank">
-        <Icon name="youtube-logo" size={24} variant="secondary" type="fill"/>
+      <a
+        href="https://www.youtube.com/@disparopro"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Visitar o YouTube da Disparo Pro"
+      >
+        <Icon name="youtube-logo" size={24} variant="secondary" type="fill" />
       </a>
     </div>
-
-
   </Container>
   <div class="bg-brand-primary py-2 px-4 md:px-6 xl:px-0">
     <Container class="text-xs md:text-sm">
