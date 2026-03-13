@@ -12,6 +12,7 @@ import SlideBoxSteps from "../components/SlideBoxSteps.astro";
 import ApiSection from "../components/ApiSection.astro";
 import Badge from "../components/ui/Badge.astro";
 import TestimonialDiv from "../components/TestimonialDiv.astro";
+import Icon from "../components/Icon.astro";
 import { Image } from "astro:assets";
 
 // Importações de imagens para otimização do Astro
@@ -25,6 +26,7 @@ import emailImg from "../assets/images/disparo_de_email.webp";
 
 const CHANNEL_FEATURES = [
   {
+    id: "whatsapp",
     badge: "O canal favorito do cliente",
     title: "WhatsApp Marketing",
     features: [
@@ -39,6 +41,7 @@ const CHANNEL_FEATURES = [
     imageAlt: "WhatsApp Marketing Dashboard",
   },
   {
+    id: "rcs",
     badge: "Conversão garantida",
     title: "RCS",
     features: [
@@ -54,6 +57,7 @@ const CHANNEL_FEATURES = [
     reverse: true,
   },
   {
+    id: "sms",
     badge: "Melhor custo-benefício",
     title: "Disparo de SMS",
     features: [
@@ -68,6 +72,7 @@ const CHANNEL_FEATURES = [
     imageAlt: "Disparo de SMS",
   },
   {
+    id: "voz",
     badge: "Comunicação humanizada ",
     title: "Disparo de Voz",
     features: [
@@ -83,6 +88,7 @@ const CHANNEL_FEATURES = [
     reverse: true,
   },
   {
+    id: "email",
     badge: "Tradicional que funciona",
     title: "Disparo de E-mail",
     features: [
@@ -150,10 +156,22 @@ const CHANNEL_FEATURES = [
     <FeatureShowcase />
   </Section>
 
-  <div class="bg-surface-muted w-full">
+  <div class="bg-surface-muted w-full" id="canais">
     <Section>
-      <div class="flex flex-col gap-6 lg:gap-12">
-        {CHANNEL_FEATURES.map((feature) => <ChannelFeature {...feature} />)}
+      <div class="flex flex-col gap-8 lg:gap-16">
+        <div>
+          <Heading as="h2" class="text-center"
+            >Todos os canais em uma só plataforma!</Heading
+          >
+          <p class="text-body-md text-text-secondary mt-4 text-center">
+            Na Disparo Pro, você cria jornadas usando os canais favoritos do
+            cliente.
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-10 lg:gap-20">
+          {CHANNEL_FEATURES.map((feature) => <ChannelFeature {...feature} />)}
+        </div>
       </div>
     </Section>
   </div>
@@ -165,11 +183,11 @@ const CHANNEL_FEATURES = [
       class="mx-auto w-full flex flex-col gap-4 lg:gap-6 items-center justify-center"
     >
       <Heading as="h2" class="text-center"
-        >Crie e dispare jornadas de comunicação com poucos cliques</Heading
+        >Crie e dispare jornadas de comunicação com poucos cliques!</Heading
       >
       <p class="text-body-md text-text-secondary text-center">
-        Na Disparo Pro, criar suas jornadas de comunicação é fácil e intuitivo.
-        Confira o passo a passo:
+        Na Disparo Pro, o passo a passo para enviar mensagens em massa é fácil e
+        intuitivo.
       </p>
       <Button variant="primary" icon="arrow-right" href={ROUTES.LOGIN}
         >Crie sua conta agora!</Button
