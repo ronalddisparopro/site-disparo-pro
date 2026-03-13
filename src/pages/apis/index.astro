@@ -3,7 +3,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Section from "../../components/ui/Section.astro";
 import Heading from "../../components/ui/Heading.astro";
 import Hero from "../../components/ui/Hero.astro";
-import { ArrowRight } from "lucide-astro";
 import Button from "../../components/ui/Button.astro";
 import { ROUTES } from "../../lib/routes";
 import Box from "../../components/ui/Box.astro";
@@ -11,11 +10,8 @@ import { Image } from "astro:assets";
 
 // Assets
 import heroImg from "../../assets/images/api-hero-image.webp";
-import fastIcon from "../../assets/icons/fast.svg";
-import dollarIcon from "../../assets/icons/dollar.svg";
-import interfaceIcon from "../../assets/icons/interface.svg";
-import verifyIcon from "../../assets/icons/verify.svg";
 ---
+
 
 <BaseLayout
   seo={{
@@ -50,7 +46,7 @@ import verifyIcon from "../../assets/icons/verify.svg";
           do seu sistema, CRM ou plataforma.
         </p>
       </div>
-      <Button variant="primary" icon={ArrowRight} href={ROUTES.CONTATO}
+      <Button variant="primary" icon="arrow-right" href={ROUTES.CONTATO}
         >Integre agora</Button
       >
     </div>
@@ -87,28 +83,29 @@ import verifyIcon from "../../assets/icons/verify.svg";
     <div class="flex flex-col gap-4 lg:grid lg:grid-cols-4 lg:gap-5">
       <Box
         variant="secondary"
-        icon={fastIcon}
+        icon="lightning"
         title="Integração simples"
         description="Conecte seu sistema rapidamente com documentação completa."
       />
       <Box
         variant="secondary"
-        icon={dollarIcon}
+        icon="currency-circle-dollar"
         title="Zero mensalidade"
         description="Integre gratuitamente e pague apenas pelos envios realizados."
       />
       <Box
         variant="secondary"
-        icon={interfaceIcon}
+        icon="layout"
         title="Multicanal"
         description="Envie SMS, WhatsApp, RCS e Disparos de Voz com uma única API."
       />
       <Box
         variant="secondary"
-        icon={verifyIcon}
+        icon="seal-check"
         title="Dados confiáveis"
         description="Acompanhe status de envio e desempenho das mensagens em tempo real."
       />
     </div>
   </Section>
+
 </BaseLayout>

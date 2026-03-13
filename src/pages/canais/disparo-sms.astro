@@ -3,7 +3,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Section from "../../components/ui/Section.astro";
 import Heading from "../../components/ui/Heading.astro";
 import Hero from "../../components/ui/Hero.astro";
-import { ArrowRight } from "lucide-astro";
 import Button from "../../components/ui/Button.astro";
 import { ROUTES } from "../../lib/routes";
 import Box from "../../components/ui/Box.astro";
@@ -15,12 +14,6 @@ import { Image } from "astro:assets";
 
 // Assets
 import heroImg from "../../assets/images/sms-hero-image.webp";
-import usersIcon from "../../assets/icons/users.svg";
-import dollarIcon from "../../assets/icons/dollar.svg";
-import verifyIcon from "../../assets/icons/verify.svg";
-import promotionIcon from "../../assets/icons/promotion.svg";
-import receiptIcon from "../../assets/icons/receipt.svg";
-import hospitalIcon from "../../assets/icons/hospital.svg";
 
 // Mockups
 import smsBetImg from "../../assets/images/mockups/sms-bet.webp";
@@ -61,7 +54,7 @@ import smsClinicasImg from "../../assets/images/mockups/sms-clinicas.webp";
           Impulsione a comunicação do seu negócio<br /> com envio de SMS em massa.
         </p>
       </div>
-      <Button variant="primary" icon={ArrowRight} href={ROUTES.CONTATO}
+      <Button variant="primary" icon="arrow-right" href={ROUTES.CONTATO}
         >Experimente agora!</Button
       >
     </div>
@@ -98,19 +91,19 @@ import smsClinicasImg from "../../assets/images/mockups/sms-clinicas.webp";
     <div class="flex flex-col gap-4 lg:grid lg:grid-cols-3 lg:gap-5">
       <Box
         variant="primary"
-        icon={usersIcon}
+        icon="users"
         title="98%"
         description="das pessoas lêem um SMS em até  3 minutos"
       />
       <Box
         variant="primary"
-        icon={dollarIcon}
+        icon="currency-circle-dollar"
         title="96%"
         description="mais barato que os meios de comunicação tradicionais"
       />
       <Box
         variant="primary"
-        icon={verifyIcon}
+        icon="seal-check"
         title="45%"
         description="de conversão, com até 500% de retorno sobre o investimento"
       />
@@ -131,7 +124,7 @@ import smsClinicasImg from "../../assets/images/mockups/sms-clinicas.webp";
         Na Disparo Pro, criar suas jornadas de comunicação é fácil e intuitivo.
         Confira o passo a passo:
       </p>
-      <Button variant="primary" icon={ArrowRight} href={ROUTES.LOGIN}
+      <Button variant="primary" icon="arrow-right" href={ROUTES.LOGIN}
         >Conheça a plataforma!</Button
       >
     </div>
@@ -149,25 +142,25 @@ import smsClinicasImg from "../../assets/images/mockups/sms-clinicas.webp";
     <InteractiveFeature
       items={[
         {
-          icon: dollarIcon,
+          icon: "currency-circle-dollar",
           title: "Betting",
           description: "Alcance apostadores com áudios de influencers.",
           image: smsBetImg,
         },
         {
-          icon: promotionIcon,
+          icon: "tag",
           title: "Crédito Consignado",
           description: "Divulgue ofertas e diferenciais unindo Voz e SMS.",
           image: smsConsignadoImg,
         },
         {
-          icon: receiptIcon,
+          icon: "receipt",
           title: "Cobrança",
           description: "Reduza a inadimplência com lembretes certeiros.",
           image: smsCobrancaImg,
         },
         {
-          icon: hospitalIcon,
+          icon: "hospital",
           title: "Clínicas",
           description: "Garanta 100% de presença com lembretes de Voz.",
           image: smsClinicasImg,
@@ -177,6 +170,7 @@ import smsClinicasImg from "../../assets/images/mockups/sms-clinicas.webp";
       buttonHref={ROUTES.CONTATO}
     />
   </Section>
+
 
   <Section>
     <TestimonialDiv />

@@ -1,6 +1,6 @@
 ---
 import Heading from "./Heading.astro";
-import { ChevronDown } from "lucide-astro";
+import Icon from "../Icon.astro";
 import { cx } from "../../lib/utils";
 
 export interface FaqItem {
@@ -47,7 +47,7 @@ const { title, description, items, class: className } = Astro.props;
               {item.question}
             </span>
             <div class="transition-transform duration-300 transform group-[.active]:rotate-180 text-text-secondary shrink-0">
-              <ChevronDown class="w-5 h-5" />
+              <Icon name="caret-down" size={20} type="regular" variant="muted"/>
             </div>
           </button>
           <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">

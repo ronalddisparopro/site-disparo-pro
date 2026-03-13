@@ -1,17 +1,19 @@
 ---
 import { cx } from "../../lib/utils";
 import { Image } from "astro:assets";
-import type { ImageMetadata } from "astro";
+import Icon from "../Icon.astro";
 
 export interface Props {
   class?: string;
   text?: string;
-  image?: string | ImageMetadata;
+  image?: string | any;
 }
 
 const { class: className, text, image, ...rest } = Astro.props;
 
 const classes = cx(className);
+
+const isIconName = typeof image === "string" && !image.includes("/") && !image.includes(".");
 ---
 
 <div class={classes} {...rest}>
@@ -20,16 +22,21 @@ const classes = cx(className);
   >
     {
       image && (
-        <Image
-          src={image as any}
-          alt={text || ""}
-          width={40}
-          height={28}
-          format="webp"
-          quality="high"
-        />
+        isIconName ? (
+          <Icon name={image} />
+        ) : (
+          <Image
+            src={image as any}
+            alt={text || ""}
+            width={40}
+            height={28}
+            format="webp"
+            quality="high"
+          />
+        )
       )
     }
+
     {text && <span class={cx("text-label text-text-secondary")}>{text}</span>}
   </div>
   <slot />

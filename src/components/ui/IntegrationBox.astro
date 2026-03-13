@@ -1,8 +1,8 @@
 ---
-import { ArrowRight } from "lucide-astro";
 import { cx } from "../../lib/utils";
 import Button from "./Button.astro";
 import Heading from "./Heading.astro";
+
 
 export interface Props {
   class?: string;
@@ -46,10 +46,11 @@ const classes = cx(baseClass, className);
     <div>
       {
         buttonHref && (
-          <Button target variant="primary" href={buttonHref} icon={ArrowRight}>
+          <Button target variant="primary" href={buttonHref} icon="arrow-right">
             Acessar integração
           </Button>
         )
+
       }
     </div>
   </div>

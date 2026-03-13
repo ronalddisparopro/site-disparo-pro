@@ -2,14 +2,12 @@
 import Container from "./ui/Container.astro";
 import { ROUTES } from "../lib/routes";
 import { Image } from "astro:assets";
+import Icon from "./Icon.astro";
 
 // Assets
 import logoFooterImg from "../assets/images/logo-disparo-pro-footer.svg";
-import facebookIcon from "../assets/icons/social/facebook.svg";
-import instagramIcon from "../assets/icons/social/instagram.svg";
-import linkedinIcon from "../assets/icons/social/linkedin.svg";
-import youtubeIcon from "../assets/icons/social/youtube.svg";
 ---
+
 
 <footer
   class="overflow-hidden"
@@ -28,20 +26,22 @@ import youtubeIcon from "../assets/icons/social/youtube.svg";
       />
     </a>
 
-    <div class="flex items-center justify-start lg:justify-center gap-4">
+    <div class="flex items-center justify-start lg:justify-center gap-4 text-white">
       <a href="https://www.facebook.com/disparopro" target="_blank">
-        <Image src={facebookIcon} alt="Facebook" width={12} height={24} />
+        <Icon name="facebook-logo" size={24} variant="secondary" type="fill"/>
       </a>
       <a href="https://www.instagram.com/disparopro/" target="_blank">
-        <Image src={instagramIcon} alt="Instagram" width={24} height={24} />
+        <Icon name="instagram-logo" size={24} variant="secondary" type="fill"/>
       </a>
       <a href="https://www.linkedin.com/company/disparo-pro" target="_blank">
-        <Image src={linkedinIcon} alt="Linkedin" width={24} height={24} />
+        <Icon name="linkedin-logo" size={24} variant="secondary" type="fill"/>
       </a>
       <a href="https://www.youtube.com/@disparopro" target="_blank">
-        <Image src={youtubeIcon} alt="Youtube" width={24} height={24} />
+        <Icon name="youtube-logo" size={24} variant="secondary" type="fill"/>
       </a>
     </div>
+
+
   </Container>
   <div class="bg-brand-primary py-2 px-4 md:px-6 xl:px-0">
     <Container class="text-xs md:text-sm">

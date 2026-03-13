@@ -3,7 +3,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Section from "../../components/ui/Section.astro";
 import Heading from "../../components/ui/Heading.astro";
 import Hero from "../../components/ui/Hero.astro";
-import { ArrowRight } from "lucide-astro";
 import Button from "../../components/ui/Button.astro";
 import { ROUTES } from "../../lib/routes";
 import Box from "../../components/ui/Box.astro";
@@ -15,12 +14,6 @@ import { Image } from "astro:assets";
 
 // Assets
 import heroImg from "../../assets/images/voz-hero-image.webp";
-import unifyIcon from "../../assets/icons/unify.svg";
-import dollarIcon from "../../assets/icons/dollar.svg";
-import usersIcon from "../../assets/icons/users.svg";
-import promotionIcon from "../../assets/icons/promotion.svg";
-import receiptIcon from "../../assets/icons/receipt.svg";
-import hospitalIcon from "../../assets/icons/hospital.svg";
 
 // Mockups
 import smsBetImg from "../../assets/images/mockups/sms-bet.webp";
@@ -28,6 +21,7 @@ import smsConsignadoImg from "../../assets/images/mockups/sms-consignado.webp";
 import smsCobrancaImg from "../../assets/images/mockups/sms-cobranca.webp";
 import smsClinicasImg from "../../assets/images/mockups/sms-clinicas.webp";
 ---
+
 
 <BaseLayout
   seo={{
@@ -61,7 +55,7 @@ import smsClinicasImg from "../../assets/images/mockups/sms-clinicas.webp";
           Amplie sua comunicação com áudios atraentes<br /> e humanizados.
         </p>
       </div>
-      <Button variant="primary" icon={ArrowRight} href={ROUTES.CONTATO}
+      <Button variant="primary" icon="arrow-right" href={ROUTES.CONTATO}
         >Experimente agora!</Button
       >
     </div>
@@ -86,7 +80,7 @@ import smsClinicasImg from "../../assets/images/mockups/sms-clinicas.webp";
     <div class="flex flex-col items-center justify-center text-center gap-4">
       <Heading as="h2">Com Disparos de Voz, seu engajamento cresce!</Heading>
       <p class="text-body-md text-text-secondary">
-        Humanize sua comunicação com jornadas integradas, personalizadas e ricas
+        Humanize sua comunicação with jornadas integradas, personalizadas e ricas
         em emoção.
       </p>
     </div>
@@ -94,19 +88,19 @@ import smsClinicasImg from "../../assets/images/mockups/sms-clinicas.webp";
     <div class="flex flex-col gap-4 lg:grid lg:grid-cols-3 lg:gap-5">
       <Box
         variant="secondary"
-        icon={unifyIcon}
+        icon="plugs"
         title="Integre"
         description="Crie campanhas integradas usando Voz e SMS"
       />
       <Box
         variant="secondary"
-        icon={dollarIcon}
+        icon="currency-circle-dollar"
         title="Economize"
         description="Pague apenas pelas chamadas atendidas"
       />
       <Box
         variant="secondary"
-        icon={usersIcon}
+        icon="users"
         title="Conquiste"
         description="Importe áudios com a voz de influenciadores"
       />
@@ -126,7 +120,7 @@ import smsClinicasImg from "../../assets/images/mockups/sms-clinicas.webp";
         Conosco, criar suas jornadas de comunicação é fácil e intuitivo. Confira
         o passo a passo:
       </p>
-      <Button variant="primary" icon={ArrowRight} href={ROUTES.LOGIN}
+      <Button variant="primary" icon="arrow-right" href={ROUTES.LOGIN}
         >Conheça a plataforma!</Button
       >
     </div>
@@ -143,28 +137,28 @@ import smsClinicasImg from "../../assets/images/mockups/sms-clinicas.webp";
     <InteractiveVoiceFeature
       items={[
         {
-          icon: dollarIcon,
+          icon: "currency-circle-dollar",
           title: "Betting",
           description: "Alcance apostadores com áudios de influencers.",
           image: smsBetImg,
           audio: "/audios/bet.mp3",
         },
         {
-          icon: promotionIcon,
+          icon: "tag",
           title: "Crédito Consignado",
           description: "Divulgue ofertas e diferenciais unindo Voz e SMS.",
           image: smsConsignadoImg,
           audio: "/audios/consignado.mp3",
         },
         {
-          icon: receiptIcon,
+          icon: "receipt",
           title: "Cobrança",
           description: "Reduza a inadimplência com lembretes certeiros.",
           image: smsCobrancaImg,
           audio: "/audios/cobranca.mp3",
         },
         {
-          icon: hospitalIcon,
+          icon: "hospital",
           title: "Clínicas",
           description: "Garanta 100% de presença com lembretes de Voz.",
           image: smsClinicasImg,
@@ -175,6 +169,7 @@ import smsClinicasImg from "../../assets/images/mockups/sms-clinicas.webp";
       buttonHref={ROUTES.CONTATO}
     />
   </Section>
+
 
   <Section>
     <ApiSection

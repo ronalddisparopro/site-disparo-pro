@@ -11,9 +11,6 @@ import { Image } from "astro:assets";
 
 // Assets
 import plansImage from "../assets/images/plans-image.webp";
-import usersIcon from "../assets/icons/users.svg";
-import evolutionIcon from "../assets/icons/evolution.svg";
-import apiIcon from "../assets/icons/console.svg";
 
 const PLANS = [
   {
@@ -126,19 +123,19 @@ const PLANS = [
         <ChannelHighlight
           items={[
             {
-              icon: usersIcon,
+              icon: "users",
               title: "Suporte Humano",
               description:
                 "Atendimento 100% feito por pessoas reais, sem robôs ou mensagens automáticas.",
             },
             {
-              icon: evolutionIcon,
+              icon: "chart-line-up",
               title: "Dados em Tempo Real",
               description:
                 "Acompanhe métricas e resultados em tempo real para tomar decisões mais inteligentes.",
             },
             {
-              icon: apiIcon,
+              icon: "terminal-window",
               title: "API Gratuita",
               description:
                 "Integração simples, rápida e sem custo adicional para conectar seus sistemas.",

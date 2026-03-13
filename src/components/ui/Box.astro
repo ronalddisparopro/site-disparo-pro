@@ -1,7 +1,7 @@
 ---
 import { cx } from "../../lib/utils";
-import { Image } from "astro:assets";
 import Button from "./Button.astro";
+import Icon from "../Icon.astro";
 
 export interface Props {
   variant?: "primary" | "secondary" | "tertiary";
@@ -27,7 +27,7 @@ const {
 } = Astro.props;
 
 const baseClass =
-  "w-full flex flex-col items-start gap-6 rounded-lg py-8 px-6 text-left transition-all hover:opacity-90";
+  "w-full flex flex-col items-start gap-4 rounded-lg py-8 px-6 text-left transition-all hover:opacity-90";
 
 const variants = {
   primary: "bg-surface-muted",
@@ -43,27 +43,15 @@ const titleStyles = {
 };
 
 const classes = cx(baseClass, variants[variant], className);
+
+const isIconName = typeof icon === "string" && !icon.includes("/") && !icon.includes(".");
 ---
 
 <div class={classes} {...rest}>
-  {
-    icon &&
-      (typeof icon === "string" ? (
-        <img
-          src={icon}
-          alt={iconAlt}
-          class="w-[52px] h-[52px] object-contain"
-        />
-      ) : (
-        <Image
-          src={icon}
-          alt={iconAlt}
-          class="w-[52px] h-[52px] object-contain"
-        />
-      ))
-  }
+  {icon && <Icon name={icon} />}
 
-  <div class="flex flex-col gap-4">
+
+  <div class="flex flex-col">
     {
       title && (
         <span class={cx("font-bold text-text-primary", titleStyles[variant])}>

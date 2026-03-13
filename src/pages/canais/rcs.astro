@@ -2,7 +2,6 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Hero from "../../components/ui/Hero.astro";
 import Button from "../../components/ui/Button.astro";
-import { ArrowRight } from "lucide-astro";
 import { ROUTES } from "../../lib/routes";
 import Heading from "../../components/ui/Heading.astro";
 import Section from "../../components/ui/Section.astro";
@@ -15,18 +14,7 @@ import { Image } from "astro:assets";
 
 // Assets
 import heroImg from "../../assets/images/rcs-hero-image.webp";
-import verifyIcon from "../../assets/icons/verify.svg";
-import interfaceIcon from "../../assets/icons/interface.svg";
-import fastIcon from "../../assets/icons/fast.svg";
-import imageIcon from "../../assets/icons/image.svg";
-import consoleIcon from "../../assets/icons/console.svg";
-import chatIcon from "../../assets/icons/check-chat.svg";
-import evolutionIcon from "../../assets/icons/evolution.svg";
-import loveIcon from "../../assets/icons/love-chat.svg";
 import rcsInvertImg from "../../assets/images/rcs-invert.webp";
-import promotionIcon from "../../assets/icons/promotion.svg";
-import hospitalIcon from "../../assets/icons/hospital.svg";
-import learnIcon from "../../assets/icons/learn.svg";
 
 // Mockups
 import rcsBasicImg from "../../assets/images/mockups/rcs-basic.webp";
@@ -36,6 +24,7 @@ import rcsSaudeImg from "../../assets/images/mockups/rcs-saude.webp";
 import rcsEducacaoImg from "../../assets/images/mockups/rcs-educacao.webp";
 import rcsInfoprodutorImg from "../../assets/images/mockups/rcs-infoprodutor.webp";
 ---
+
 
 <BaseLayout
   seo={{
@@ -67,7 +56,7 @@ import rcsInfoprodutorImg from "../../assets/images/mockups/rcs-infoprodutor.web
           Acelere conversões com mensagens interativas<br /> e multimídia.
         </p>
       </div>
-      <Button variant="primary" icon={ArrowRight} href={ROUTES.CONTATO}
+      <Button variant="primary" icon="arrow-right" href={ROUTES.CONTATO}
         >Experimente agora!</Button
       >
     </div>
@@ -100,37 +89,37 @@ import rcsInfoprodutorImg from "../../assets/images/mockups/rcs-infoprodutor.web
     <div class="flex flex-col gap-4 lg:grid lg:grid-cols-3 lg:gap-5">
       <Box
         variant="secondary"
-        icon={verifyIcon}
+        icon="seal-check"
         title="Validação de Marca"
         description="Sua marca verificada garante segurança e credibilidade desde o primeiro contato"
       />
       <Box
         variant="secondary"
-        icon={interfaceIcon}
+        icon="layout"
         title="Branding Personalizado"
         description="Adicione logotipo, nome e cores para reforçar a identidade visual da sua marca"
       />
       <Box
         variant="secondary"
-        icon={fastIcon}
+        icon="lightning"
         title="Botões Interativos"
         description="Facilite cliques, compras e respostas rápidas com botões projetados para engajamento"
       />
       <Box
         variant="secondary"
-        icon={imageIcon}
+        icon="image"
         title="Imagens e Vídeos"
         description="Torne suas mensagens mais atraentes com imagens e vídeos envolventes"
       />
       <Box
         variant="secondary"
-        icon={consoleIcon}
+        icon="terminal-window"
         title="API Integrada"
         description="Conecte facilmente seus sistemas à nossa plataforma com uma API robusta"
       />
       <Box
         variant="secondary"
-        icon={chatIcon}
+        icon="chat-circle-dots"
         title="Respostas Diretas"
         description="Estabeleça diálogos diretos com o cliente com respostas fáceis de receber e visualizar"
       />
@@ -144,14 +133,14 @@ import rcsInfoprodutorImg from "../../assets/images/mockups/rcs-infoprodutor.web
     <InteractiveFeature
       items={[
         {
-          icon: loveIcon,
+          icon: "chat-circle-dots",
           title: "RCS Basic",
           description:
             "Mensagens rápidas e diretas, ideais para confirmações, lembretes e notificações. Limite de 160 caracteres.",
           image: rcsBasicImg,
         },
         {
-          icon: imageIcon,
+          icon: "image",
           title: "RCS Single",
           description:
             "Mensagens completas para campanhas de marketing, com até 3072 caracteres, imagens, botões e links interativos.",
@@ -173,19 +162,19 @@ import rcsInfoprodutorImg from "../../assets/images/mockups/rcs-infoprodutor.web
         <ChannelHighlight
           items={[
             {
-              icon: verifyIcon,
+              icon: "seal-check",
               title: "Confiabilidade",
               description:
                 "Sua marca já chega com a validação do Google, transmitindo confiança desde o primeiro contato",
             },
             {
-              icon: evolutionIcon,
+              icon: "chart-line-up",
               title: "Resultados mensuráveis",
               description:
                 "Métricas detalhadas de entrega, abertura e interação para otimizar suas campanhas",
             },
             {
-              icon: loveIcon,
+              icon: "lightning",
               title: "Simplicidade",
               description:
                 "Ative e envie mensagens em poucos passos, sem precisar de suporte técnico especializado",
@@ -209,26 +198,26 @@ import rcsInfoprodutorImg from "../../assets/images/mockups/rcs-infoprodutor.web
     <InteractiveFeature
       items={[
         {
-          icon: promotionIcon,
+          icon: "tag",
           title: "E-Commerce",
           description:
             "Ofertas, anúncios e recuperação de carrinhos abandonados.",
           image: rcsEcommerceImg,
         },
         {
-          icon: hospitalIcon,
+          icon: "hospital",
           title: "Saúde",
           description: "Confirmações, cobranças, lembretes e mais.",
           image: rcsSaudeImg,
         },
         {
-          icon: learnIcon,
+          icon: "student",
           title: "Educação",
           description: "Lembretes, comunicados, cobranças e mais.",
           image: rcsEducacaoImg,
         },
         {
-          icon: interfaceIcon,
+          icon: "layout",
           title: "Infoprodutores",
           description:
             "Ofertas exclusivas, convites para lives, lançamentos e mais.",
@@ -239,6 +228,7 @@ import rcsInfoprodutorImg from "../../assets/images/mockups/rcs-infoprodutor.web
       buttonHref={ROUTES.LOGIN}
     />
   </Section>
+
 
   <Section>
     <ApiSection

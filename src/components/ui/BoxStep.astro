@@ -1,8 +1,10 @@
 ---
 import { cx } from "../../lib/utils";
 import { Image } from "astro:assets";
+import Icon from "../Icon.astro";
 
 export interface Props {
+  icon?: string | any;
   class?: string;
   image?: string | any;
   imageAlt?: string;
@@ -13,6 +15,7 @@ export interface Props {
 const {
   class: className,
   image,
+  icon,
   imageAlt = "",
   title,
   description,
@@ -28,6 +31,11 @@ const classes = cx(baseClass, className);
 <div class={classes} {...rest}>
   <div class="flex flex-col gap-8">
     <div class="flex flex-col gap-3">
+      {
+        icon && (
+          <Icon name={icon}/>
+        )
+      }
       {
         title && (
           <span class={cx("font-bold text-title-card text-text-primary")}>

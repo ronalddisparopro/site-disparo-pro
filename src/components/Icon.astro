@@ -1,0 +1,50 @@
+---
+import { Icon as AstroIcon } from "astro-icon/components";
+import { cx } from "../lib/utils";
+
+interface Props {
+  name: string;
+  size?: number | string;
+  variant?: "primary" | "secondary" | "muted";
+  type?: "regular" | "duotone" | "fill";
+  class?: string;
+  [key: string]: any;
+}
+
+const {
+  name,
+  size = 32,
+  variant = "primary",
+  type = "duotone",
+  class: className,
+  ...props
+} = Astro.props;
+
+// Determina o nome interno do ícone com base no tipo
+let iconName = name;
+if (!name.startsWith("ph:")) {
+  if (type === "duotone" && !name.endsWith("-duotone")) {
+    iconName = `ph:${name}-duotone`;
+  } else if (type === "fill" && !name.endsWith("-fill")) {
+    iconName = `ph:${name}-fill`;
+  } else {
+    iconName = `ph:${name}`;
+  }
+}
+
+const variants = {
+  primary: "text-brand-primary",
+  secondary: "text-surface-default",
+  muted: "text-text-primary",
+};
+
+const classes = cx(variant && variants[variant], className);
+---
+
+<AstroIcon
+  name={iconName}
+  width={size}
+  height={size}
+  class={classes}
+  {...props}
+/>

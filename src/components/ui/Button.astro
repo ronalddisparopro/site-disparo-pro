@@ -1,5 +1,6 @@
 ---
 import { cx } from "../../lib/utils";
+import IconComponent from "../Icon.astro";
 
 export interface Props {
   href?: string;
@@ -65,22 +66,43 @@ const variants = {
 };
 
 const classes = cx(baseClass, variants[variant], className);
+
+const isIconName = typeof Icon === "string";
 ---
 
 {
   href ? (
     <a href={href} target={targetValue} rel={rel} class={classes} {...rest}>
       <slot />
-      {(variant === "primary" || variant === "white") && Icon && (
-        <Icon class="ml-2 w-5 h-5" />
-      )}
+      {(variant === "primary" || variant === "white") &&
+        Icon &&
+        (isIconName ? (
+          <IconComponent
+            name={Icon}
+            size={20}
+            type="regular"
+            variant={variant === "primary" ? "secondary" : "primary"}
+            class="ml-2"
+          />
+        ) : (
+          <Icon class="ml-2 w-5 h-5" />
+        ))}
     </a>
   ) : (
     <button class={classes} {...rest}>
       <slot />
-      {(variant === "primary" || variant === "white") && Icon && (
-        <Icon class="ml-2 w-5 h-5" />
-      )}
+      {(variant === "primary" || variant === "white") &&
+        Icon &&
+        (isIconName ? (
+          <IconComponent
+            name={Icon}
+            size={20}
+            variant={variant === "primary" ? "secondary" : "primary"}
+            class="ml-2"
+          />
+        ) : (
+          <Icon class="ml-2 w-5 h-5" />
+        ))}
     </button>
   )
 }

@@ -1,7 +1,6 @@
 ---
 import { cx } from "../../lib/utils";
 import Button from "./Button.astro";
-import { ArrowRight } from "@lucide/astro";
 import Heading from "./Heading.astro";
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
@@ -63,7 +62,7 @@ const {
       </ul>
     </div>
 
-    <Button href={buttonHref} variant="primary" icon={ArrowRight}>
+    <Button href={buttonHref} variant="primary" icon="arrow-right">
       {buttonText}
     </Button>
   </div>

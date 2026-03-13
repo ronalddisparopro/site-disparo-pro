@@ -1,7 +1,7 @@
 ---
 import { cx } from "../../lib/utils";
 import Button from "./Button.astro";
-import { ArrowRight, Check } from "lucide-astro";
+import Icon from "../Icon.astro";
 import Heading from "./Heading.astro";
 import { ROUTES } from "../../lib/routes";
 import Badge from "./Badge.astro";
@@ -112,7 +112,7 @@ const { plans, class: className } = Astro.props;
                   {plan.features.map((feature) => (
                     <li class="flex items-start gap-3">
                       <div class="shrink-0 w-5 h-5 rounded-full bg-brand-soft flex items-center justify-center p-1">
-                        <Check class="w-full h-full text-brand-primary" stroke-width={4} />
+                        <Icon name="check" size={16} variant="primary" type="regular"/>
                       </div>
                       <span class="text-tag font-bold text-text-primary leading-tight">
                         {feature}
@@ -128,7 +128,7 @@ const { plans, class: className } = Astro.props;
               href={ROUTES.CONTATO}
                 variant="primary" 
                 class="w-full flex justify-between px-6" 
-                icon={ArrowRight}
+                icon="arrow-right"
               >
                 Comece agora
               </Button>

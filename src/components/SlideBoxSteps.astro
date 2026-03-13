@@ -5,11 +5,10 @@ import criarJornadaImg from "../assets/images/criar-jornada.svg";
 import dispararImg from "../assets/images/disparar.svg";
 ---
 
-<div
-  class="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8 w-full"
->
+<div class="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8 w-full">
   <div class="w-full">
     <BoxStep
+      icon="number-square-one"
       title="Faça login"
       description="Acesse a plataforma com e-mail e senha."
       image={criarContaImg}
@@ -17,6 +16,7 @@ import dispararImg from "../assets/images/disparar.svg";
   </div>
   <div class="w-full">
     <BoxStep
+      icon="number-square-two"
       title="Crie sua jornada"
       description="Suba a lista de contatos e crie suas mensagens."
       image={criarJornadaImg}
@@ -24,6 +24,7 @@ import dispararImg from "../assets/images/disparar.svg";
   </div>
   <div class="w-full">
     <BoxStep
+      icon="number-square-three"
       title="Dispare"
       description="Programe ou dispare sua jornada de comunicação."
       image={dispararImg}

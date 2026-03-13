@@ -3,7 +3,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Section from "../../components/ui/Section.astro";
 import Heading from "../../components/ui/Heading.astro";
 import Hero from "../../components/ui/Hero.astro";
-import { ArrowRight } from "lucide-astro";
 import Button from "../../components/ui/Button.astro";
 import { ROUTES } from "../../lib/routes";
 import Badge from "../../components/ui/Badge.astro";
@@ -15,14 +14,7 @@ import Faq from "../../components/ui/Faq.astro";
 import { Image } from "astro:assets";
 
 // Import Assets
-import whatsappIcon from "../../assets/icons/whatsapp-icon.svg";
 import heroImg from "../../assets/images/whatsapp-hero-image.webp";
-import usersIcon from "../../assets/icons/users.svg";
-import dollarIcon from "../../assets/icons/dollar.svg";
-import verifyIcon from "../../assets/icons/verify.svg";
-import fastIcon from "../../assets/icons/fast.svg";
-import chatIcon from "../../assets/icons/check-chat.svg";
-import notifyIcon from "../../assets/icons/notify.svg";
 import whatsappHighRes from "../../assets/images/whatsapp_marketing.webp";
 
 // Mockups
@@ -31,16 +23,10 @@ import alcanceImg from "../../assets/images/mockups/whatsapp-alcance.webp";
 import conversaoImg from "../../assets/images/mockups/whatsapp-conversao.webp";
 import possibilidadesImg from "../../assets/images/mockups/whatsapp-possibilidades.webp";
 
-// Icons for interactive
-import loveIcon from "../../assets/icons/love-chat.svg";
-import searchIcon from "../../assets/icons/search.svg";
-import bagIcon from "../../assets/icons/bag.svg";
-import interfaceIcon from "../../assets/icons/interface.svg";
-
 import boxWhatsAppImg from "../../assets/images/boxes-whatsapp-image.webp";
 import boxWhatsAppMobileImg from "../../assets/images/boxes-whatsapp-image-mobile.webp";
-import unifyIcon from "../../assets/icons/unify.svg";
 ---
+
 
 <BaseLayout
   seo={{
@@ -66,7 +52,7 @@ import unifyIcon from "../../assets/icons/unify.svg";
     <div
       class="w-full lg:w-1/2 flex flex-col items-start gap-6 md:gap-8 lg:gap-4 xl:gap-8 relative z-10"
     >
-      <Badge text="Parceira Oficial do WhatsApp" image={whatsappIcon} />
+      <Badge text="Parceira Oficial do WhatsApp" image="whatsapp-logo" />
       <div class="flex flex-col gap-4 md:gap-6 lg:gap-4 xl:gap-6 items-start">
         <Heading as="h1">
           Conte com o canal mais usado do Brasil para vender!
@@ -75,7 +61,7 @@ import unifyIcon from "../../assets/icons/unify.svg";
           Amplie a comunicação da sua empresa<br /> com WhatsApp.
         </p>
       </div>
-      <Button variant="primary" icon={ArrowRight} href={ROUTES.CONTATO}
+      <Button variant="primary" icon="arrow-right" href={ROUTES.CONTATO}
         >Comece agora</Button
       >
     </div>
@@ -110,19 +96,19 @@ import unifyIcon from "../../assets/icons/unify.svg";
     <div class="flex flex-col gap-4 lg:grid lg:grid-cols-3 lg:gap-5">
       <Box
         variant="primary"
-        icon={usersIcon}
+        icon="users"
         title="94%"
         description="dos brasileiros usam WhatsApp para receber mensagens"
       />
       <Box
         variant="primary"
-        icon={dollarIcon}
+        icon="currency-circle-dollar"
         title="45%"
         description="das empresas vendem mais com WhatsApp"
       />
       <Box
         variant="primary"
-        icon={verifyIcon}
+        icon="seal-check"
         title="88%"
         description="dos clientes preferem contato pelo WhatsApp"
       />
@@ -139,17 +125,17 @@ import unifyIcon from "../../assets/icons/unify.svg";
         <ChannelHighlight
           items={[
             {
-              icon: fastIcon,
+              icon: "arrows-out",
               title: "Completo",
               description: "Visualize respostas enviadas pelos seus clientes",
             },
             {
-              icon: chatIcon,
+              icon: "chat-circle-dots",
               title: "Prático",
               description: "Responda seus clientes sem sair da plataforma",
             },
             {
-              icon: notifyIcon,
+              icon: "bell",
               title: "Ágil",
               description: "Seja notificado em tempo real",
             },
@@ -173,25 +159,25 @@ import unifyIcon from "../../assets/icons/unify.svg";
     <InteractiveFeature
       items={[
         {
-          icon: loveIcon,
+          icon: "chat-circle-dots",
           title: "Mais retorno",
           description: "Garanta até 47% de taxa de resposta.",
           image: retornoImg,
         },
         {
-          icon: searchIcon,
+          icon: "user-circle-plus",
           title: "Mais alcance",
           description: "Atinja mais de 147 milhões de usuários.",
           image: alcanceImg,
         },
         {
-          icon: bagIcon,
+          icon: "shopping-bag",
           title: "Mais conversão",
           description: "Converta até 40% da sua audiência.",
           image: conversaoImg,
         },
         {
-          icon: interfaceIcon,
+          icon: "layout",
           title: "Um canal, diversas possibilidades",
           description: "WhatsApp, RCS, SMS, Voz e E-mail em um só lugar.",
           image: possibilidadesImg,
@@ -237,31 +223,31 @@ import unifyIcon from "../../assets/icons/unify.svg";
           <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6">
             <Box
               variant="tertiary"
-              icon={unifyIcon}
+              icon="gear"
               title="Gerenciamento Completo"
               description="Crie, agende e acompanhe status em tempo real"
             />
             <Box
               variant="tertiary"
-              icon={loveIcon}
+              icon="chat-circle-dots"
               title="Caixa de Mensagens"
               description="Acompanhe seu histórico de mensagens"
             />
             <Box
               variant="tertiary"
-              icon={usersIcon}
+              icon="users"
               title="Controle de Contatos"
               description="Adicione manualmente ou importe listas em massa"
             />
             <Box
               variant="tertiary"
-              icon={interfaceIcon}
+              icon="layout"
               title="Biblioteca de Modelos"
               description="Desenvolva modelos de mensagens personalizados"
             />
             <Box
               variant="tertiary"
-              icon={fastIcon}
+              icon="lightning"
               title="Praticidade Garantida"
               description="Receba notificações de mensagens em tempo real"
             />
@@ -273,6 +259,7 @@ import unifyIcon from "../../assets/icons/unify.svg";
               buttonText="Receba um contato"
             />
           </div>
+
         </div>
       </div>
     </Section>

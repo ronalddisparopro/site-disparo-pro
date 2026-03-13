@@ -2,15 +2,14 @@
 import { cx } from "../../lib/utils";
 import Button from "./Button.astro";
 import Heading from "./Heading.astro";
-import { ArrowRight } from "lucide-astro";
 import { Image } from "astro:assets";
-import type { ImageMetadata } from "astro";
+import Icon from "../Icon.astro";
 
 export interface FeatureItem {
-  icon: string | ImageMetadata;
+  icon: string | any;
   title: string;
   description: string;
-  image: string | ImageMetadata;
+  image: string | any;
 }
 
 export interface Props {
@@ -68,37 +67,33 @@ const {
   <div class="w-full lg:w-1/2 flex flex-col gap-6 px-4 lg:px-6 py-8">
     <div class="flex flex-col gap-6">
       {
-        items.map((item, index) => (
-          <button
-            class={cx(
-              "flex flex-col items-start gap-3 pb-4 text-left border-b border-brand-soft transition-all duration-300 group feature-item-btn",
-              index === 0 ? "opacity-100" : "opacity-50 hover:opacity-80",
-            )}
-            data-index={index}
-          >
-            <div class="flex items-center justify-start gap-4">
-              <Image
-                src={item.icon as any}
-                alt={item.title}
-                width={52}
-                height={52}
-                class="w-[52px] h-[52px] transition-transform group-active:scale-95"
-              />
-              <Heading as="h4" variant="primary">
-                {item.title}
-              </Heading>
-            </div>
+        items.map((item, index) => {
+          return (
+            <button
+              class={cx(
+                "flex flex-col items-start gap-3 pb-4 text-left border-b border-brand-soft transition-all duration-300 group feature-item-btn",
+                index === 0 ? "opacity-100" : "opacity-50 hover:opacity-80",
+              )}
+              data-index={index}
+            >
+              <div class="flex items-center justify-start gap-4">
+                <Icon name={item.icon as string} />
+                <Heading as="h4" variant="primary">
+                  {item.title}
+                </Heading>
+              </div>
 
-            <p class="text-body-sm text-text-secondary leading-relaxed">
-              {item.description}
-            </p>
-          </button>
-        ))
+              <p class="text-body-sm text-text-secondary leading-relaxed">
+                {item.description}
+              </p>
+            </button>
+          );
+        })
       }
     </div>
 
     <div>
-      <Button variant="primary" icon={ArrowRight} href={buttonHref}>
+      <Button variant="primary" icon="arrow-right" href={buttonHref}>
         {buttonText}
       </Button>
     </div>

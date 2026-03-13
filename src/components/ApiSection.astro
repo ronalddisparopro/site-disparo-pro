@@ -1,13 +1,12 @@
 ---
-import { ArrowRight } from "@lucide/astro";
 import { cx } from "../lib/utils";
 import Button from "./ui/Button.astro";
+import Icon from "./Icon.astro";
 import Heading from "./ui/Heading.astro";
 import { ROUTES } from "../lib/routes";
 import { Image } from "astro:assets";
 
 // Assets
-import apiIcon from "../assets/icons/api.svg";
 import codeApiImg from "../assets/images/code-api.svg";
 
 export interface Props {
@@ -27,7 +26,7 @@ const classes = cx(className);
     style="background: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 100%), #0d0d0d;"
   >
     <div class="w-full lg:w-1/2 flex flex-col items-start gap-6">
-      <Image src={apiIcon} alt="API da Disparo Pro" width={64} height={64} />
+      <Icon name="terminal-window" size={48} variant="secondary" />
       {
         title && (
           <Heading as="h2" variant="secondary">
@@ -43,10 +42,11 @@ const classes = cx(className);
           </p>
         )
       }
-      <Button href={ROUTES.APIS.INDEX} variant="white" icon={ArrowRight}
+      <Button href={ROUTES.APIS.INDEX} variant="white" icon="arrow-right" 
         >Saiba Mais</Button
       >
     </div>
+
     <Image
       src={codeApiImg}
       alt="Código da API da Disparo Pro"

@@ -2,7 +2,7 @@
 import Container from "./ui/Container.astro";
 import { ROUTES } from "../lib/routes";
 import Button from "./ui/Button.astro";
-import { Menu, X, ChevronDown } from "@lucide/astro";
+import Icon from "./Icon.astro";
 import { Image } from "astro:assets";
 
 // Assets
@@ -62,7 +62,14 @@ const navItems = [
                   onclick={!item.href ? "return false;" : ""}
                 >
                   {item.label}
-                  {item.children && <ChevronDown class="w-4 h-4" />}
+                  {item.children && (
+                    <Icon
+                      name="caret-down"
+                      size={16}
+                      type="regular"
+                      variant="muted"
+                    />
+                  )}
                 </a>
 
                 {item.children && (
@@ -101,8 +108,12 @@ const navItems = [
         class="lg:hidden p-2 text-text-primary focus:outline-none"
         aria-label="Toggle Menu"
       >
-        <Menu id="menu-icon" class="w-6 h-6" />
-        <X id="close-icon" class="w-6 h-6 hidden" />
+        <div id="menu-icon">
+          <Icon name="list" size={24} type="regular" />
+        </div>
+        <div id="close-icon" class="hidden">
+          <Icon name="x" size={24} type="regular" />
+        </div>
       </button>
     </div>
 
@@ -131,7 +142,13 @@ const navItems = [
                   )}
                   {item.children && (
                     <button class="mobile-submenu-toggle p-2">
-                      <ChevronDown class="w-4 h-4 transition-transform duration-200" />
+                      <Icon
+                        name="caret-down"
+                        size={16}
+                        class="transition-transform duration-200"
+                        type="regular"
+                        variant="muted"
+                      />
                     </button>
                   )}
                 </div>
