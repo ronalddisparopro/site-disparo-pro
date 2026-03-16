@@ -98,7 +98,7 @@ const CHANNEL_FEATURES = [
       "Suporte em tempo real",
     ],
     buttonText: "Saiba mais",
-    buttonHref: ROUTES.CONTATO,
+    buttonHref: ROUTES.CANAIS.EMAIL,
     imageSrc: emailImg,
     imageAlt: "Disparo de E-mail",
   },
@@ -106,7 +106,10 @@ const CHANNEL_FEATURES = [
 ---
 
 <BaseLayout>
-  <Hero id="home" class="bg-surface-default relative overflow-hidden">
+  <Hero
+    id="home"
+    class="bg-surface-default relative overflow-hidden pb-12 lg:pb-24"
+  >
     <!-- Glow roxo -->
     <div
       class="pointer-events-none absolute -bottom-[50px] md:-bottom-[220px] left-[5%] md:left-2/6 w-[150px] h-[150px] md:w-[428px] md:h-[428px] rounded-full bg-brand-secondary blur-[50px] md:blur-[100px] opacity-60 md:opacity-100"

@@ -6,6 +6,8 @@ import Icon from "./Icon.astro";
 
 // Assets
 import logoFooterImg from "../assets/images/logo-disparo-pro-footer.svg";
+import Heading from "./ui/Heading.astro";
+import Button from "./ui/Button.astro";
 ---
 
 <footer
@@ -13,17 +15,30 @@ import logoFooterImg from "../assets/images/logo-disparo-pro-footer.svg";
   style="background: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 100%), #0d0d0d;"
 >
   <Container
-    class="flex flex-col lg:flex-row justify-between gap-8 lg:gap-0 py-10 lg:py-16 px-4 md:px-6 xl:px-0"
+    class="flex flex-col lg:flex-row justify-between items-start gap-8 lg:gap-0 py-10 lg:py-16 px-4 md:px-6 xl:px-0"
   >
-    <a href={ROUTES.HOME} class="inline-block max-w-60">
-      <Image
-        src={logoFooterImg}
-        alt="Disparo Pro"
-        class="w-full h-auto"
-        width={240}
-        height={60}
-      />
-    </a>
+    <div class="flex flex-col gap-6">
+      <a href={ROUTES.HOME} class="inline-block max-w-60">
+        <Image
+          src={logoFooterImg}
+          alt="Disparo Pro"
+          class="w-full h-auto"
+          width={240}
+          height={60}
+        />
+      </a>
+      <div class="flex flex-col gap-2">
+        <Heading as="h4" variant="secondary">Conheça nossos planos!</Heading>
+        <p class="text-body-sm text-surface-default">
+          Opções pensadas sob medida para o seu negócio.
+        </p>
+        <div>
+          <Button variant="secondary" href={ROUTES.PLANOS}
+            >Acessar planos</Button
+          >
+        </div>
+      </div>
+    </div>
 
     <div
       class="flex items-center justify-start lg:justify-center gap-4 text-white"

@@ -13,23 +13,23 @@ import TestimonialDiv from "../../components/TestimonialDiv.astro";
 import { Image } from "astro:assets";
 
 // Assets
-import heroImg from "../../assets/images/sms-hero-image.webp";
+import heroImg from "../../assets/images/email-hero-image.webp";
 
 // Mockups
-import smsBetImg from "../../assets/images/mockups/sms-bet.webp";
-import smsConsignadoImg from "../../assets/images/mockups/sms-consignado.webp";
-import smsCobrancaImg from "../../assets/images/mockups/sms-cobranca.webp";
-import smsClinicasImg from "../../assets/images/mockups/sms-clinicas.webp";
+import emailEcommerce from "../../assets/images/mockups/email-ecommerce.webp";
+import emailDisparo from "../../assets/images/mockups/email-disparo.webp";
+import emailInfoprodutor from "../../assets/images/mockups/email-infoprodutor.webp";
+import emailProvedor from "../../assets/images/mockups/email-provedor-de-internet.webp";
 ---
 
 <BaseLayout
   seo={{
-    title: "Disparo de SMS",
-    description: "Alcance até 98% dos seus clientes com Disparo de SMS!",
+    title: "Disparo de Email",
+    description: "Retenha clientes com jornadas de E-mail automatizadas!",
   }}
 >
   <Hero
-    id="disparo-de-sms"
+    id="disparo-de-email"
     class="bg-surface-default relative overflow-hidden"
   >
     <!-- Glow roxo -->
@@ -48,10 +48,11 @@ import smsClinicasImg from "../../assets/images/mockups/sms-clinicas.webp";
     >
       <div class="flex flex-col gap-4 md:gap-6 lg:gap-4 xl:gap-6 items-start">
         <Heading as="h1">
-          Alcance até 98% dos seus clientes com Disparo de SMS!
+          Retenha clientes com jornadas de E-mail automatizadas!
         </Heading>
         <p class="text-body-md text-text-secondary max-w-[500px]">
-          Impulsione a comunicação do seu negócio<br /> com envio de SMS em massa.
+          Crie, personalize e dispare jornadas de comunicação completas de forma
+          simples e automática.
         </p>
       </div>
       <Button variant="primary" icon="arrow-right" href={ROUTES.CONTATO}
@@ -80,32 +81,32 @@ import smsClinicasImg from "../../assets/images/mockups/sms-clinicas.webp";
       class="mx-auto w-full xl:max-w-3/4 flex flex-col items-center justify-center text-center gap-4"
     >
       <Heading as="h2"
-        >O SMS é o canal mais eficiente para comunicar o seu negócio</Heading
+        >Os E-mails ainda são a alternativa mais viável para reter clientes!</Heading
       >
-      <p class="text-body-md text-text-secondary max-w-[500px]">
-        Simples, rápido e com altas taxas de alcance, o SMS oferece excelentes
-        resultados com um ótimo custo-benefício.
+      <p class="text-body-md text-text-secondary">
+        Completos, instantâneos e reconhecidos pelo seu público-alvo, os
+        disparos de E-mail trazem resultados visíveis.
       </p>
     </div>
 
     <div class="flex flex-col gap-4 lg:grid lg:grid-cols-3 lg:gap-5">
       <Box
-        variant="primary"
+        variant="secondary"
+        icon="chart-line-up"
+        title="Automação com resultado"
+        description="E-mails automatizados geram 52% mais aberturas, 332% mais cliques e até 2361% mais conversões."
+      />
+      <Box
+        variant="secondary"
         icon="users"
-        title="98%"
-        description="das pessoas lêem um SMS em até  3 minutos"
+        title="O canal favorito"
+        description="Cerca de 80% dos clientes preferem ser contatados através de E-mails ao invés de ligações."
       />
       <Box
-        variant="primary"
-        icon="currency-circle-dollar"
-        title="96%"
-        description="mais barato que os meios de comunicação tradicionais"
-      />
-      <Box
-        variant="primary"
+        variant="secondary"
         icon="seal-check"
-        title="45%"
-        description="de conversão, com até 500% de retorno sobre o investimento"
+        title="Verificação constante"
+        description="Até 99% dos usuários de E-mail checam as mensagens em suas caixas de entrada diariamente."
       />
     </div>
   </Section>
@@ -117,8 +118,8 @@ import smsClinicasImg from "../../assets/images/mockups/sms-clinicas.webp";
       class="mx-auto w-full xl:max-w-3/4 flex flex-col gap-4 lg:gap-6 items-center justify-center"
     >
       <Heading as="h2" class="text-center"
-        >Na Disparo Pro, você não precisa ser um especialista para disparar SMS
-        em massa!</Heading
+        >Na Disparo Pro, você não precisa ser um especialista para criar
+        jornadas de E-mail!</Heading
       >
       <p class="text-body-md text-text-secondary text-center">
         Na Disparo Pro, criar suas jornadas de comunicação é fácil e intuitivo.
@@ -135,35 +136,35 @@ import smsClinicasImg from "../../assets/images/mockups/sms-clinicas.webp";
   <Section containerClass="flex flex-col gap-6 lg:gap-12">
     <div class="flex flex-col gap-4 lg:gap-6">
       <Heading as="h2"
-        >Com SMS, você melhora sua comunicação em diferentes segmentos de
-        mercado</Heading
+        >Com disparos de E-mail, você fala com seu cliente em diferentes
+        momentos da jornada!</Heading
       >
     </div>
     <InteractiveFeature
       items={[
         {
           icon: "currency-circle-dollar",
-          title: "Betting",
-          description: "Alcance apostadores com áudios de influencers.",
-          image: smsBetImg,
+          title: "Descoberta",
+          description: "Receba o cliente com uma oferta especial.",
+          image: emailEcommerce,
         },
         {
           icon: "tag",
-          title: "Crédito Consignado",
-          description: "Divulgue ofertas e diferenciais unindo Voz e SMS.",
-          image: smsConsignadoImg,
+          title: "Nutrição",
+          description: "Mantenha o cliente interessado nos seus produtos.",
+          image: emailDisparo,
         },
         {
           icon: "receipt",
-          title: "Cobrança",
-          description: "Reduza a inadimplência com lembretes certeiros.",
-          image: smsCobrancaImg,
+          title: "Recuperação",
+          description: "Resgate a atenção de clientes inativos.",
+          image: emailInfoprodutor,
         },
         {
-          icon: "hospital",
-          title: "Clínicas",
-          description: "Garanta 100% de presença com lembretes de Voz.",
-          image: smsClinicasImg,
+          icon: "list-checks",
+          title: "Experiência",
+          description: "Faça pesquisas de satisfação sobre suas soluções.",
+          image: emailProvedor,
         },
       ]}
       buttonText="Desbrave possibilidades!"
@@ -171,15 +172,10 @@ import smsClinicasImg from "../../assets/images/mockups/sms-clinicas.webp";
     />
   </Section>
 
-
-  <Section>
-    <TestimonialDiv />
-  </Section>
-
   <Section>
     <ApiSection
-      title="Integre nossa API de SMS ao seu sistema!"
-      description="Com Disparo Pro, você tem acesso a uma API de SMS com integração facilitada."
+      title="Integre nossa API de E-mail ao seu sistema!"
+      description="Com a Disparo Pro, você tem acesso a uma API de E-mail com suporte nacional e integração facilitada."
     />
   </Section>
 </BaseLayout>
