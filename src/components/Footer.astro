@@ -8,78 +8,176 @@ import Icon from "./Icon.astro";
 import logoFooterImg from "../assets/images/logo-disparo-pro-footer.svg";
 import Heading from "./ui/Heading.astro";
 import Button from "./ui/Button.astro";
+
+const footerLinks = {
+  empresa: [
+    { label: "Início", href: ROUTES.HOME },
+    { label: "Planos", href: ROUTES.PLANOS },
+    { label: "APIs Disparo Pro", href: ROUTES.APIS.INDEX },
+    { label: "Integrações", href: ROUTES.APIS.INTEGRATIONS },
+  ],
+  canais: [
+    { label: "WhatsApp Marketing", href: ROUTES.CANAIS.WHATSAPP },
+    { label: "RCS", href: ROUTES.CANAIS.RCS },
+    { label: "Disparo de SMS", href: ROUTES.CANAIS.SMS },
+    { label: "Disparo de Voz", href: ROUTES.CANAIS.VOZ },
+    { label: "Gestão de Grupos", href: "#" },
+  ],
+  navegue: [
+    { label: "Termos e Políticas", href: "#" },
+    { label: "Serviços e Eventos Cobráveis", href: "#" },
+    {
+      label: "Trabalhe Conosco",
+      href: ROUTES.TRABALHE_CONOSCO,
+    },
+    { label: "Base de conhecimento", href: "#" },
+  ],
+};
+
+const socialLinks = [
+  {
+    name: "facebook-logo",
+    href: "https://www.facebook.com/disparopro",
+    label: "Visitar o Facebook da Disparo Pro",
+  },
+  {
+    name: "instagram-logo",
+    href: "https://www.instagram.com/disparopro/",
+    label: "Visitar o Instagram da Disparo Pro",
+  },
+  {
+    name: "linkedin-logo",
+    href: "https://www.linkedin.com/company/disparo-pro",
+    label: "Visitar o LinkedIn da Disparo Pro",
+  },
+  {
+    name: "youtube-logo",
+    href: "https://www.youtube.com/@disparopro",
+    label: "Visitar o YouTube da Disparo Pro",
+  },
+];
 ---
 
 <footer
   class="overflow-hidden"
-  style="background: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 100%), #0d0d0d;"
+  style="background: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 100%), #0d0d0d;"
 >
-  <Container
-    class="flex flex-col lg:flex-row justify-between items-start gap-8 lg:gap-0 py-10 lg:py-16 px-4 md:px-6 xl:px-0"
-  >
-    <div class="flex flex-col gap-6">
-      <a href={ROUTES.HOME} class="inline-block max-w-60">
-        <Image
-          src={logoFooterImg}
-          alt="Disparo Pro"
-          class="w-full h-auto"
-          width={240}
-          height={60}
-        />
-      </a>
-      <div class="flex flex-col gap-2">
-        <Heading as="h4" variant="secondary">Conheça nossos planos!</Heading>
-        <p class="text-body-sm text-surface-default">
-          Opções pensadas sob medida para o seu negócio.
-        </p>
-        <div>
-          <Button variant="secondary" href={ROUTES.PLANOS}
-            >Acessar planos</Button
+  <Container class="py-12 lg:py-20 px-4 md:px-6 xl:px-0">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
+      <div class="lg:col-span-4 flex flex-col gap-8">
+        <a href={ROUTES.HOME} class="inline-block max-w-56">
+          <Image
+            src={logoFooterImg}
+            alt="Disparo Pro"
+            class="w-full h-auto"
+            width={240}
+            height={60}
+          />
+        </a>
+        <div class="flex flex-col gap-4">
+          <Heading as="h4" variant="secondary" class="text-xl"
+            >Conheça nossos planos!</Heading
           >
+          <p class="text-body-sm text-surface-default/70 max-w-xs">
+            Opções pensadas sob medida para o seu negócio.
+          </p>
+          <div class="pt-2">
+            <Button variant="secondary" href={ROUTES.PLANOS}
+              >Acessar planos</Button
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-12">
+        <div class="flex flex-col gap-6">
+          <span class="text-white font-bold text-lg">Navegue</span>
+          <ul class="flex flex-col gap-3">
+            {
+              footerLinks.navegue.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-surface-default/80 hover:text-surface-default transition-colors text-body-sm"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="flex flex-col gap-6">
+          <span class="text-white font-bold text-lg">Canais</span>
+          <ul class="flex flex-col gap-3">
+            {
+              footerLinks.canais.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    rel="noopener noreferrer"
+                    class="text-surface-default/80 hover:text-surface-default transition-colors text-body-sm"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="flex flex-col gap-6">
+          <span class="text-white font-bold text-lg">Institucional</span>
+          <ul class="flex flex-col gap-3">
+            {
+              footerLinks.empresa.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    rel="noopener noreferrer"
+                    class="text-surface-default/80 hover:text-surface-default transition-colors text-body-sm"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
         </div>
       </div>
     </div>
 
     <div
-      class="flex items-center justify-start lg:justify-center gap-4 text-white"
+      class="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6"
     >
-      <a
-        href="https://www.facebook.com/disparopro"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Visitar o Facebook da Disparo Pro"
-      >
-        <Icon name="facebook-logo" size={24} variant="secondary" type="fill" />
-      </a>
-      <a
-        href="https://www.instagram.com/disparopro/"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Visitar o Instagram da Disparo Pro"
-      >
-        <Icon name="instagram-logo" size={24} variant="secondary" type="fill" />
-      </a>
-      <a
-        href="https://www.linkedin.com/company/disparo-pro"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Visitar o LinkedIn da Disparo Pro"
-      >
-        <Icon name="linkedin-logo" size={24} variant="secondary" type="fill" />
-      </a>
-      <a
-        href="https://www.youtube.com/@disparopro"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Visitar o YouTube da Disparo Pro"
-      >
-        <Icon name="youtube-logo" size={24} variant="secondary" type="fill" />
-      </a>
+      <div class="flex items-center gap-4">
+        {
+          socialLinks.map((social) => (
+            <a
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={social.label}
+            >
+              <Icon
+                name={social.name}
+                size={24}
+                type="fill"
+                variant="secondary"
+              />
+            </a>
+          ))
+        }
+      </div>
     </div>
   </Container>
-  <div class="bg-brand-primary py-2 px-4 md:px-6 xl:px-0">
+
+  <div class="bg-brand-primary py-4 px-4 md:px-6 xl:px-0">
     <Container class="text-xs md:text-sm">
-      <p class="text-surface-default">
+      <p class="text-surface-default font-medium">
         Copyright © {new Date().getFullYear()} Disparo Pro Todos os direitos reservados.
       </p>
     </Container>

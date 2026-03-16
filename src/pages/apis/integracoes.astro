@@ -5,64 +5,68 @@ import Badge from "../../components/ui/Badge.astro";
 import Heading from "../../components/ui/Heading.astro";
 import IntegrationsSection from "../../components/IntegrationsSection.astro";
 import Section from "../../components/ui/Section.astro";
+import Image from "astro/components/Image.astro";
+
+import logoPipedrive from "../../assets/images/integracoes/logo-pipedrive.svg";
+import logoMautic from "../../assets/images/integracoes/logo-mautic.svg";
+import logoContaAzul from "../../assets/images/integracoes/logo-conta-azul.svg";
+import logoZapier from "../../assets/images/integracoes/logo-zapier.svg";
+import logoMake from "../../assets/images/integracoes/logo-make.svg";
+import logoIxcSoft from "../../assets/images/integracoes/logo-ixcsoft.svg";
+import logoHubsoft from "../../assets/images/integracoes/logo-hubsoft.svg";
+import logoEliteSoft from "../../assets/images/integracoes/logo-elite-soft.svg";
+import logoSpg from "../../assets/images/integracoes/logo-spg.svg";
 
 const recommendedIntegrations = [
   {
-    title: "Pipedrive",
-    description:
-      "Importe seus contatos do Pipedrive e envie campanhas de marketing usando o SMS.",
+    logo: logoPipedrive,
+    logoAlt: "logoPipedrive",
     buttonHref: "https://marketplace.disparopro.com.br/plugin/pipedrive",
   },
   {
-    title: "Mautic",
-    description:
-      "Insira o disparo de WhatsApp, SMS e Voz em suas campanhas de comunicação e impacte seus clientes com assertividade.",
+    logo: logoMautic,
+    logoAlt: "logoMautic",
     buttonHref: "https://marketplace.disparopro.com.br/plugin/mautic",
   },
   {
-    title: "Conta Azul",
-    description:
-      "Importe seus clientes da Conta Azul e envie campanhas de comunicação usando WhatsApp, SMS e Voz.",
+    logo: logoContaAzul,
+    logoAlt: "logoContaAzul",
     buttonHref: "https://marketplace.disparopro.com.br/plugin/contaazul",
   },
 ];
 const automationTools = [
   {
-    title: "Zapier",
-    description:
-      "Integre mais de 2.000 aplicativos com a Disparo Pro e configure fluxos de automação.",
+    logo: logoZapier,
+    logoAlt: "logoZapier",
     buttonHref: "https://marketplace.disparopro.com.br/plugin/zapier",
   },
   {
-    title: "Make",
-    description:
-      "Integre mais de 500 aplicativos com a Disparo Pro e configure fluxos de automação.",
+    logo: logoMake,
+    logoAlt: "logoMake",
     buttonHref: "https://marketplace.disparopro.com.br/plugin/integromat",
   },
 ];
 const internetProviders = [
   {
-    title: "IXC Soft",
-    description:
-      "Dispare WhatsApp, SMS e Voz com avisos e cobranças para os clientes do seu provedor de internet.",
+    logo: logoIxcSoft,
+    logoAlt: "logoIxcSoft",
     buttonHref: "https://wiki.ixcsoft.com.br/pt-br/home",
   },
   {
-    title: "Hubsoft",
-    description:
-      "Envie suas faturas de forma automática para os clientes do seu provedor de internet.",
+    logo: logoHubsoft,
+    logoAlt: "logoHubsoft",
     buttonHref: "https://marketplace.disparopro.com.br/plugin/hubsoft",
   },
 ];
 const erpSystems = [
   {
-    title: "Elite Soft",
-    description: "Gerencie seu provedor de forma simples, fácil e ágil!",
+    logo: logoEliteSoft,
+    logoAlt: "logoEliteSoft",
     buttonHref: "https://www.elitesoft.com.br/",
   },
   {
-    title: "SPG",
-    description: "Gerencie seu provedor de forma simples, fácil e ágil!",
+    logo: logoSpg,
+    logoAlt: "logoSpg",
     buttonHref: "https://www.tsmx.net.br/sgp/",
   },
 ];
@@ -101,8 +105,8 @@ const erpSystems = [
           Integre nossas APIs aos seus sistemas favoritos!
         </Heading>
         <p class="text-body-md text-text-secondary w-full lg:w-3/4">
-          Dispare WhatsApp, SMS, RCS, E-mail e Voz com praticidade e automação usando os
-          principais sistemas do mercado.
+          Dispare WhatsApp, SMS, RCS, E-mail e Voz com praticidade e automação
+          usando os principais sistemas do mercado.
         </p>
       </div>
     </div>

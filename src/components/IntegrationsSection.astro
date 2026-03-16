@@ -3,8 +3,8 @@ import Heading from "./ui/Heading.astro";
 import IntegrationBox from "./ui/IntegrationBox.astro";
 
 interface Integration {
-  title: string;
-  description: string;
+  logo: any;
+  logoAlt?: string;
   buttonHref: string;
 }
 
@@ -21,12 +21,12 @@ const { title, integrations } = Astro.props;
     <Heading as="h2">{title}</Heading>
   </div>
 
-  <div class="flex flex-col gap-4 lg:gap-6 w-full">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 w-full">
     {
       integrations.map((item) => (
         <IntegrationBox
-          title={item.title}
-          description={item.description}
+          logo={item.logo}
+          logoAlt={item.logoAlt}
           buttonHref={item.buttonHref}
         />
       ))

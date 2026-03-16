@@ -35,30 +35,33 @@ const features = [
 ];
 ---
 
-<div class="flex flex-col items-center gap-8 lg:gap-12 max-w-5xl mx-auto">
-  <div class="text-center flex flex-col gap-6">
+<div class="flex flex-col gap-12 lg:gap-20 max-w-7xl mx-auto px-4">
+  <div class="text-center flex flex-col gap-6 max-w-3xl mx-auto">
     <Heading as="h2" variant="primary">Assine, carregue e dispare!</Heading>
     <p class="text-text-secondary text-body-md">
       Com a Disparo Pro, criar e enviar jornadas de comunicação é fácil e
       prático.
     </p>
+  </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+    <!-- Menus on the left -->
+    <div class="lg:col-span-4 flex flex-col gap-4 order-2 lg:order-1">
       {
         features.map((feature, index) => (
           <button
             data-feature-id={feature.id}
             data-index={index}
             class:list={[
-              "feature-card text-left p-4 rounded-xl border transition-all duration-300 cursor-pointer group flex flex-col gap-2",
+              "feature-card text-left p-6 rounded-2xl border transition-all duration-300 cursor-pointer group flex flex-col",
               index === 0
-                ? "active bg-brand-soft border-brand-primary"
-                : "bg-white border-dashed border-border-default hover:border-brand-primary/50",
+                ? "active bg-brand-soft border-transparent"
+                : "bg-transparent border-dashed border-border-default hover:bg-brand-soft/30 hover:border-brand-primary/20",
             ]}
           >
             <span
               class:list={[
-                "text-label font-bold transition-colors",
+                "text-label font-extrabold transition-colors text-lg lg:text-xl",
                 index === 0
                   ? "text-brand-primary"
                   : "text-text-primary group-hover:text-brand-primary",
@@ -66,39 +69,49 @@ const features = [
             >
               {feature.title}
             </span>
-            <p class="text-body-sm text-text-secondary">
-              {feature.description}
-            </p>
+            <div
+              class:list={[
+                "description-wrapper transition-all duration-500 ease-in-out overflow-hidden",
+                index === 0 ? "max-h-40 opacity-100 mt-3" : "max-h-0 opacity-0",
+              ]}
+            >
+              <p class="text-body-sm text-text-secondary leading-relaxed">
+                {feature.description}
+              </p>
+            </div>
           </button>
         ))
       }
     </div>
-  </div>
 
-  <div
-    class="relative w-full max-w-[1014px] aspect-1014/634 rounded-2xl overflow-hidden shadow-sm mx-auto"
-  >
-    {
-      features.map((feature, index) => (
-        <div
-          id={`image-${feature.id}`}
-          class:list={[
-            "feature-image absolute inset-0 transition-opacity duration-500 ease-in-out",
-            index === 0 ? "opacity-100 z-10" : "opacity-0 z-0",
-          ]}
-        >
-          <Image
-            src={feature.image as any}
-            alt={feature.title}
-            class="w-full h-full object-contain"
-            width={1014}
-            height={634}
-            format="webp"
-            quality="mid"
-          />
-        </div>
-      ))
-    }
+    <!-- Image on the right -->
+    <div
+      class="lg:col-span-8 order-1 lg:order-2 relative w-full aspect-1014/634 rounded-2xl overflow-hidden border border-border-default bg-white group/image"
+    >
+      {
+        features.map((feature, index) => (
+          <div
+            id={`image-${feature.id}`}
+            class:list={[
+              "feature-image absolute inset-0 transition-all duration-700 ease-in-out transform",
+              index === 0
+                ? "opacity-100 scale-100 z-10"
+                : "opacity-0 scale-105 z-0",
+            ]}
+          >
+            <Image
+              src={feature.image as any}
+              alt={feature.title}
+              class="w-full h-full object-cover"
+              width={1014}
+              height={634}
+              format="webp"
+              quality="mid"
+            />
+          </div>
+        ))
+      }
+    </div>
   </div>
 </div>
 
@@ -111,20 +124,32 @@ const features = [
       card.addEventListener("click", () => {
         const featureId = card.getAttribute("data-feature-id");
 
+        // Update Cards
         cards.forEach((c) => {
-          c.classList.remove("active", "bg-brand-soft", "border-brand-primary");
-          c.classList.add("bg-white", "border-dashed", "border-border-default");
+          c.classList.remove("active", "bg-brand-soft", "border-transparent");
+          c.classList.add(
+            "bg-transparent",
+            "border-dashed",
+            "border-border-default",
+          );
 
           const title = c.querySelector("span");
           if (title) {
             title.classList.remove("text-brand-primary");
             title.classList.add("text-text-primary");
           }
+
+          const desc = c.querySelector(".description-wrapper");
+          if (desc) {
+            desc.classList.remove("max-h-40", "opacity-100", "mt-3");
+            desc.classList.add("max-h-0", "opacity-0");
+          }
         });
 
-        card.classList.add("active", "bg-brand-soft", "border-brand-primary");
+        // Activate clicked card
+        card.classList.add("active", "bg-brand-soft", "border-transparent");
         card.classList.remove(
-          "bg-white",
+          "bg-transparent",
           "border-dashed",
           "border-border-default",
         );
@@ -135,13 +160,20 @@ const features = [
           activeTitle.classList.remove("text-text-primary");
         }
 
+        const activeDesc = card.querySelector(".description-wrapper");
+        if (activeDesc) {
+          activeDesc.classList.add("max-h-40", "opacity-100", "mt-3");
+          activeDesc.classList.remove("max-h-0", "opacity-0");
+        }
+
+        // Update Images
         images.forEach((img) => {
           if (img.id === `image-${featureId}`) {
-            img.classList.add("opacity-100", "z-10");
-            img.classList.remove("opacity-0", "z-0");
+            img.classList.add("opacity-100", "scale-100", "z-10");
+            img.classList.remove("opacity-0", "scale-105", "z-0");
           } else {
-            img.classList.remove("opacity-100", "z-10");
-            img.classList.add("opacity-0", "z-0");
+            img.classList.remove("opacity-100", "scale-100", "z-10");
+            img.classList.add("opacity-0", "scale-105", "z-0");
           }
         });
       });
@@ -152,4 +184,12 @@ const features = [
   initFeatureShowcase();
 </script>
 
-<style></style>
+<style>
+  .feature-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .description-wrapper {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+</style>

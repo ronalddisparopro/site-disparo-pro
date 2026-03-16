@@ -4,6 +4,7 @@ export const ROUTES = {
   CONTATO: "/contato",
   MATERIAIS: "/materiais",
   LOGIN: "https://auth.disparopro.com.br/",
+  TRABALHE_CONOSCO: "https://ativoscapital.rhgestor.com.br/",
 
   BLOG: {
     HOME: "/blog",

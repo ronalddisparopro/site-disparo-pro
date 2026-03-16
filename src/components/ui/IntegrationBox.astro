@@ -1,56 +1,40 @@
 ---
+import { Image } from "astro:assets";
 import { cx } from "../../lib/utils";
 import Button from "./Button.astro";
-import Heading from "./Heading.astro";
-
 
 export interface Props {
   class?: string;
-  title?: string;
-  description?: string;
+  logo?: any;
+  logoAlt?: string;
   buttonHref?: string;
 }
 
 const {
   class: className,
-  title,
-  description,
+  logo,
+  logoAlt = "",
   buttonHref,
   ...rest
 } = Astro.props;
 
 const baseClass =
-  "w-full flex flex-col items-start gap-6 rounded-lg py-8 px-8 lg:py-12 lg:px-12 text-left bg-surface-muted";
+  "w-full flex flex-col items-start gap-6 rounded-lg py-8 px-8 text-left bg-surface-muted";
 
 const classes = cx(baseClass, className);
 ---
 
 <div class={classes} {...rest}>
-  <div class="flex flex-col gap-4">
-    {
-      title && (
-        <Heading as="h3" class={cx}>
-          {title}
-        </Heading>
-      )
-    }
-
-    {
-      description && (
-        <p class="text-body-md text-text-secondary leading-relaxed">
-          {description}
-        </p>
-      )
-    }
+  <div class="flex flex-col justify-between gap-4 h-[160px]">
+    {logo && <Image src={logo} alt={logoAlt} width={120} />}
     <slot />
     <div>
       {
         buttonHref && (
-          <Button target variant="primary" href={buttonHref} icon="arrow-right">
+          <Button target variant="outline" href={buttonHref} icon="arrow-right">
             Acessar integração
           </Button>
         )
-
       }
     </div>
   </div>
