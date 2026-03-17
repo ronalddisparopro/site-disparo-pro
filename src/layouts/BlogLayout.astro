@@ -3,6 +3,7 @@ import BaseLayout from "./BaseLayout.astro";
 import type { SeoProps } from "../types/seo";
 import Section from "../components/ui/Section.astro";
 import Heading from "../components/ui/Heading.astro";
+import Hero from "../components/ui/Hero.astro";
 
 export interface Props {
   seo: SeoProps;
@@ -14,37 +15,39 @@ const { seo, title, description } = Astro.props;
 ---
 
 <BaseLayout seo={seo}>
-  <Section class="bg-surface-muted border-b border-border-default">
-    <div class="max-w-3xl mx-auto text-center">
-      <Heading as="h1" class="mb-4">{title}</Heading>
-      {description && <p class="text-xl text-text-secondary">{description}</p>}
+  <Hero
+    id="blog"
+    class="pb-12 lg:pb-24 xl:pb-36 bg-surface-default relative overflow-hidden"
+  >
+    <!-- Glow roxo -->
+    <div
+      class="pointer-events-none absolute -bottom-[50px] md:-bottom-[220px] left-[5%] md:left-2/6 w-[150px] h-[150px] md:w-[428px] md:h-[428px] rounded-full bg-brand-secondary blur-[50px] md:blur-[100px] opacity-60 md:opacity-100"
+    >
     </div>
-  </Section>
-  <Section>
-    <div class="flex flex-col lg:flex-row gap-12">
-      <div class="grow">
-        <slot />
+
+    <!-- Glow rosa -->
+    <div
+      class="pointer-events-none absolute -bottom-[80px] md:-bottom-[364px] right-[5%] md:right-0 w-[200px] h-[200px] md:w-[800px] md:h-[800px] rounded-full bg-brand-primary blur-[70px] md:blur-[100px] opacity-60 md:opacity-100"
+    >
+    </div>
+    <div
+      class="mx-auto w-full lg:max-w-4/5 flex flex-col items-center justify-center gap-6 md:gap-8 lg:gap-4 xl:gap-8 relative z-10"
+    >
+      <div
+        class="flex flex-col gap-4 md:gap-6 lg:gap-4 xl:gap-6 items-center text-center"
+      >
+        <Heading as="h1">
+          {title}
+        </Heading>
+        <p class="text-body-md text-text-secondary w-full lg:w-3/4">
+          {description}
+        </p>
       </div>
-      <aside class="w-full lg:w-80 shrink-0">
-        <div
-          class="bg-surface-default p-6 rounded-lg shadow-sm border border-border-default"
-        >
-          <Heading as="h3" class="mb-4">Categorias</Heading>
-          <ul class="space-y-2">
-            <li>
-              <a
-                href="/blog/categoria/whatsapp"
-                class="text-primary hover:underline">WhatsApp</a
-              >
-            </li>
-            <li>
-              <a href="/blog/categoria/rcs" class="text-primary hover:underline"
-                >RCS</a
-              >
-            </li>
-          </ul>
-        </div>
-      </aside>
+    </div>
+  </Hero>
+  <Section>
+    <div class="w-full">
+      <slot />
     </div>
   </Section>
 </BaseLayout>

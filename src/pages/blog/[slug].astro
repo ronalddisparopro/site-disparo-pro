@@ -1,15 +1,21 @@
 ---
 import PostLayout from "../../layouts/PostLayout.astro";
-import { MOCK_POSTS } from "../../types/blog";
+import { getBlogPosts } from "../../types/blog";
 
-export function getStaticPaths() {
-  return MOCK_POSTS.map((post) => ({
-    params: { slug: post.slug },
-    props: { post },
-  }));
+export async function getStaticPaths() {
+  const posts = await getBlogPosts();
+  return posts.map((post) => {
+    const relatedPosts = posts
+      .filter((p) => p.categorySlug === post.categorySlug && p.id !== post.id)
+      .slice(0, 2);
+    return {
+      params: { slug: post.slug },
+      props: { post, relatedPosts },
+    };
+  });
 }
 
-const { post } = Astro.props;
+const { post, relatedPosts } = Astro.props;
 
 const seo = {
   title: `${post.title} - Blog Disparo Pro`,
@@ -21,6 +27,6 @@ const seo = {
 };
 ---
 
-<PostLayout post={post} seo={seo}>
+<PostLayout post={post} seo={seo} relatedPosts={relatedPosts}>
   <div set:html={post.content} />
 </PostLayout>

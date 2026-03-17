@@ -6,21 +6,24 @@ import Container from "../components/ui/Container.astro";
 import Heading from "../components/ui/Heading.astro";
 import AuthorBox from "../components/AuthorBox.astro";
 import { ROUTES } from "../lib/routes";
+import { Image } from "astro:assets";
+import BlogCard from "../components/BlogCard.astro";
 
 export interface Props {
   post: BlogPost;
   seo: SeoProps;
+  relatedPosts?: BlogPost[];
 }
 
-const { post, seo } = Astro.props;
+const { post, seo, relatedPosts } = Astro.props;
 ---
 
 <BaseLayout seo={seo}>
   <article class="py-12 md:py-20 lg:py-24">
-    <Container class="max-w-4xl mx-auto">
+    <Container class="px-4 md:px-6 xl:px-0 max-w-4xl mx-auto">
       <!-- Breadcrumbs -->
       <nav class="mb-8 text-sm text-text-tertiary" aria-label="Breadcrumb">
-        <ol class="list-none p-0 inline-flex">
+        <ol class="list-none p-0 inline-flex flex-wrap gap-2">
           <li class="flex items-center">
             <a href="/" class="hover:text-text-primary">Home</a>
             <span class="mx-2">/</span>
@@ -31,7 +34,7 @@ const { post, seo } = Astro.props;
           </li>
           <li class="flex items-center">
             <a
-              href={ROUTES.BLOG.CATEGORY(post.category)}
+              href={ROUTES.BLOG.CATEGORY(post.categorySlug)}
               class="hover:text-text-primary capitalize">{post.category}</a
             >
             <span class="mx-2">/</span>
@@ -44,23 +47,54 @@ const { post, seo } = Astro.props;
 
       <div class="mb-8">
         <Heading as="h1" class="mb-6">{post.title}</Heading>
-        <p class="text-xl text-text-secondary mb-8">{post.excerpt}</p>
+        <p class="text-body-md text-text-secondary mb-8">{post.excerpt}</p>
 
-        <!-- Placeholder da Imagem (simulando um img sem src real ou class utility) -->
-        <div
-          class="w-full h-[400px] bg-surface-muted rounded-xl mb-8 flex items-center justify-center text-text-tertiary"
-        >
-          Capa: {post.coverImage}
-        </div>
+        {
+          post.coverImage && (
+            <Image
+              src={post.coverImage}
+              alt={post.title}
+              width={1200}
+              height={480}
+              class="w-full h-[200px] md:h-[480px] object-cover rounded-xl mb-8"
+            />
+          )
+        }
+        {
+          !post.coverImage && (
+            <div class="w-full h-[200px] md:h-[400px] bg-surface-muted rounded-xl mb-8 flex items-center justify-center text-text-tertiary">
+              Blog Disparo Pro
+            </div>
+          )
+        }
       </div>
 
       <AuthorBox author={post.author} publishedAt={post.publishedAt} />
 
       <div
-        class="prose prose-lg max-w-none prose-h2:text-3xl prose-h2:font-semibold prose-h2:mt-12 prose-h2:mb-6 prose-p:text-text-secondary prose-p:leading-relaxed"
+        class="prose prose-lg max-w-none
+        prose-h1:text-title-section prose-h1:font-semibold prose-h1:mt-4 prose-h1:mb-4
+        prose-h2:text-title-card prose-h2:font-semibold prose-h2:mt-4 prose-h2:mb-4
+        prose-h3:text-title-card prose-h3:font-semibold prose-h3:mt-4 prose-h3:mb-4
+        prose-p:text-text-secondary prose-p:leading-relaxed border-b border-border-default pb-4"
       >
         <slot />
       </div>
+
+      {
+        relatedPosts && relatedPosts.length > 0 && (
+          <div class="mt-16">
+            <Heading as="h3" class="mb-8">
+              Veja também
+            </Heading>
+            <div class="grid gap-8 md:grid-cols-2">
+              {relatedPosts.map((relatedPost) => (
+                <BlogCard post={relatedPost} />
+              ))}
+            </div>
+          </div>
+        )
+      }
     </Container>
   </article>
 </BaseLayout>

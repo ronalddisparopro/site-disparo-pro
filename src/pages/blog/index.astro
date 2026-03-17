@@ -1,7 +1,10 @@
 ---
 import BlogLayout from "../../layouts/BlogLayout.astro";
 import BlogGrid from "../../components/BlogGrid.astro";
-import { MOCK_POSTS } from "../../types/blog";
+import { getBlogPosts } from "../../types/blog";
+import { supabase } from "../../lib/supabase";
+
+const posts = await getBlogPosts();
 
 const seo = {
   title: "Blog - Disparo Pro",
@@ -11,8 +14,8 @@ const seo = {
 
 <BlogLayout
   seo={seo}
-  title="Blog Disparo Pro"
+  title="Blog da Disparo Pro"
   description="Dicas, tutoriais e novidades sobre as melhores ferramentas de comunicação."
 >
-  <BlogGrid posts={MOCK_POSTS} />
+  <BlogGrid posts={posts} />
 </BlogLayout>

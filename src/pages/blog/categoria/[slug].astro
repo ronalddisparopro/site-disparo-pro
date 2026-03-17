@@ -1,18 +1,27 @@
 ---
 import BlogLayout from "../../../layouts/BlogLayout.astro";
 import BlogGrid from "../../../components/BlogGrid.astro";
-import { MOCK_POSTS } from "../../../types/blog";
+import { getBlogPosts } from "../../../types/blog";
 
-export function getStaticPaths() {
-  const categories = [...new Set(MOCK_POSTS.map((post) => post.category))];
-  return categories.map((category) => ({
-    params: { slug: category },
-    props: { category },
-  }));
+export async function getStaticPaths() {
+  const posts = await getBlogPosts();
+  
+  // Find unique category slugs
+  const categorySlugs = [...new Set(posts.map((post) => post.categorySlug))];
+  
+  return categorySlugs.map((slug) => {
+    // Acha o nome da categoria para o slug
+    const categoryName = posts.find(p => p.categorySlug === slug)?.category || slug;
+    return {
+      params: { slug },
+      props: { category: categoryName, slug },
+    };
+  });
 }
 
-const { category } = Astro.props;
-const posts = MOCK_POSTS.filter((post) => post.category === category);
+const { category, slug } = Astro.props;
+const allPosts = await getBlogPosts();
+const posts = allPosts.filter((post) => post.categorySlug === slug);
 
 const seo = {
   title: `Categoria: ${category} - Blog Disparo Pro`,
@@ -25,5 +34,5 @@ const seo = {
   title={`Categoria: ${category}`}
   description={`Todos os artigos em ${category}`}
 >
-  <BlogGrid posts={posts} />
+  <BlogGrid posts={posts} currentCategory={slug} />
 </BlogLayout>

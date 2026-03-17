@@ -2,6 +2,7 @@
 import type { BlogPost } from "../types/blog";
 import { ROUTES } from "../lib/routes";
 import { formatDate } from "../lib/utils";
+import { Image } from "astro:assets";
 
 export interface Props {
   post: BlogPost;
@@ -12,15 +13,22 @@ const { post } = Astro.props;
 
 <article class="flex flex-col overflow-hidden">
   <a href={ROUTES.BLOG.POST(post.slug)} class="shrink-0">
-    <img
-      src={post.coverImage}
-      alt={post.title}
-      class="w-full h-56 object-cover rounded-lg"
-    />
+    {post.coverImage ? (
+      <Image
+        src={post.coverImage}
+        alt={post.title}
+        width={800}
+        height={450}
+        class="w-full h-52 object-cover rounded-lg"
+      />
+    ) : (      <div class="w-full h-52 bg-surface-muted rounded-lg flex items-center justify-center text-text-tertiary">
+        <span class="text-xs">Sem imagem</span>
+      </div>
+    )}
   </a>
   <div class="flex-1 p-4 flex flex-col gap-4">
     <p class="text-sm text-text-secondary">
-      <a href={ROUTES.BLOG.CATEGORY(post.category)} class="hover:underline">
+      <a href={ROUTES.BLOG.CATEGORY(post.categorySlug)} class="hover:underline">
         {post.category}
       </a>
     </p>

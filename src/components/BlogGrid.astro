@@ -1,14 +1,191 @@
 ---
 import type { BlogPost } from "../types/blog";
 import BlogCard from "./BlogCard.astro";
+import { getBlogPosts } from "../types/blog";
+import Button from "./ui/Button.astro";
+import Icon from "./Icon.astro";
 
 export interface Props {
   posts: BlogPost[];
+  currentCategory?: string;
 }
 
-const { posts } = Astro.props;
+const { posts, currentCategory = "all" } = Astro.props;
+
+// Buscar todos os posts para extrair a lista completa de categorias
+const allPosts = await getBlogPosts();
+const allCategories = [
+  ...new Set(allPosts.map((post) => post.category)),
+].filter(Boolean);
+const categoriesData = allCategories.map((cat) => {
+  const post = allPosts.find((p) => p.category === cat);
+  return { slug: post?.categorySlug || cat, name: cat };
+});
 ---
 
-<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-  {posts.map((post) => <BlogCard post={post} />)}
+<div
+  class="mb-10 flex flex-col sm:flex-row gap-4 justify-between items-center bg-surface-muted p-4 rounded-xl border border-dashed border-border-default/40"
+>
+  <div class="w-full sm:w-1/2 md:w-1/3 relative">
+    <input
+      type="text"
+      id="blog-search"
+      placeholder="Pesquisar artigos..."
+      class="w-full px-4 py-3 bg-surface-default border border-border-default rounded-lg text-body-sm text-text-primary focus:outline-none focus:border-brand-primary transition-colors"
+    />
+  </div>
+  <div class="w-full sm:w-1/2 md:w-1/3 relative">
+    <select
+      id="blog-category"
+      class="w-full pl-4 pr-10 py-3 bg-surface-default border border-border-default rounded-lg text-body-sm text-text-primary cursor-pointer focus:outline-none focus:border-brand-primary transition-colors appearance-none"
+    >
+      <option value="all" selected={currentCategory === "all"}
+        >Todas as Categorias</option
+      >
+      {
+        categoriesData.map((c) => (
+          <option value={c.slug} selected={currentCategory === c.slug}>
+            {c.name}
+          </option>
+        ))
+      }
+    </select>
+    <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+      <Icon variant="muted" size={20} type="regular" name="caret-down" />
+    </div>
+  </div>
 </div>
+
+<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3" id="blog-grid">
+  {
+    posts && posts.length > 0 ? (
+      posts.map((post) => (
+        <div
+          class="blog-post-card"
+          data-category={post.categorySlug}
+          data-title={post.title.toLowerCase()}
+        >
+          <BlogCard post={post} />
+        </div>
+      ))
+    ) : (
+      <div
+        class="col-span-full py-12 text-center bg-surface-muted rounded-xl border border-dashed border-border-default"
+        id="no-posts-msg"
+      >
+        <p class="text-text-secondary font-medium">
+          Nenhum artigo encontrado no momento.
+        </p>
+      </div>
+    )
+  }
+</div>
+
+<div
+  id="no-results"
+  class="hidden py-12 text-center bg-surface-muted rounded-xl border border-dashed border-border-default mt-8"
+>
+  <p class="text-text-secondary font-medium">
+    Nenhum artigo encontrado para a sua pesquisa.
+  </p>
+</div>
+
+<div class="mt-12 hidden" id="load-more-container">
+  <div class="flex justify-center">
+    <Button variant="primary" id="load-more-btn">
+      Carregar mais artigos
+    </Button>
+  </div>
+</div>
+
+<script>
+  function setupBlogFiltering() {
+    const searchInput = document.getElementById(
+      "blog-search",
+    ) as HTMLInputElement;
+    const categorySelect = document.getElementById(
+      "blog-category",
+    ) as HTMLSelectElement;
+    const grid = document.getElementById("blog-grid");
+    const noResultsMsg = document.getElementById("no-results");
+    const loadMoreContainer = document.getElementById("load-more-container");
+    const loadMoreBtn = document.getElementById("load-more-btn");
+
+    if (!grid) return;
+
+    const cards = Array.from(
+      grid.querySelectorAll(".blog-post-card"),
+    ) as HTMLElement[];
+    let visibleCards = [...cards];
+    let currentPage = 1;
+    const postsPerPage = 12;
+
+    function render() {
+      const searchTerm = searchInput?.value.toLowerCase().trim() || "";
+
+      // Transform filters
+      visibleCards = cards.filter((card) => {
+        const title = card.getAttribute("data-title") || "";
+        const matchesSearch = title.includes(searchTerm);
+
+        return matchesSearch;
+      });
+
+      // Hide all first
+      cards.forEach((card) => (card.style.display = "none"));
+
+      // Render paginated cards
+      const cardsToShow = visibleCards.slice(0, currentPage * postsPerPage);
+      cardsToShow.forEach((card) => (card.style.display = "block"));
+
+      // Pagination button logic
+      if (loadMoreContainer) {
+        if (visibleCards.length > currentPage * postsPerPage) {
+          loadMoreContainer.classList.remove("hidden");
+        } else {
+          loadMoreContainer.classList.add("hidden");
+        }
+      }
+
+      // Empty state logic
+      if (noResultsMsg) {
+        if (visibleCards.length === 0 && cards.length > 0) {
+          noResultsMsg.classList.remove("hidden");
+        } else {
+          noResultsMsg.classList.add("hidden");
+        }
+      }
+    }
+
+    if (searchInput)
+      searchInput.addEventListener("input", () => {
+        currentPage = 1;
+        render();
+      });
+
+    // Configura a navegação real nas categorias
+    if (categorySelect)
+      categorySelect.addEventListener("change", () => {
+        const selected = categorySelect.value;
+        if (selected === "all") {
+          window.location.href = "/blog";
+        } else {
+          window.location.href = "/blog/categoria/" + selected;
+        }
+      });
+
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener("click", () => {
+        currentPage++;
+        render();
+      });
+    }
+
+    // Init display state
+    render();
+  }
+
+  // Support for View Transitions
+  setupBlogFiltering();
+  document.addEventListener("astro:after-swap", setupBlogFiltering);
+</script>

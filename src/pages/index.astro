@@ -12,8 +12,8 @@ import SlideBoxSteps from "../components/SlideBoxSteps.astro";
 import ApiSection from "../components/ApiSection.astro";
 import Badge from "../components/ui/Badge.astro";
 import TestimonialDiv from "../components/TestimonialDiv.astro";
-import Icon from "../components/Icon.astro";
 import { Image } from "astro:assets";
+import RecentPosts from "../components/RecentPosts.astro";
 
 // Importações de imagens para otimização do Astro
 import heroImage from "../assets/images/home-hero-image.webp";
@@ -209,5 +209,9 @@ const CHANNEL_FEATURES = [
 
   <Section>
     <TestimonialDiv />
+  </Section>
+
+  <Section>
+    <RecentPosts />
   </Section>
 </BaseLayout>
