@@ -19,9 +19,9 @@ const { post } = Astro.props;
         alt={post.title}
         width={800}
         height={450}
-        class="w-full h-52 object-cover rounded-lg"
+        class="w-full h-40 md:h-52 object-cover rounded-lg"
       />
-    ) : (      <div class="w-full h-52 bg-surface-muted rounded-lg flex items-center justify-center text-text-tertiary">
+    ) : (      <div class="w-full h-40 md:h-52 bg-surface-muted rounded-lg flex items-center justify-center text-text-tertiary">
         <span class="text-xs">Sem imagem</span>
       </div>
     )}
