@@ -1,0 +1,97 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Section from "../components/ui/Section.astro";
+import Heading from "../components/ui/Heading.astro";
+import SecondaryHeader from "../components/SecondaryHeader.astro";
+import { supabase } from "../lib/supabase";
+import { marked } from "marked";
+import { gfmHeadingId } from "marked-gfm-heading-id";
+
+const { data: page, error } = await supabase
+  .from("legal_pages")
+  .select("*")
+  .eq("slug", "termos-e-politicas")
+  .single();
+
+let htmlContent = "";
+if (page) {
+  // Configura o marked para respeitar quebras de linha simples e usar GFM com IDs nos headers
+  await marked.use(gfmHeadingId());
+  htmlContent = await marked.parse(page.content, {
+    breaks: true,
+    gfm: true,
+  });
+} else if (error) {
+  console.error("Erro ao buscar página no Supabase:", error);
+  htmlContent =
+    "<p class='text-red-500'>Erro ao carregar o conteúdo do Supabase.</p>";
+}
+
+const anchorLinks = [
+  {
+    label: "Termos de Uso",
+    href: "#termos-de-uso-da-plataforma-disparo-pro",
+  },
+  {
+    label: "Política de Privacidade",
+    href: "#política-de-privacidade-da-plataforma-disparo-pro",
+  },
+  {
+    label: "Política de Cookies",
+    href: "#política-de-cookies-da-plataforma-disparo-pro",
+  },
+  {
+    label: "Política de Moderação",
+    href: "#política-de-moderação-de-conteúdo-da-plataforma-disparo-pro",
+  },
+];
+---
+
+<BaseLayout
+  seo={{
+    title: page?.title || "Termos e Políticas | Disparo Pro",
+    description:
+      "Conheça os termos de uso, políticas de privacidade e cookies da plataforma Disparo Pro.",
+  }}
+>
+  <Section class="bg-surface-muted pt-32 pb-16 text-left lg:text-center">
+    <Heading as="h1">{page?.title || "Termos e Políticas"}</Heading>
+  </Section>
+
+  <SecondaryHeader links={anchorLinks} />
+
+  <Section>
+    <div class="max-w-4xl mx-auto">
+      <div
+        class="prose prose-pink prose-lg max-w-none text-text-secondary
+               prose-headings:text-text-primary prose-headings:font-bold prose-strong:text-text-primary"
+        set:html={htmlContent}
+      />
+    </div>
+  </Section>
+</BaseLayout>
+
+<style is:global>
+  /* Garante que o conteúdo dinâmico tenha espaçamento correto entre parágrafos e elementos */
+  .prose p {
+    margin-bottom: 1.5rem !important;
+    display: block content;
+  }
+  .prose ul,
+  .prose ol {
+    margin-bottom: 1.5rem !important;
+    padding-left: 1.5rem !important;
+  }
+  .prose li {
+    margin-bottom: 0.5rem !important;
+  }
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4 {
+    margin-top: 2rem !important;
+    margin-bottom: 1rem !important;
+    /* Espaçamento para não ficar sob o header fixo ao clicar nas âncoras */
+    scroll-margin-top: 140px;
+  }
+</style>

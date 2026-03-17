@@ -1,0 +1,106 @@
+---
+import Container from "./ui/Container.astro";
+import Button from "./ui/Button.astro";
+
+interface Props {
+  variant?: "anchors" | "cta";
+  links?: { label: string; href: string }[];
+  ctaText?: string;
+  ctaButton?: { label: string; href: string };
+  showOnScroll?: boolean;
+}
+
+const { 
+  variant = "anchors", 
+  links = [], 
+  ctaText = "Conheça nossos planos! Opções pensadas sob medida para o seu negócio.",
+  ctaButton = { label: "Ver planos", href: "/planos" },
+  showOnScroll = true
+} = Astro.props;
+---
+
+<div
+  id="secondary-header"
+  class:list={[
+    "fixed left-0 w-full z-40 bg-brand-primary text-white transition-all duration-300 shadow-lg",
+    showOnScroll ? "-translate-y-full opacity-0" : "top-[72px] lg:top-[80px]"
+  ]}
+>
+  <Container class="py-3 px-4 md:px-6 xl:px-0">
+    <div class="flex items-center justify-between gap-4">
+      {variant === "anchors" ? (
+        <nav class="w-full">
+          <ul class="flex flex-wrap items-center justify-center lg:justify-start gap-4 lg:gap-12">
+            {links.map((link) => (
+              <li>
+                <a 
+                  href={link.href} 
+                  class="text-button-sm text-white/90 hover:text-white transition-colors whitespace-nowrap font-medium uppercase tracking-wide"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ) : (
+        <div class="flex items-center justify-between w-full">
+          <p class="text-white font-medium text-sm md:text-base">
+            <span class="font-bold">{ctaText.split('!')[0]}!</span>
+            <span class="hidden md:inline"> {ctaText.split('!')[1]}</span>
+          </p>
+          <Button 
+            href={ctaButton.href} 
+            variant="outline" 
+            class="text-white! border-white! hover:bg-white! hover:text-brand-primary! whitespace-nowrap text-xs md:text-sm py-2 px-4"
+          >
+            {ctaButton.label}
+          </Button>
+        </div>
+      )}
+    </div>
+  </Container>
+</div>
+
+<script is:inline define:vars={{ showOnScroll, variant }}>
+  const header = document.getElementById('secondary-header');
+  const mainHeader = document.querySelector('header');
+  
+  if (header) {
+    // Calculamos o offset base para ficar abaixo do header principal
+    const updatePosition = () => {
+      const mainHeaderHeight = mainHeader?.offsetHeight || 80;
+      if (!showOnScroll) {
+        header.style.top = `${mainHeaderHeight}px`;
+      }
+    };
+
+    window.addEventListener('resize', updatePosition);
+    updatePosition();
+
+    if (showOnScroll) {
+      window.addEventListener('scroll', () => {
+        // Para páginas de canais (variant cta), usamos a segunda dobra
+        // Para páginas legais (variant anchors), usamos o fim da primeira seção (~300px)
+        const threshold = variant === 'cta' ? window.innerHeight * 1.1 : 300;
+        const mainHeaderHeight = mainHeader?.offsetHeight || 80;
+
+        if (window.scrollY > threshold) {
+          header.classList.remove('-translate-y-full', 'opacity-0');
+          header.classList.add('translate-y-0', 'opacity-100');
+          header.style.top = `${mainHeaderHeight}px`;
+        } else {
+          header.classList.add('-translate-y-full', 'opacity-0');
+          header.classList.remove('translate-y-0', 'opacity-100');
+        }
+      });
+    }
+  }
+</script>
+
+<style>
+  #secondary-header {
+    /* Garante que o menu secundário não sobreponha menus suspensos do principal se necessário, 
+       mas aqui z-40 é menor que z-50 do Header principal */
+  }
+</style>

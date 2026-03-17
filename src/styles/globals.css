@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
 
 @theme {
   --color-brand-primary: #eb4699;
@@ -28,6 +30,10 @@
   --text-button-sm: 1rem;
   --text-label: clamp(1rem, 1.3vw, 1.125rem);
   --text-tag: 0.875rem;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 :root {

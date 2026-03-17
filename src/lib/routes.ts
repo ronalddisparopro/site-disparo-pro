@@ -23,4 +23,6 @@ export const ROUTES = {
     INDEX: "/apis",
     INTEGRATIONS: "/apis/integracoes",
   },
+  TERMOS_E_POLITICAS: "/termos-e-politicas",
+  SERVICOS_E_EVENTOS_COBRAVEIS: "/servicos-e-eventos-cobraveis",
 } as const;

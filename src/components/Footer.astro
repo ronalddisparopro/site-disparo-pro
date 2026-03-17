@@ -21,16 +21,18 @@ const footerLinks = {
     { label: "RCS", href: ROUTES.CANAIS.RCS },
     { label: "Disparo de SMS", href: ROUTES.CANAIS.SMS },
     { label: "Disparo de Voz", href: ROUTES.CANAIS.VOZ },
-    { label: "Gestão de Grupos", href: "#" },
+    { label: "Disparo de E-mail", href: ROUTES.CANAIS.EMAIL },
   ],
   navegue: [
-    { label: "Termos e Políticas", href: "#" },
-    { label: "Serviços e Eventos Cobráveis", href: "#" },
+    { label: "Termos e Políticas", href: ROUTES.TERMOS_E_POLITICAS },
+    {
+      label: "Serviços e Eventos Cobráveis",
+      href: ROUTES.SERVICOS_E_EVENTOS_COBRAVEIS,
+    },
     {
       label: "Trabalhe Conosco",
       href: ROUTES.TRABALHE_CONOSCO,
     },
-    { label: "Base de conhecimento", href: "#" },
   ],
 };
 
@@ -98,7 +100,6 @@ const socialLinks = [
                 <li>
                   <a
                     href={link.href}
-                    target="_blank"
                     rel="noopener noreferrer"
                     class="text-surface-default/80 hover:text-surface-default transition-colors text-body-sm"
                   >
