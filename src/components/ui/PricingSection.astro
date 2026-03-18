@@ -28,20 +28,20 @@ const { plans, class: className } = Astro.props;
 <div class={cx("flex flex-col items-center gap-6 lg:gap-8 w-full", className)} data-pricing-section>
   <!-- Toggle Switch -->
   <div class="flex flex-col items-center gap-6">
-    <div class="bg-white/10 p-1 rounded-xl flex items-center gap-1 w-[220px] relative">
+    <div class="bg-surface-default/60 p-1 rounded-xl flex items-center gap-1 w-[220px] relative">
       <div 
         data-toggle-bg
         class="absolute top-1 left-1 bottom-1 w-[calc(50%-4px)] bg-brand-primary rounded-lg shadow-lg transition-all duration-300 ease-in-out"
       ></div>
       <button 
         data-pricing-toggle="monthly"
-        class="relative flex-1 py-2 text-label font-bold text-center transition-colors duration-300 z-10 text-surface-default"
+        class="relative flex-1 py-2 text-label font-bold text-center transition-colors duration-300 z-10 text-white cursor-pointer"
       >
         Mensal
       </button>
       <button 
         data-pricing-toggle="annual"
-        class="relative flex-1 py-2 text-label font-bold text-center transition-colors duration-300 z-10 text-text-primary"
+        class="relative flex-1 py-2 text-label font-bold text-center transition-colors duration-300 z-10 text-text-primary cursor-pointer"
       >
         Anual
       </button>
@@ -155,8 +155,16 @@ const { plans, class: className } = Astro.props;
         const updatePricing = (type: 'monthly' | 'annual') => {
           if (type === 'monthly') {
             toggleBg.style.left = '4px';
+            monthlyBtn.classList.add('text-white');
+            monthlyBtn.classList.remove('text-text-primary');
+            annualBtn.classList.add('text-text-primary');
+            annualBtn.classList.remove('text-white');
           } else {
             toggleBg.style.left = 'calc(50% + 0px)';
+            annualBtn.classList.add('text-white');
+            annualBtn.classList.remove('text-text-primary');
+            monthlyBtn.classList.add('text-text-primary');
+            monthlyBtn.classList.remove('text-white');
           }
 
           priceValues.forEach(price => {
