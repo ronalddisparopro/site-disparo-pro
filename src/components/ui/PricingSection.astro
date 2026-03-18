@@ -57,81 +57,113 @@ const { plans, class: className } = Astro.props;
         plans.map((plan) => (
           <div 
             class={cx(
-              "w-full bg-surface-default rounded-2xl flex flex-col items-stretch justify-between p-6 md:p-7 relative border border-border-default/32",
-              plan.highlighted ? "border-2 border-brand-primary" : ""
+              "w-full rounded-2xl flex flex-col items-stretch relative h-full transition-all duration-300",
+              plan.highlighted 
+                ? "bg-linear-to-t from-brand-secondary to-brand-primary p-[3px]" 
+                : "bg-surface-default border border-border-default/32 p-6 md:p-7"
             )}
           >
-            <div class="flex flex-col gap-6 text-left h-full">
-              <!-- Header -->
-              <div class="flex flex-col gap-4">
-                <Heading as="h3" class="text-heading-h4 font-bold text-text-primary leading-tight">
-                  {plan.name}
-                </Heading>
-                <p class="text-body-sm text-text-secondary min-h-[48px]">
-                  {plan.description}
-                </p>
-              </div>
-
-            <!-- Price -->
-            <div class="flex flex-col gap-2">
-              <div class="flex items-baseline gap-1" data-price-container>
-                <span 
-                  class="text-title-section font-bold text-text-primary tracking-tight" 
-                  data-price-value 
-                  data-monthly={plan.monthlyPrice} 
-                  data-annual={plan.annualPrice}
-                >
-                  {plan.monthlyPrice === "Personalizado" ? plan.monthlyPrice : `R$${plan.monthlyPrice}`}
-                </span>
-                <span 
-                  class:list={["text-body-md font-bold text-text-primary", plan.monthlyPrice === "Personalizado" && "hidden"]} 
-                  data-price-suffix
-                >
-                  /mês
-                </span>
-              </div>
-              <p 
-                class:list={["text-tag font-bold text-text-secondary", plan.monthlyPrice === "Personalizado" && "hidden"]} 
-                data-payment-label
-              >
-                Pagamento mensal
-              </p>
-            </div>
-
-              <!-- Divider -->
-              <div class="h-px bg-border-default w-full"></div>
-
-              <!-- Features -->
-              <div class="flex flex-col gap-4 flex-1">
-                {plan.previousPlanText && (
-                  <p class="text-tag font-bold text-text-primary">
-                    {plan.previousPlanText}
-                  </p>
-                )}
-                <ul class="flex flex-col gap-4">
-                  {plan.features.map((feature) => (
-                    <li class="flex items-start gap-3">
-                      <div class="shrink-0 w-5 h-5 rounded-full bg-brand-soft flex items-center justify-center p-1">
-                        <Icon name="check" size={16} variant="primary" type="regular"/>
-                      </div>
-                      <span class="text-tag font-bold text-text-primary leading-tight">
-                        {feature}
+            <div class={cx(
+              "flex flex-col justify-between text-left h-full w-full",
+              plan.highlighted ? "bg-text-primary rounded-[calc(1rem-3px)] p-6 md:p-7" : ""
+            )}>
+              <div class="flex flex-col gap-6">
+                <!-- Header -->
+                <div class="flex flex-col gap-4">
+                  {plan.highlighted && (
+                    <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-default/10 border border-white/10 w-fit">
+                      <Icon name="star" size={14} variant="secondary" type="fill" />
+                      <span class="text-[10px] font-bold text-surface-default uppercase tracking-wider">
+                        Mais escolhido
                       </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+                    </div>
+                  )}
+                  <Heading 
+                    as="h3" 
+                    variant={plan.highlighted ? "secondary" : "primary"}
+                    class="text-heading-h4 font-bold leading-tight"
+                  >
+                    {plan.name}
+                  </Heading>
+                  <p class={cx("text-body-sm min-h-[48px]", plan.highlighted ? "text-surface-default/80" : "text-text-secondary")}>
+                    {plan.description}
+                  </p>
+                </div>
 
-            <div class="mt-8">
-              <Button
-              href={ROUTES.CONTATO}
-                variant="primary" 
-                class="w-full flex justify-between px-6" 
-                icon="arrow-right"
-              >
-                Comece agora
-              </Button>
+                <!-- Price -->
+                <div class="flex flex-col gap-2">
+                  <div class="flex items-baseline gap-1" data-price-container>
+                    <span 
+                      class={cx("text-title-section font-bold tracking-tight", plan.highlighted ? "text-surface-default" : "text-text-primary")}
+                      data-price-value 
+                      data-monthly={plan.monthlyPrice} 
+                      data-annual={plan.annualPrice}
+                    >
+                      {plan.monthlyPrice === "Personalizado" ? plan.monthlyPrice : `R$${plan.monthlyPrice}`}
+                    </span>
+                    <span 
+                      class:list={[
+                        "text-body-md font-bold", 
+                        plan.highlighted ? "text-surface-default" : "text-text-primary",
+                        plan.monthlyPrice === "Personalizado" && "hidden"
+                      ]} 
+                      data-price-suffix
+                    >
+                      /mês
+                    </span>
+                  </div>
+                  <p 
+                    class:list={[
+                      "text-tag font-bold", 
+                      plan.highlighted ? "text-surface-default/80" : "text-text-secondary",
+                      plan.monthlyPrice === "Personalizado" && "hidden"
+                    ]} 
+                    data-payment-label
+                  >
+                    Pagamento mensal
+                  </p>
+                </div>
+
+                <!-- Divider -->
+                <div class={cx("h-px w-full", plan.highlighted ? "bg-border-default/20" : "bg-border-default")}></div>
+
+                <!-- Features -->
+                <div class="flex flex-col gap-4 flex-1">
+                  {plan.previousPlanText && (
+                    <p class={cx("text-tag font-bold", plan.highlighted ? "text-surface-default" : "text-text-primary")}>
+                      {plan.previousPlanText}
+                    </p>
+                  )}
+                  <ul class="flex flex-col gap-4">
+                    {plan.features.map((feature) => (
+                      <li class="flex items-start gap-3">
+                        <div class={cx("shrink-0 w-5 h-5 rounded-full flex items-center justify-center p-1", plan.highlighted ? "bg-surface-default/10" : "bg-brand-soft")}>
+                          <Icon 
+                            name="check" 
+                            size={16} 
+                            variant={plan.highlighted ? "secondary" : "primary"} 
+                            type="regular"
+                          />
+                        </div>
+                        <span class={cx("text-tag font-bold leading-tight", plan.highlighted ? "text-surface-default" : "text-text-primary")}>
+                          {feature}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <div class="mt-8">
+                <Button
+                  href={ROUTES.CONTATO}
+                  variant={plan.highlighted ? "white" : "primary"} 
+                  class="w-full flex justify-between px-6" 
+                  icon="arrow-right"
+                >
+                  Comece agora
+                </Button>
+              </div>
             </div>
           </div>
         ))
