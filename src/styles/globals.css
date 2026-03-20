@@ -28,7 +28,7 @@
 
   --text-button: clamp(1rem, 1.5vw, 1.25rem);
   --text-button-sm: 1rem;
-  --text-label: clamp(1rem, 1.3vw, 1.125rem);
+  --text-label: clamp(1rem);
   --text-tag: 0.875rem;
 }
 

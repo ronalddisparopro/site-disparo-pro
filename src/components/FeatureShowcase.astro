@@ -11,25 +11,28 @@ const features = [
   {
     id: "jornadas",
     title: "Jornadas integradas",
-    description: "Integração com Playtech, Smartico e Optimove.",
+    description:
+      "WhatsApp, RCS, SMS, Voz e E-mail <strong>em um só lugar</strong>.",
     image: jornadasImg,
   },
   {
     id: "disparo-simples",
     title: "Disparo Simples",
-    description: "Use templates prontos para disparar com facilidade.",
+    description:
+      "Use templates prontos para <strong>disparar com facilidade</strong>.",
     image: disparoSimplesImg,
   },
   {
     id: "api",
-    title: "API Gratuita",
-    description: "Integre seu sistema à nossa API sem custos adicionais.",
+    title: "API Facilitada",
+    description:
+      "Integração com <strong>Playtech, Smartico, Optimove</strong> e mais.",
     image: apiImg,
   },
   {
     id: "dados",
     title: "Visualização de Dados",
-    description: "Confira seu desempenho em tempo real.",
+    description: "Confira seu <strong>desempenho em tempo real</strong>.",
     image: dadosImg,
   },
 ];
@@ -53,15 +56,13 @@ const features = [
             data-feature-id={feature.id}
             data-index={index}
             class:list={[
-              "feature-card text-left p-6 rounded-2xl border transition-all duration-300 cursor-pointer group flex flex-col",
-              index === 0
-                ? "active bg-brand-soft border-transparent"
-                : "bg-transparent border-dashed border-border-default hover:bg-brand-soft/30 hover:border-brand-primary/20",
+              "feature-card text-left p-6 rounded-2xl transition-all duration-300 cursor-pointer group flex flex-col border-none",
+              index === 0 ? "active bg-brand-soft" : "bg-transparent",
             ]}
           >
             <span
               class:list={[
-                "text-label font-extrabold transition-colors text-lg lg:text-xl",
+                "text-label font-extrabold transition-colors",
                 index === 0
                   ? "text-brand-primary"
                   : "text-text-primary group-hover:text-brand-primary",
@@ -71,13 +72,18 @@ const features = [
             </span>
             <div
               class:list={[
-                "description-wrapper transition-all duration-500 ease-in-out overflow-hidden",
-                index === 0 ? "max-h-40 opacity-100 mt-3" : "max-h-0 opacity-0",
+                "description-wrapper grid transition-all duration-500 ease-in-out",
+                index === 0
+                  ? "grid-rows-[1fr] opacity-100"
+                  : "grid-rows-[0fr] opacity-0",
               ]}
             >
-              <p class="text-body-sm text-text-secondary leading-relaxed">
-                {feature.description}
-              </p>
+              <div class="overflow-hidden">
+                <p
+                  class="text-body-sm text-text-secondary leading-relaxed pt-3"
+                  set:html={feature.description}
+                />
+              </div>
             </div>
           </button>
         ))
@@ -96,7 +102,7 @@ const features = [
               "feature-image absolute inset-0 transition-all duration-700 ease-in-out transform",
               index === 0
                 ? "opacity-100 scale-100 z-10"
-                : "opacity-0 scale-105 z-0",
+                : "opacity-0 scale-102 z-0",
             ]}
           >
             <Image
@@ -126,12 +132,8 @@ const features = [
 
         // Update Cards
         cards.forEach((c) => {
-          c.classList.remove("active", "bg-brand-soft", "border-transparent");
-          c.classList.add(
-            "bg-transparent",
-            "border-dashed",
-            "border-border-default",
-          );
+          c.classList.remove("active", "bg-brand-soft");
+          c.classList.add("bg-transparent", "border-transparent");
 
           const title = c.querySelector("span");
           if (title) {
@@ -141,18 +143,18 @@ const features = [
 
           const desc = c.querySelector(".description-wrapper");
           if (desc) {
-            desc.classList.remove("max-h-40", "opacity-100", "mt-3");
-            desc.classList.add("max-h-0", "opacity-0");
+            desc.classList.remove("grid-rows-[1fr]", "opacity-100");
+            desc.classList.add("grid-rows-[0fr]", "opacity-0");
           }
         });
 
         // Activate clicked card
-        card.classList.add("active", "bg-brand-soft", "border-transparent");
-        card.classList.remove(
-          "bg-transparent",
-          "border-dashed",
-          "border-border-default",
+        card.classList.add(
+          "active",
+          "bg-brand-soft",
+          "border-transparent",
         );
+        card.classList.remove("bg-transparent", "border-transparent");
 
         const activeTitle = card.querySelector("span");
         if (activeTitle) {
@@ -162,18 +164,18 @@ const features = [
 
         const activeDesc = card.querySelector(".description-wrapper");
         if (activeDesc) {
-          activeDesc.classList.add("max-h-40", "opacity-100", "mt-3");
-          activeDesc.classList.remove("max-h-0", "opacity-0");
+          activeDesc.classList.add("grid-rows-[1fr]", "opacity-100");
+          activeDesc.classList.remove("grid-rows-[0fr]", "opacity-0");
         }
 
         // Update Images
         images.forEach((img) => {
           if (img.id === `image-${featureId}`) {
-            img.classList.add("opacity-100", "scale-100", "z-10");
-            img.classList.remove("opacity-0", "scale-105", "z-0");
+            img.classList.add("opacity-100", "z-10");
+            img.classList.remove("opacity-0", "z-0");
           } else {
-            img.classList.remove("opacity-100", "scale-100", "z-10");
-            img.classList.add("opacity-0", "scale-105", "z-0");
+            img.classList.remove("opacity-100", "z-10");
+            img.classList.add("opacity-0", "z-0");
           }
         });
       });

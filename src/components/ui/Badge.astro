@@ -13,7 +13,8 @@ const { class: className, text, image, ...rest } = Astro.props;
 
 const classes = cx(className);
 
-const isIconName = typeof image === "string" && !image.includes("/") && !image.includes(".");
+const isIconName =
+  typeof image === "string" && !image.includes("/") && !image.includes(".");
 ---
 
 <div class={classes} {...rest}>
@@ -21,20 +22,19 @@ const isIconName = typeof image === "string" && !image.includes("/") && !image.i
     class="flex items-center gap-2 py-2 px-4 rounded-full bg-surface-muted/40 border border-border-default/20"
   >
     {
-      image && (
-        isIconName ? (
+      image &&
+        (isIconName ? (
           <Icon name={image} />
         ) : (
           <Image
             src={image as any}
             alt={text || ""}
-            width={40}
-            height={28}
+            width={92}
+            height={48}
             format="webp"
             quality="high"
           />
-        )
-      )
+        ))
     }
 
     {text && <span class={cx("text-label text-text-secondary")}>{text}</span>}

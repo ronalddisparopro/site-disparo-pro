@@ -12,17 +12,13 @@ import { Image } from "astro:assets";
 import heroImg from "../../assets/images/api-hero-image.webp";
 ---
 
-
 <BaseLayout
   seo={{
     title: "APIs da Disparo Pro",
     description: "Integre nossa API ao seu sistema!",
   }}
 >
-  <Hero
-    id="apis"
-    class="bg-surface-default relative overflow-hidden"
-  >
+  <Hero id="apis" class="bg-surface-default relative overflow-hidden">
     <!-- Glow roxo -->
     <div
       class="pointer-events-none absolute -bottom-[50px] md:-bottom-[220px] left-[5%] md:left-2/6 w-[150px] h-[150px] md:w-[428px] md:h-[428px] rounded-full bg-brand-secondary blur-[50px] md:blur-[100px] opacity-60 md:opacity-100"
@@ -42,8 +38,8 @@ import heroImg from "../../assets/images/api-hero-image.webp";
           Integre SMS, WhatsApp, RCS, E-mail e Voz ao seu sistema com nossa API
         </Heading>
         <p class="text-body-md text-text-secondary max-w-[500px]">
-          Automatize a comunicação da sua empresa e envie mensagens diretamente
-          do seu sistema, CRM ou plataforma.
+          Automatize a comunicação da sua empresa usando seu próprio sistema,
+          CRM ou plataforma.
         </p>
       </div>
       <Button variant="primary" icon="arrow-right" href={ROUTES.CONTATO}
@@ -97,7 +93,7 @@ import heroImg from "../../assets/images/api-hero-image.webp";
         variant="secondary"
         icon="layout"
         title="Multicanal"
-        description="Envie SMS, WhatsApp, RCS e Disparos de Voz com uma única API."
+        description="Envie SMS, WhatsApp, RCS, E-mail e Voz com uma única API."
       />
       <Box
         variant="secondary"
@@ -107,5 +103,4 @@ import heroImg from "../../assets/images/api-hero-image.webp";
       />
     </div>
   </Section>
-
 </BaseLayout>
