@@ -4,7 +4,7 @@ import { Image } from "astro:assets";
 import Icon from "../Icon.astro";
 
 export interface Props {
-  icon?: string | any;
+  bagde?: string | any;
   class?: string;
   image?: string | any;
   imageAlt?: string;
@@ -15,7 +15,7 @@ export interface Props {
 const {
   class: className,
   image,
-  icon,
+  bagde,
   imageAlt = "",
   title,
   description,
@@ -23,43 +23,55 @@ const {
 } = Astro.props;
 
 const baseClass =
-  "bg-surface-muted border border-border-default flex flex-col items-start rounded-lg py-8 px-4 text-left transition-all hover:opacity-90";
+  "bg-surface-muted border border-border-default flex flex-col items-start rounded-2xl overflow-hidden transition-all hover:opacity-90 w-full h-full";
 
 const classes = cx(baseClass, className);
 ---
 
 <div class={classes} {...rest}>
-  <div class="flex flex-col gap-8">
-    <div class="flex flex-col gap-3">
+  {
+    image && (
+      <div class="w-full border-b border-border-default flex items-center justify-center overflow-hidden">
+        {typeof image === "string" ? (
+          <img
+            src={image}
+            alt={imageAlt}
+            class="w-full h-full object-contain"
+          />
+        ) : (
+          <Image
+            src={image}
+            alt={imageAlt}
+            class="w-full h-full object-contain"
+          />
+        )}
+      </div>
+    )
+  }
+
+  <div class="flex flex-col gap-10 p-8 w-full">
+    <div class="flex flex-col gap-2.5">
       {
-        icon && (
-          <Icon name={icon}/>
+        bagde && (
+          <div class="bg-brand-soft px-3 py-1.5 rounded-lg w-fit flex items-center justify-center mb-1.5">
+            <span class="text-brand-primary font-bold">{bagde}</span>
+          </div>
         )
       }
       {
         title && (
-          <span class={cx("font-bold text-title-card text-text-primary")}>
-            {title}
-          </span>
+          <h3 class="font-bold text-title-card text-text-primary">{title}</h3>
         )
       }
 
       {
         description && (
-          <p class="text-body-md text-text-secondary leading-relaxed">
+          <p class="text-body-lg text-text-secondary leading-tight">
             {description}
           </p>
         )
       }
     </div>
-    {
-      image &&
-        (typeof image === "string" ? (
-          <img src={image} alt={imageAlt} class="w-full object-contain" />
-        ) : (
-          <Image src={image} alt={imageAlt} class="w-full object-contain" />
-        ))
-    }
     <slot />
   </div>
 </div>
