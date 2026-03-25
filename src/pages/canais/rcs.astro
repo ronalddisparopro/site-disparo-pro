@@ -15,7 +15,7 @@ import { Image } from "astro:assets";
 
 // Assets
 import heroImg from "../../assets/images/rcs-hero-image.webp";
-import rcsInvertImg from "../../assets/images/rcs-invert.webp";
+import rcsImg from "../../assets/images/rcs.webp";
 
 // Mockups
 import rcsBasicImg from "../../assets/images/mockups/rcs-basic.webp";
@@ -26,17 +26,13 @@ import rcsEducacaoImg from "../../assets/images/mockups/rcs-educacao.webp";
 import rcsInfoprodutorImg from "../../assets/images/mockups/rcs-infoprodutor.webp";
 ---
 
-
 <BaseLayout
   seo={{
     title: "RCS",
     description: "Acelere conversões com mensagens interativas e multimídia.",
   }}
 >
-  <Hero
-    id="rcs"
-    class="bg-surface-default relative overflow-hidden"
-  >
+  <Hero id="rcs" class="bg-surface-default relative overflow-hidden">
     <!-- Glow roxo -->
     <div
       class="pointer-events-none absolute -bottom-[50px] md:-bottom-[220px] left-[5%] md:left-2/6 w-[150px] h-[150px] md:w-[428px] md:h-[428px] rounded-full bg-brand-secondary blur-[50px] md:blur-[100px] opacity-60 md:opacity-100"
@@ -183,7 +179,7 @@ import rcsInfoprodutorImg from "../../assets/images/mockups/rcs-infoprodutor.web
                 "Ative e envie mensagens em poucos passos, sem precisar de suporte técnico especializado",
             },
           ]}
-          imageSrc={rcsInvertImg}
+          imageSrc={rcsImg}
           imageAlt="RCS"
           buttonText=" Receba um contato"
           buttonHref={ROUTES.CONTATO}
@@ -231,7 +227,6 @@ import rcsInfoprodutorImg from "../../assets/images/mockups/rcs-infoprodutor.web
       buttonHref={ROUTES.LOGIN}
     />
   </Section>
-
 
   <Section>
     <ApiSection

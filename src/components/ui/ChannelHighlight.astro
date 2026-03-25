@@ -32,12 +32,12 @@ const {
 
 <div
   class={cx(
-    "flex flex-col lg:flex-row items-center lg:items-stretch justify-between gap-4 lg:gap-12 bg-surface-default rounded-2xl overflow-hidden",
+    "flex flex-col items-start lg:items-stretch justify-between gap-12 lg:gap-20 bg-surface-default px-4 lg:px-16 py-8 lg:py-12 rounded-2xl overflow-hidden lg:flex-row",
     className,
   )}
 >
   <div
-    class="flex flex-col justify-center items-start gap-6 w-full px-4 xl:px-16 lg:w-1/2 py-8"
+    class="flex flex-col justify-center items-start gap-8 w-full px-8 lg:px-0 lg:w-2/5"
   >
     <div class="flex flex-col gap-6 w-full">
       {
@@ -45,12 +45,12 @@ const {
           return (
             <div class="flex flex-col gap-1">
               <div class="flex items-center gap-4">
-                <Icon name={item.icon as string} />
+                <Icon name={item.icon as string} size={24} />
                 <Heading as="h3" variant="primary">
                   {item.title}
                 </Heading>
               </div>
-              <p class="text-body-sm text-text-secondary leading-relaxed">
+              <p class="text-body-sm text-text-secondary leading-tight">
                 {item.description}
               </p>
             </div>
@@ -59,20 +59,22 @@ const {
       }
     </div>
 
-    <Button href={buttonHref} variant="primary" icon="arrow-right" class="mt-4">
+    <Button href={buttonHref} variant="primary" icon="arrow-right">
       {buttonText}
     </Button>
   </div>
 
-  <div class="lg:w-1/2 w-full h-full relative">
-    <Image
-      src={imageSrc as any}
-      alt={imageAlt}
-      class="w-full h-full object-cover"
-      width={800}
-      height={600}
-      format="webp"
-      quality="mid"
-    />
+  <div class="lg:w-1/2 w-full flex items-center justify-center">
+    <div class="relative w-full overflow-hidden flex items-center justify-center">
+      <Image
+        src={imageSrc as any}
+        alt={imageAlt}
+        class="w-full h-full object-contain aspect-4/3 lg:aspect-auto"
+        width={1000}
+        height={800}
+        format="webp"
+        quality="high"
+      />
+    </div>
   </div>
 </div>
