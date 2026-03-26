@@ -1,40 +1,174 @@
 ---
 import Section from "./ui/Section.astro";
 import Heading from "./ui/Heading.astro";
-import Testimonial from "./Testimonial.astro";
+import { Image } from "astro:assets";
 
 import deiveImg from "../assets/images/deive_leonardo.webp";
 import augustoImg from "../assets/images/augusto_dalvit.webp";
 import lionImg from "../assets/images/lion-correa.webp";
+
+const testimonials = [
+  {
+    name: "Deive Leonardo",
+    position: "Influencer, Escritor, Infoprodutor",
+    text: "“Quando fizemos o lançamento do filme A Resposta, a Disparo Pro nos ajudou a alcançar todos os nossos leads e pessoas que fizeram parte da nossa história. Foi o melhor lançamento que pudemos imaginar, e ficamos no Top 10 da Netflix!”",
+    image: deiveImg,
+  },
+  {
+    name: "Augusto Dalvit Tonelo",
+    position: "Vice-Presidente de Marketing da Chapecoense",
+    text: "“Nós percebemos que o SMS era um canal bastante eficiente para a nossa necessidade. Precisávamos alcançar o torcedor associado de forma rápida e eficaz para mantê-lo engajado com o Clube. Considerando o investimento, o retorno foi muito positivo!”",
+    image: augustoImg,
+  },
+  {
+    name: "Lion Corrêa",
+    position: "Especialista em Marcas do time Jesué Tomé",
+    text: "“Disparamos SMS e Voz alguns minutos antes da nossa live começar e isso aumentou muito a participação do público! Gostaria de destacar o suporte, que nos ajudou desde o cadastro das listas até o envio. Recomendamos muito a Disparo Pro.”",
+    image: lionImg,
+  },
+];
 ---
 
-<div class="flex flex-col items-center justify-center gap-8 lg:gap-12">
-  <div class="flex flex-col items-center justify-center gap-6">
-    <Heading as="h2">Quem conhece, confia!</Heading>
-    <p class="text-body-md text-text-secondary">
+<div class="flex flex-col items-center justify-center gap-12 lg:gap-16">
+  <div class="flex flex-col items-center justify-center gap-4">
+    <Heading as="h2" class="text-center">Quem conhece, confia!</Heading>
+    <p class="text-body-md text-text-secondary text-center">
       + de 20 mil clientes atendidos
     </p>
   </div>
-  <div
-    class="gap-8 lg:gap-12 flex flex-col lg:flex-row items-center justify-between"
-  >
-    <Testimonial
-      name="Deive Leonardo"
-      position="Influencer, Escritor, Infoprodutor"
-      text="“Quando fizemos o lançamento do filme A Resposta, a Disparo Pro nos ajudou a alcançar todos os nossos leads e pessoas que fizeram parte da nossa história. Foi o melhor lançamento que pudemos imaginar, e ficamos no Top 10 da Netflix!”"
-      image={deiveImg}
-    />
-    <Testimonial
-      name="Augusto Dalvit Tonelo"
-      position="Vice-Presidente de Marketing da Chapecoense"
-      text="“Nós percebemos que o SMS era um canal bastante eficiente para a nossa necessidade. Precisávamos alcançar o torcedor associado de forma rápida e eficaz para mantê-lo engajado com o Clube. Considerando o investimento, o retorno foi muito positivo!”"
-      image={augustoImg}
-    />
-    <Testimonial
-      name="Lion Corrêa"
-      position="Especialista em Marcas do time Jesué Tomé"
-      text="“Disparamos SMS e Voz alguns minutos antes da nossa live começar e isso aumentou muito a participação do público! Gostaria de destacar o suporte, que nos ajudou desde o cadastro das listas até o envio. Recomendamos muito a Disparo Pro.”"
-      image={lionImg}
-    />
+
+  <div class="w-full max-w-[1000px] mx-auto">
+    <!-- Main White Box - Shadows and borders removed as requested -->
+    <div class="bg-white rounded-3xl p-8 lg:p-12 relative overflow-hidden">
+      <!-- Content Layer - Using Grid to stack items and maintain stable height -->
+      <div class="grid grid-cols-1 grid-rows-1 items-center justify-center">
+        {
+          testimonials.map((t, i) => (
+            <div
+              class:list={[
+                "testimonial-content [grid-area:1/1] transition-opacity duration-500 ease-in-out flex flex-col justify-center items-center text-center gap-8",
+                i === 0
+                  ? "opacity-100 z-10 pointer-events-auto"
+                  : "opacity-0 z-0 pointer-events-none",
+              ]}
+              data-index={i}
+            >
+              <p class="text-body-lg text-text-secondary font-medium leading-relaxed max-w-[800px]">
+                {t.text}
+              </p>
+              <div class="flex flex-col items-center gap-1">
+                <span class="font-bold text-body-md text-text-primary">
+                  {t.name}
+                </span>
+                <span class="text-tag text-text-secondary">{t.position}</span>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Selectors Layer -->
+      <div class="flex items-center justify-center gap-4 mt-12">
+        {
+          testimonials.map((t, i) => (
+            <button
+              class:list={[
+                "testimonial-selector group relative overflow-hidden rounded-full border-2 transition-all duration-300 ease-out cursor-pointer",
+                i === 0
+                  ? "w-14 h-14 md:w-20 md:h-20 border-brand-primary scale-110 z-10"
+                  : "w-10 h-10 md:w-14 md:h-14 border-transparent grayscale opacity-40 hover:opacity-100 hover:grayscale-0 z-0",
+              ]}
+              data-index={i}
+              aria-label={`Ver depoimento de ${t.name}`}
+            >
+              <Image
+                src={t.image}
+                alt={t.name}
+                class="w-full h-full object-cover"
+                width={80}
+                height={80}
+              />
+            </button>
+          ))
+        }
+      </div>
+    </div>
   </div>
 </div>
+
+<script>
+  function initTestimonials() {
+    const selectors = document.querySelectorAll(".testimonial-selector");
+    const contents = document.querySelectorAll(".testimonial-content");
+
+    selectors.forEach((selector) => {
+      selector.addEventListener("click", () => {
+        const index = selector.getAttribute("data-index");
+
+        // Update Selectors
+        selectors.forEach((s) => {
+          const sIndex = s.getAttribute("data-index");
+          if (sIndex === index) {
+            s.classList.add(
+              "w-14",
+              "h-14",
+              "md:w-20",
+              "md:h-20",
+              "border-brand-primary",
+              "scale-110",
+              "z-10",
+            );
+            s.classList.remove(
+              "w-10",
+              "h-10",
+              "md:w-14",
+              "md:h-14",
+              "border-transparent",
+              "grayscale",
+              "opacity-40",
+              "z-0",
+            );
+          } else {
+            s.classList.remove(
+              "w-14",
+              "h-14",
+              "md:w-20",
+              "md:h-20",
+              "border-brand-primary",
+              "scale-110",
+              "z-10",
+            );
+            s.classList.add(
+              "w-10",
+              "h-10",
+              "md:w-14",
+              "md:h-14",
+              "border-transparent",
+              "grayscale",
+              "opacity-40",
+              "z-0",
+            );
+          }
+        });
+
+        // Update Contents - Opacity only, no movement
+        contents.forEach((c) => {
+          const cIndex = c.getAttribute("data-index");
+          if (cIndex === index) {
+            c.classList.remove("opacity-0", "z-0", "pointer-events-none");
+            c.classList.add("opacity-100", "z-10", "pointer-events-auto");
+          } else {
+            c.classList.add("opacity-0", "z-0", "pointer-events-none");
+            c.classList.remove("opacity-100", "z-10", "pointer-events-auto");
+          }
+        });
+      });
+    });
+  }
+
+  // Init on load
+  initTestimonials();
+
+  // Support for view transitions
+  document.addEventListener("astro:after-swap", initTestimonials);
+</script>
